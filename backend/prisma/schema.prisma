@@ -15,9 +15,9 @@ datasource db {
 
 model Tag {
   id        Int      @id @default(autoincrement())
-  label     String
-  bgColor   String
-  textColor String
+  name      String
+  bgColor   String   @default("#ffece1")
+  textColor String   @default("#ff5c00")
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
