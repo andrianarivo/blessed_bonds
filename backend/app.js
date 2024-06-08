@@ -7,7 +7,6 @@ const swaggerUi = require('swagger-ui-express');
 const {swaggerSpec} = require('./swagger');
 
 const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
 const apiV1 = require('./routes/api/v1');
 
 const app = express();
@@ -23,7 +22,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
 app.use('/api/v1', apiV1);
 app.use('/api-docs/v1', swaggerUi.serve, swaggerUi.setup(swaggerSpec))
 
