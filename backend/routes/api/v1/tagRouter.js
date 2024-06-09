@@ -2,7 +2,7 @@ const express = require('express');
 
 const router = express.Router();
 
-const {listTag, getTag} = require('../../../controllers/tagController');
+const {listTag, getTag, createTag} = require('../../../controllers/tagController');
 
 /**
  * @openapi
@@ -59,5 +59,25 @@ router.get('/', listTag);
  *         description: Tag not found
  */
 router.get('/:id', getTag);
+
+/**
+ * @openapi
+ * /tags:
+ *   post:
+ *     description: Create a new Tag
+ *     requestBody:
+ *       description: Tag data
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *            $ref: '#/components/schemas/Tag'
+ *     responses:
+ *       200:
+ *         description: Tag created successfully
+ *       400:
+ *         description: Validation error
+ */
+router.post('/', createTag);
 
 module.exports = router;

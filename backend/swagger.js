@@ -1,4 +1,5 @@
 const swaggerJsdoc = require('swagger-jsdoc');
+const tagSchema = require('./schemas/tag'); 
 
 const options = {
   definition: {
@@ -8,8 +9,13 @@ const options = {
       description: 'Dev'
     }],
     info: {
-      title: 'Hello World',
+      title: 'Prayer Dom',
       version: '1.0.0',
+    },
+    components: {
+      schemas: {
+        Tag: tagSchema,
+      },
     },
   },
   apis: ['./routes/api/v1/*.js'],

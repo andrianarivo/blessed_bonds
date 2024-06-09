@@ -1,4 +1,6 @@
 const asyncHandler = require('express-async-handler');
+const {body, validationResult} = require('express-validator');
+const {isHexColor} = require('../validators');
 const { prisma } = require('../db');
 
 exports.listTag = asyncHandler(async (req, res) => {
@@ -39,3 +41,24 @@ exports.getTag = asyncHandler(async (req, res) => {
     tag
   })
 })
+
+exports.createTag = [
+  body('name', 'Name is required').isString().isLength({min: 3}).escape(),
+  body('bgColor').custom(isHexColor).withMessage('Invalid hexadecimal color code'),
+  body('textColor').custom(isHexColor).withMessage('Invalid hexadecimal color code'),
+  asyncHandler(async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).send({errors: errors.array()});
+    }
+    const { name } = req.body;
+    const tag = await prisma.tag.create({
+      data: {
+        name
+      }
+    });
+    res.json({
+      tag
+    })
+  })
+]
