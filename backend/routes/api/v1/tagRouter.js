@@ -8,6 +8,8 @@ const {listTag, getTag, createTag, deleteTag, updateTag} = require('../../../con
  * @openapi
  * /tags:
  *   get:
+ *     tags:
+ *       - Tag
  *     description: Get list of Tags
  *     parameters:
  *       - in: query
@@ -44,6 +46,8 @@ router.get('/', listTag);
  * @openapi
  * /tags/{id}:
  *   get:
+ *     tags:
+ *       - Tag
  *     description: Get Tag specified by ID
  *     parameters:
  *       - in: path
@@ -64,6 +68,8 @@ router.get('/:id', getTag);
  * @openapi
  * /tags:
  *   post:
+ *     tags:
+ *       - Tag
  *     description: Create a new Tag
  *     requestBody:
  *       description: Tag data
@@ -84,6 +90,8 @@ router.post('/', createTag);
  * @openapi
  * /tags/{id}:
  *   delete:
+ *     tags:
+ *       - Tag
  *     description: Delete Tag specified by ID
  *     parameters:
  *       - in: path
@@ -104,6 +112,8 @@ router.delete('/:id', deleteTag);
  * @openapi
  * /tags/{id}:
  *   patch:
+ *     tags:
+ *       - Tag
  *     description: Update Tag specified by ID
  *     parameters:
  *       - in: path

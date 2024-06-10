@@ -12,6 +12,12 @@ const options = {
       title: 'Prayer Dom',
       version: '1.0.0',
     },
+    tags: [
+      {
+        name: 'Tag',
+        description: 'Operations about tags',
+      },
+    ],
     components: {
       schemas: {
         Tag: tagSchema,
