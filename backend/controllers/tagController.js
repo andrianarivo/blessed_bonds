@@ -21,9 +21,9 @@ exports.listTag = asyncHandler(async (req, res) => {
       }
     }
   }
-  const allTags = await prisma.tag.findMany(options);
+  const tags = await prisma.tag.findMany(options);
   res.json({
-    tags: allTags
+    tags
   })
 });
 
@@ -44,8 +44,8 @@ exports.getTag = asyncHandler(async (req, res) => {
 
 exports.createTag = [
   body('name', 'Name is required').isString().isLength({min: 3}).escape(),
-  body('bgColor').custom(isHexColor).withMessage('Invalid hexadecimal color code'),
-  body('textColor').custom(isHexColor).withMessage('Invalid hexadecimal color code'),
+  body('bgColor').escape().custom(isHexColor).withMessage('Invalid hexadecimal color code'),
+  body('textColor').escape().custom(isHexColor).withMessage('Invalid hexadecimal color code'),
   asyncHandler(async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
