@@ -1,5 +1,6 @@
 const swaggerJsdoc = require('swagger-jsdoc');
 const tagSchema = require('./schemas/tag'); 
+const topicSchema = require('./schemas/topic'); 
 
 const options = {
   definition: {
@@ -17,10 +18,15 @@ const options = {
         name: 'Tag',
         description: 'Operations about tags',
       },
+      {
+        name: 'Topic',
+        description: 'Operations about topics',
+      },
     ],
     components: {
       schemas: {
         Tag: tagSchema,
+        Topic: topicSchema,
       },
     },
   },
