@@ -14,18 +14,82 @@ datasource db {
 }
 
 model Tag {
-  id        Int      @id @default(autoincrement())
+  id        Int             @id @default(autoincrement())
   name      String
-  bgColor   String   @default("#ffece1")
-  textColor String   @default("#ff5c00")
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  bgColor   String          @default("#ffece1")
+  textColor String          @default("#ff5c00")
+  prayers   TagsOnPrayers[]
+  createdAt DateTime        @default(now())
+  updatedAt DateTime        @updatedAt
 }
 
 model Topic {
   id          Int      @id @default(autoincrement())
   name        String
   description String
+  prayers     Prayer[]
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+}
+
+model Prayer {
+  id             Int             @id @default(autoincrement())
+  summary        String
+  description    String
+  datetimeToPray DateTime        @default(now())
+  location       String          @default("home")
+  priority       Int             @default(0)
+  color          String          @default("#3300ff")
+  isPrivate      Boolean         @default(true)
+  topic          Topic?          @relation(fields: [topicId], references: [id])
+  topicId        Int?
+  status         Status          @relation(fields: [statusId], references: [id])
+  statusId       Int
+  answers        Answer[]
+  notes          Note[]
+  tags           TagsOnPrayers[]
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+}
+
+model TagsOnPrayers {
+  prayer     Prayer   @relation(fields: [prayerId], references: [id])
+  prayerId   Int
+  tag        Tag      @relation(fields: [tagId], references: [id])
+  tagId      Int
+  assignedAt DateTime @default(now())
+
+  @@id([prayerId, tagId])
+  @@map("PrayersOnTags")
+}
+
+model Answer {
+  id        Int      @id @default(autoincrement())
+  content   String
+  prayer    Prayer   @relation(fields: [prayerId], references: [id], onDelete: Cascade)
+  prayerId  Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Status {
+  id        Int      @id @default(autoincrement())
+  name      String
+  prayers   Prayer[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Note {
+  id           Int      @id @default(autoincrement())
+  title        String
+  content      String
+  isPrivate    Boolean
+  prayer       Prayer   @relation(fields: [prayerId], references: [id], onDelete: Cascade)
+  prayerId     Int
+  noteParent   Note?    @relation("NotesReplies", fields: [noteParentId], references: [id])
+  noteParentId Int?
+  replies      Note[]   @relation("NotesReplies")
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 }
