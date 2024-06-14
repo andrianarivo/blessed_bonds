@@ -1,34 +1,30 @@
 module.exports = {
   type: 'object',
   properties: {
+    id: {
+      type: 'integer',
+      description: 'ID of the Status',
+    },
     name: {
       type: 'string',
-      description: 'Name of the Tag',
-    },
-    bgColor: {
-      type: 'string',
-      description: 'Background color hex code',
-    },
-    textColor: {
-      type: 'string',
-      description: 'Text color hex code',
+      description: 'Name of the Status',
     },
     prayers: {
       type: 'array',
       items: {
         $ref: '#/components/schemas/Prayer',
       },
-      description: 'Prayers with the Tag',
+      description: 'Prayers with the Status',
     },
     createdAt: {
       type: 'string',
       format: 'date-time',
-      description: 'Date and time of the Tag creation',
+      description: 'Date and time of the Status creation',
     },
     updatedAt: {
       type: 'string',
       format: 'date-time',
-      description: 'Date and time of the Tag update',
+      description: 'Date and time of the Status update',
     },
   },
   required: ['name'],
