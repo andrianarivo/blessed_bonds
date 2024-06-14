@@ -1,5 +1,5 @@
-const asyncHandler = require("express-async-handler");
-const {body, validationResult} = require('express-validator');
+const asyncHandler = require('express-async-handler');
+const { body, validationResult } = require('express-validator');
 const { prisma } = require('../db');
 
 exports.listTopic = asyncHandler(async (req, res) => {
@@ -11,109 +11,119 @@ exports.listTopic = asyncHandler(async (req, res) => {
     take: parseInt(limit),
     orderBy: [
       {
-        [sortField]: sortOrder
-      }
+        [sortField]: sortOrder,
+      },
     ],
     where: {
       name: {
-        contains: name || ''
-      }
-    }
-  }
+        contains: name || '',
+      },
+    },
+  };
   const topics = await prisma.topic.findMany(options);
   res.json({
-    topics
-  })
+    topics,
+  });
 });
 
 exports.getTopic = asyncHandler(async (req, res) => {
   const { id } = req.params;
   const topic = await prisma.topic.findUnique({
     where: {
-      id: parseInt(id)
-    }
+      id: parseInt(id),
+    },
   });
   if (!topic) {
-    return res.status(404).send({error: 'Topic not found'}) 
+    return res.status(404).send({ error: 'Topic not found' });
   }
   res.json({
-    topic
-  })
+    topic,
+  });
 });
 
 exports.createTopic = [
-  body('name', 'Name is required').isString().isLength({min: 3}).escape(),
-  body('description', 'Description has to be a string').optional().isString().escape(),
+  body('name', 'Name is required').isString().isLength({ min: 3 }).escape(),
+  body('description', 'Description has to be a string')
+    .optional()
+    .isString()
+    .escape(),
   asyncHandler(async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).send({errors: errors.array()});
+      return res.status(400).send({ errors: errors.array() });
     }
-    const { name, description = "" } = req.body;
+    const { name, description = '' } = req.body;
     const topic = await prisma.topic.create({
       data: {
         name,
         description,
-      }
+      },
     });
     res.json({
-      topic
-    })
-  })
+      topic,
+    });
+  }),
 ];
 
 exports.deleteTopic = asyncHandler(async (req, res) => {
   const { id } = req.params;
   const topicToDelete = await prisma.topic.findUnique({
     where: {
-      id: parseInt(id)
-    }
+      id: parseInt(id),
+    },
   });
-  if(!topicToDelete) {
-    return res.status(404).send({error: 'Topic not found'});
+  if (!topicToDelete) {
+    return res.status(404).send({ error: 'Topic not found' });
   }
   const topic = await prisma.topic.delete({
     where: {
-      id: parseInt(id)
-    }
+      id: parseInt(id),
+    },
   });
   res.json({
-    topic
-  })
+    topic,
+  });
 });
 
 exports.updateTopic = [
-  body('name', 'Name has to be string').isString().isLength({min: 3}).escape().optional(),
-  body('description', 'Description has to be a string').isString().escape().optional(),
+  body('name', 'Name has to be string')
+    .optional()
+    .isString()
+    .isLength({ min: 3 })
+    .escape(),
+  body('description', 'Description has to be a string')
+    .optional()
+    .isString()
+    .escape(),
   asyncHandler(async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).send({errors: errors.array()});
+      return res.status(400).send({ errors: errors.array() });
     }
     const { id } = req.params;
     const topicToUpdate = await prisma.topic.findUnique({
       where: {
-        id: parseInt(id)
-      }
+        id: parseInt(id),
+      },
     });
-    if(!topicToUpdate) {
-      return res.status(404).send({error: 'Tag not found'});
+    if (!topicToUpdate) {
+      return res.status(404).send({ error: 'Tag not found' });
     }
-    const { 
+    const {
       name = topicToUpdate.name,
-      description = topicToUpdate.description
+      description = topicToUpdate.description,
     } = req.body;
     const topic = await prisma.topic.update({
       data: {
         name,
-        description
+        description,
       },
       where: {
-        id: parseInt(id)
-      }
+        id: parseInt(id),
+      },
     });
     res.json({
-      topic
-    })
-  })
+      topic,
+    });
+  }),
 ];

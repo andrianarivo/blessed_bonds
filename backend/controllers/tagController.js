@@ -1,6 +1,6 @@
 const asyncHandler = require('express-async-handler');
-const {body, validationResult} = require('express-validator');
-const {isHexColor} = require('../validators');
+const { body, validationResult } = require('express-validator');
+const { isHexColor } = require('../validators');
 const { prisma } = require('../db');
 
 exports.listTag = asyncHandler(async (req, res) => {
@@ -12,114 +12,130 @@ exports.listTag = asyncHandler(async (req, res) => {
     take: parseInt(limit),
     orderBy: [
       {
-        [sortField]: sortOrder
-      }
+        [sortField]: sortOrder,
+      },
     ],
     where: {
       name: {
-        contains: name || ''
-      }
-    }
-  }
+        contains: name || '',
+      },
+    },
+  };
   const tags = await prisma.tag.findMany(options);
   res.json({
-    tags
-  })
+    tags,
+  });
 });
 
 exports.getTag = asyncHandler(async (req, res) => {
   const { id } = req.params;
   const tag = await prisma.tag.findUnique({
     where: {
-      id: parseInt(id)
-    }
+      id: parseInt(id),
+    },
   });
   if (!tag) {
-    return res.status(404).send({error: 'Tag not found'}) 
+    return res.status(404).send({ error: 'Tag not found' });
   }
   res.json({
-    tag
-  })
-})
+    tag,
+  });
+});
 
 exports.createTag = [
-  body('name', 'Name is required').isString().isLength({min: 3}).escape(),
-  body('bgColor').escape().custom(isHexColor).withMessage('Invalid hexadecimal color code'),
-  body('textColor').escape().custom(isHexColor).withMessage('Invalid hexadecimal color code'),
+  body('name', 'Name is required').isString().isLength({ min: 3 }).escape(),
+  body('bgColor')
+    .optional()
+    .custom(isHexColor)
+    .withMessage('Invalid hexadecimal color code'),
+  body('textColor')
+    .optional()
+    .custom(isHexColor)
+    .withMessage('Invalid hexadecimal color code'),
   asyncHandler(async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).send({errors: errors.array()});
+      return res.status(400).send({ errors: errors.array() });
     }
-    const { name, bgColor = undefined, textColor = undefined } = req.body;
+    const { name, bgColor = '#ffece1', textColor = '#ff5c00' } = req.body;
     const tag = await prisma.tag.create({
       data: {
         name,
         bgColor,
-        textColor
-      }
+        textColor,
+      },
     });
     res.json({
-      tag
-    })
-  })
-]
+      tag,
+    });
+  }),
+];
 
 exports.deleteTag = asyncHandler(async (req, res) => {
   const { id } = req.params;
   const tagToDelete = await prisma.tag.findUnique({
     where: {
-      id: parseInt(id)
-    }
+      id: parseInt(id),
+    },
   });
-  if(!tagToDelete) {
-    return res.status(404).send({error: 'Tag not found'});
+  if (!tagToDelete) {
+    return res.status(404).send({ error: 'Tag not found' });
   }
   const tag = await prisma.tag.delete({
     where: {
-      id: parseInt(id)
-    }
+      id: parseInt(id),
+    },
   });
   res.json({
-    tag
-  })
-})
+    tag,
+  });
+});
 
 exports.updateTag = [
-  body('name', 'Name has to be string').isString().isLength({min: 3}).escape().optional(),
-  body('bgColor').custom(isHexColor).withMessage('Invalid hexadecimal color code'),
-  body('textColor').custom(isHexColor).withMessage('Invalid hexadecimal color code'),
+  body('name', 'Name has to be string')
+    .optional()
+    .isString()
+    .isLength({ min: 3 })
+    .escape(),
+  body('bgColor')
+    .optional()
+    .custom(isHexColor)
+    .withMessage('Invalid hexadecimal color code'),
+  body('textColor')
+    .optional()
+    .custom(isHexColor)
+    .withMessage('Invalid hexadecimal color code'),
   asyncHandler(async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).send({errors: errors.array()});
+      return res.status(400).send({ errors: errors.array() });
     }
     const { id } = req.params;
     const tagToUpdate = await prisma.tag.findUnique({
       where: {
-        id: parseInt(id)
-      }
+        id: parseInt(id),
+      },
     });
-    if(!tagToUpdate) {
-      return res.status(404).send({error: 'Tag not found'});
+    if (!tagToUpdate) {
+      return res.status(404).send({ error: 'Tag not found' });
     }
-    const { 
-      name = tagToUpdate.name, 
-      bgColor = tagToUpdate.bgColor, 
-      textColor = tagToUpdate.textColor 
+    const {
+      name = tagToUpdate.name,
+      bgColor = tagToUpdate.bgColor,
+      textColor = tagToUpdate.textColor,
     } = req.body;
     const tag = await prisma.tag.update({
       data: {
         name,
         bgColor,
-        textColor
+        textColor,
       },
       where: {
-        id: parseInt(id)
-      }
+        id: parseInt(id),
+      },
     });
     res.json({
-      tag
-    })
-  })
-]
+      tag,
+    });
+  }),
+];

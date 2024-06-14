@@ -13,6 +13,17 @@ async function main() {
       name: faker.lorem.word(),
     },
   });
+  await prisma.status.create({
+    data: {
+      name: faker.lorem.word(),
+    },
+  });
+  await prisma.topic.create({
+    data: {
+      name: faker.lorem.word(),
+      description: faker.lorem.paragraph(),
+    },
+  });
 }
 
 void main()

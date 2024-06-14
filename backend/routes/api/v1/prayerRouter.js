@@ -3,20 +3,20 @@ const express = require('express');
 const router = express.Router();
 
 const {
-  listTag,
-  getTag,
-  createTag,
-  deleteTag,
-  updateTag,
-} = require('../../../controllers/tagController');
+  listPrayer,
+  getPrayer,
+  createPrayer,
+  deletePrayer,
+  updatePrayer,
+} = require('../../../controllers/prayerController');
 
 /**
  * @openapi
- * /tags:
+ * /prayers:
  *   get:
  *     tags:
- *       - Tag
- *     description: Get list of Tags
+ *       - Prayer
+ *     description: Get list of Prayers
  *     parameters:
  *       - in: query
  *         name: page
@@ -29,98 +29,98 @@ const {
  *         schema:
  *           type: integer
  *           default: 10
- *         description: Number of Tags per page
+ *         description: Number of Prayers per page
  *       - in: query
  *         name: sortBy
  *         schema:
  *           type: string
- *           default: "name.asc"
+ *           default: "summary.asc"
  *         description: Sorting field and order separeted by a dot
  *       - in: query
- *         name: name
+ *         name: summary
  *         schema:
  *           type: string
- *           default: "self-control"
- *         description: Search by name
+ *           default: "God is provider"
+ *         description: Search by summary
  *     responses:
  *       200:
- *         description: Returns an array of Tags
+ *         description: Returns an array of Prayers
  */
-router.get('/', listTag);
+router.get('/', listPrayer);
 
 /**
  * @openapi
- * /tags/{id}:
+ * /prayers/{id}:
  *   get:
  *     tags:
- *       - Tag
- *     description: Get Tag specified by ID
+ *       - Prayer
+ *     description: Get Prayer specified by ID
  *     parameters:
  *       - in: path
  *         name: id
  *         schema:
  *           type: integer
  *         required: true
- *         description: ID of the Tag
+ *         description: ID of the Prayer
  *     responses:
  *       200:
- *         description: Returns a Tag
+ *         description: Returns a Prayer
  *       404:
- *         description: Tag not found
+ *         description: Prayer not found
  */
-router.get('/:id', getTag);
+router.get('/:id', getPrayer);
 
 /**
  * @openapi
- * /tags:
+ * /prayers:
  *   post:
  *     tags:
- *       - Tag
- *     description: Create a new Tag
+ *       - Prayer
+ *     description: Create a new Prayer
  *     requestBody:
- *       description: Tag data
+ *       description: Prayer data
  *       required: true
  *       content:
  *         application/json:
  *           schema:
- *            $ref: '#/components/schemas/Tag'
+ *            $ref: '#/components/schemas/Prayer'
  *     responses:
  *       200:
- *         description: Tag created successfully
+ *         description: Prayer created successfully
  *       400:
  *         description: Validation error
  */
-router.post('/', createTag);
+router.post('/', createPrayer);
 
 /**
  * @openapi
- * /tags/{id}:
+ * /prayers/{id}:
  *   delete:
  *     tags:
- *       - Tag
- *     description: Delete Tag specified by ID
+ *       - Prayer
+ *     description: Delete Prayer specified by ID
  *     parameters:
  *       - in: path
  *         name: id
  *         schema:
  *           type: integer
  *         required: true
- *         description: ID of the Tag
+ *         description: ID of the Prayer
  *     responses:
  *       200:
- *         description: Tag deleted successfully
+ *         description: Prayer deleted successfully
  *       404:
- *         description: Tag not found
+ *         description: Prayer not found
  */
-router.delete('/:id', deleteTag);
+router.delete('/:id', deletePrayer);
 
 /**
  * @openapi
- * /tags/{id}:
+ * /prayers/{id}:
  *   patch:
  *     tags:
- *       - Tag
- *     description: Update Tag specified by ID
+ *       - Prayer
+ *     description: Update Prayer specified by ID
  *     parameters:
  *       - in: path
  *         name: id
@@ -129,18 +129,18 @@ router.delete('/:id', deleteTag);
  *         required: true
  *         description: ID of the Tag
  *     requestBody:
- *       description: Tag data
+ *       description: Prayer data
  *       required: true
  *       content:
  *         application/json:
  *           schema:
- *            $ref: '#/components/schemas/Tag'
+ *            $ref: '#/components/schemas/Prayer'
  *     responses:
  *       200:
- *         description: Tag updated successfully
+ *         description: Prayer updated successfully
  *       400:
  *         description: Validation error
  */
-router.patch('/:id', updateTag);
+router.patch('/:id', updatePrayer);
 
 module.exports = router;

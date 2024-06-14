@@ -2,7 +2,13 @@ const express = require('express');
 
 const router = express.Router();
 
-const {listTopic, getTopic, createTopic, deleteTopic, updateTopic} = require('../../../controllers/topicController');
+const {
+  listTopic,
+  getTopic,
+  createTopic,
+  deleteTopic,
+  updateTopic,
+} = require('../../../controllers/topicController');
 
 /**
  * @openapi
@@ -62,7 +68,7 @@ router.get('/', listTopic);
  *       404:
  *         description: Topic not found
  */
-router.get('/:id',getTopic);
+router.get('/:id', getTopic);
 
 /**
  * @openapi
