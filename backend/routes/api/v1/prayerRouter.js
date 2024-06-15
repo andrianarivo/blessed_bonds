@@ -8,6 +8,7 @@ const {
   createPrayer,
   deletePrayer,
   updatePrayer,
+  getPrayerNotes,
 } = require('../../../controllers/prayerController');
 
 /**
@@ -69,6 +70,52 @@ router.get('/', listPrayer);
  *         description: Prayer not found
  */
 router.get('/:id', getPrayer);
+
+/**
+ * @openapi
+ * /prayers/{id}/notes:
+ *   get:
+ *     tags:
+ *       - Prayer
+ *     description: Get Prayer specified by ID
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: integer
+ *         required: true
+ *         description: ID of the Prayer
+ *       - in: query
+ *         name: page
+ *         schema:
+ *           type: integer
+ *           default: 1
+ *         description: Page number
+ *       - in: query
+ *         name: limit
+ *         schema:
+ *           type: integer
+ *           default: 10
+ *         description: Number of Notes per page
+ *       - in: query
+ *         name: sortBy
+ *         schema:
+ *           type: string
+ *           default: "title.asc"
+ *         description: Sorting field and order separeted by a dot
+ *       - in: query
+ *         name: title
+ *         schema:
+ *           type: string
+ *           default: "Jesus is the Messiah"
+ *         description: Search by title
+ *     responses:
+ *       200:
+ *         description: Returns a list of Notes from the specified Prayer
+ *       404:
+ *         description: Prayer not found
+ */
+router.get('/:id/notes', getPrayerNotes);
 
 /**
  * @openapi
