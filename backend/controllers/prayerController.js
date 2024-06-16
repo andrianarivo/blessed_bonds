@@ -24,11 +24,18 @@ exports.listPrayer = asyncHandler(async (req, res) => {
     include: {
       status: true,
       topic: true,
-      tags: true,
+      tags: {
+        select: {
+          tag: true,
+        },
+      },
     },
   };
   const prayers = await prisma.prayer.findMany(options);
   res.json({
+    page: parseInt(page),
+    limit: parseInt(limit),
+    sortBy,
     prayers,
   });
 });
@@ -38,6 +45,15 @@ exports.getPrayer = asyncHandler(async (req, res) => {
   const prayer = await prisma.prayer.findUnique({
     where: {
       id: parseInt(id),
+    },
+    include: {
+      status: true,
+      topic: true,
+      tags: {
+        select: {
+          tag: true,
+        },
+      },
     },
   });
   if (!prayer) {
@@ -76,6 +92,9 @@ exports.getPrayerNotes = asyncHandler(async (req, res) => {
   };
   const notes = await prisma.note.findMany(options);
   res.json({
+    page: parseInt(page),
+    limit: parseInt(limit),
+    sortBy,
     notes,
   });
 });
@@ -175,4 +194,102 @@ exports.deletePrayer = asyncHandler(async (req, res) => {
   });
 });
 
-exports.updatePrayer = [asyncHandler(async (req, res) => {})];
+exports.updatePrayer = [
+  body('summary', 'Summary is required')
+    .optional()
+    .isString()
+    .isLength({ min: 3 })
+    .escape(),
+  body('description', 'Description is required')
+    .optional()
+    .isString()
+    .isLength({ min: 10 })
+    .escape(),
+  body('datetimeToPray').optional().isISO8601(),
+  body('location').optional().isString().escape(),
+  body('priority').optional().isInt({ min: -2, max: 2 }),
+  body('color')
+    .optional()
+    .custom(isHexColor)
+    .withMessage('Invalid hexadecimal color code'),
+  body('isPrivate').optional().isBoolean(),
+  body('topicId').optional().isInt({ min: 0 }),
+  body('statusId').optional().isInt({ min: 0 }),
+  body('tagIds').optional().isArray().custom(isArrayOfIds),
+  asyncHandler(async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).send({ errors: errors.array() });
+    }
+    const { id: prayerId } = req.params;
+    const prayerToUpdate = await prisma.prayer.findUnique({
+      where: {
+        id: parseInt(prayerId),
+      },
+    });
+    if (!prayerToUpdate) {
+      return res.status(404).send({ error: 'Prayer not found' });
+    }
+    console.log(prayerToUpdate.tags);
+    const {
+      summary = prayerToUpdate.summary,
+      description = prayerToUpdate.description,
+      datetimeToPray = prayerToUpdate.datetimeToPray,
+      location = prayerToUpdate.location,
+      priority = prayerToUpdate.priority,
+      color = prayerToUpdate.color,
+      isPrivate = prayerToUpdate.isPrivate,
+      topicId = prayerToUpdate.topicId,
+      statusId = prayerToUpdate.statusId,
+      tagIds = prayerToUpdate.tags?.map((tag) => tag.id),
+    } = req.body;
+    const data = {
+      summary,
+      description,
+      datetimeToPray,
+      location,
+      priority,
+      color,
+      isPrivate,
+      status: {
+        connect: { id: statusId },
+      },
+    };
+    if (topicId) {
+      data.topic = {
+        connect: { id: topicId },
+      };
+    }
+    const prayer = await prisma.prayer.update({
+      data,
+      where: {
+        id: parseInt(prayerId),
+      },
+    });
+    await prisma.prayer.update({
+      data: {
+        tags: {
+          deleteMany: {},
+        },
+      },
+      where: {
+        id: parseInt(prayerId),
+      },
+    });
+    tagIds?.forEach(async (tagId) => {
+      await prisma.tagsOnPrayers.create({
+        data: {
+          tag: {
+            connect: { id: tagId },
+          },
+          prayer: {
+            connect: { id: prayer.id },
+          },
+        },
+      });
+    });
+    res.json({
+      prayer,
+    });
+  }),
+];
