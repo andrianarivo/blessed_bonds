@@ -23,6 +23,9 @@ exports.listTag = asyncHandler(async (req, res) => {
   };
   const tags = await prisma.tag.findMany(options);
   res.json({
+    page: parseInt(page),
+    limit: parseInt(limit),
+    sortBy,
     tags,
   });
 });

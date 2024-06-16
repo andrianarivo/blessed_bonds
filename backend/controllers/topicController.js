@@ -22,6 +22,9 @@ exports.listTopic = asyncHandler(async (req, res) => {
   };
   const topics = await prisma.topic.findMany(options);
   res.json({
+    page: parseInt(page),
+    limit: parseInt(limit),
+    sortBy,
     topics,
   });
 });
