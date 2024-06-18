@@ -8,8 +8,16 @@ const {
   createPrayer,
   deletePrayer,
   updatePrayer,
-  getPrayerNotes,
+  getPrayerAnswers,
 } = require('../../../controllers/prayerController');
+
+const {
+  listPrayerNote,
+  getPrayerNote,
+  createPrayerNote,
+  deletePrayerNote,
+  updatePrayerNote,
+} = require('../../../controllers/prayerNoteController');
 
 /**
  * @openapi
@@ -73,52 +81,6 @@ router.get('/:id', getPrayer);
 
 /**
  * @openapi
- * /prayers/{id}/notes:
- *   get:
- *     tags:
- *       - Prayer
- *     description: Get Prayer specified by ID
- *     parameters:
- *       - in: path
- *         name: id
- *         schema:
- *           type: integer
- *         required: true
- *         description: ID of the Prayer
- *       - in: query
- *         name: page
- *         schema:
- *           type: integer
- *           default: 1
- *         description: Page number
- *       - in: query
- *         name: limit
- *         schema:
- *           type: integer
- *           default: 10
- *         description: Number of Notes per page
- *       - in: query
- *         name: sortBy
- *         schema:
- *           type: string
- *           default: "title.asc"
- *         description: Sorting field and order separeted by a dot
- *       - in: query
- *         name: title
- *         schema:
- *           type: string
- *           default: "Jesus is the Messiah"
- *         description: Search by title
- *     responses:
- *       200:
- *         description: Returns a list of Notes from the specified Prayer
- *       404:
- *         description: Prayer not found
- */
-router.get('/:id/notes', getPrayerNotes);
-
-/**
- * @openapi
  * /prayers:
  *   post:
  *     tags:
@@ -174,7 +136,7 @@ router.delete('/:id', deletePrayer);
  *         schema:
  *           type: integer
  *         required: true
- *         description: ID of the Tag
+ *         description: ID of the Prayer
  *     requestBody:
  *       description: Prayer data
  *       required: true
@@ -189,5 +151,217 @@ router.delete('/:id', deletePrayer);
  *         description: Validation error
  */
 router.patch('/:id', updatePrayer);
+
+/**
+ * @openapi
+ * /prayers/{prayerId}/notes:
+ *   get:
+ *     tags:
+ *       - Prayer
+ *     description: Get Notes from a Prayer specified by ID
+ *     parameters:
+ *       - in: path
+ *         name: prayerId
+ *         schema:
+ *           type: integer
+ *         required: true
+ *         description: ID of the Prayer
+ *       - in: query
+ *         name: page
+ *         schema:
+ *           type: integer
+ *           default: 1
+ *         description: Page number
+ *       - in: query
+ *         name: limit
+ *         schema:
+ *           type: integer
+ *           default: 10
+ *         description: Number of Notes per page
+ *       - in: query
+ *         name: sortBy
+ *         schema:
+ *           type: string
+ *           default: "title.asc"
+ *         description: Sorting field and order separeted by a dot
+ *       - in: query
+ *         name: title
+ *         schema:
+ *           type: string
+ *           default: "Jesus is the Messiah"
+ *         description: Search by title
+ *     responses:
+ *       200:
+ *         description: Returns a list of Notes from the specified Prayer
+ *       404:
+ *         description: Prayer not found
+ */
+router.get('/:prayerId/notes', listPrayerNote);
+
+/**
+ * @openapi
+ * /prayers/{prayerId}/notes/{noteId}:
+ *   get:
+ *     tags:
+ *       - Prayer
+ *     description: Get a Note specified by Prayer and ID
+ *     parameters:
+ *       - in: path
+ *         name: prayerId
+ *         schema:
+ *           type: integer
+ *         required: true
+ *         description: ID of the Prayer
+ *       - in: path
+ *         name: noteId
+ *         schema:
+ *           type: integer
+ *         required: true
+ *         description: ID of the Note
+ *     responses:
+ *       200:
+ *         description: Returns a Note from the specified Prayer
+ *       404:
+ *         description: Note not found
+ */
+router.get('/:prayerId/notes/:noteId', getPrayerNote);
+
+/**
+ * @openapi
+ * /prayers/{prayerId}/notes:
+ *   post:
+ *     tags:
+ *       - Prayer
+ *     description: Create a new Note for a Prayer
+ *     parameters:
+ *       - in: path
+ *         name: prayerId
+ *         schema:
+ *           type: integer
+ *         required: true
+ *         description: ID of the Prayer
+ *     requestBody:
+ *       description: Note data
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *            $ref: '#/components/schemas/Note'
+ *     responses:
+ *       200:
+ *         description: Note created successfully
+ *       400:
+ *         description: Validation error
+ */
+router.post('/:prayerId/notes', createPrayerNote);
+
+/**
+ * @openapi
+ * /prayers/{prayerId}/notes/{noteId}:
+ *   delete:
+ *     tags:
+ *       - Prayer
+ *     description: Delete a Note from a Prayer specified by ID
+ *     parameters:
+ *       - in: path
+ *         name: prayerId
+ *         schema:
+ *           type: integer
+ *         required: true
+ *         description: ID of the Prayer
+ *       - in: path
+ *         name: noteId
+ *         schema:
+ *           type: integer
+ *         required: true
+ *         description: ID of the Note
+ *     responses:
+ *       200:
+ *         description: Note deleted successfully
+ *       404:
+ *         description: Note not found
+ */
+router.delete('/:prayerId/notes/:noteId', deletePrayerNote);
+
+/**
+ * @openapi
+ * /prayers/{prayerId}/notes/{noteId}:
+ *   patch:
+ *     tags:
+ *       - Prayer
+ *     description: Update Note specified by Prayer and ID
+ *     parameters:
+ *       - in: path
+ *         name: prayerId
+ *         schema:
+ *           type: integer
+ *         required: true
+ *         description: ID of the Prayer
+ *       - in: path
+ *         name: noteId
+ *         schema:
+ *           type: integer
+ *         required: true
+ *         description: ID of the Note
+ *     requestBody:
+ *       description: Note data
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *            $ref: '#/components/schemas/Note'
+ *     responses:
+ *       200:
+ *         description: Note updated successfully
+ *       400:
+ *         description: Validation error
+ */
+router.patch('/:prayerId/notes/:noteId', updatePrayerNote);
+
+/**
+ * @openapi
+ * /prayers/{id}/answers:
+ *   get:
+ *     tags:
+ *       - Prayer
+ *     description: Get Answers from a Prayer specified by ID
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: integer
+ *         required: true
+ *         description: ID of the Prayer
+ *       - in: query
+ *         name: page
+ *         schema:
+ *           type: integer
+ *           default: 1
+ *         description: Page number
+ *       - in: query
+ *         name: limit
+ *         schema:
+ *           type: integer
+ *           default: 10
+ *         description: Number of Answers per page
+ *       - in: query
+ *         name: sortBy
+ *         schema:
+ *           type: string
+ *           default: "content.asc"
+ *         description: Sorting field and order separeted by a dot
+ *       - in: query
+ *         name: content
+ *         schema:
+ *           type: string
+ *           default: "Messiah"
+ *         description: Search by content (keyword)
+ *     responses:
+ *       200:
+ *         description: Returns a list of Answers from the specified Prayer
+ *       404:
+ *         description: Prayer not found
+ */
+router.get('/:id/answers', getPrayerAnswers);
 
 module.exports = router;

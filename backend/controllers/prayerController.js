@@ -64,41 +64,6 @@ exports.getPrayer = asyncHandler(async (req, res) => {
   });
 });
 
-exports.getPrayerNotes = asyncHandler(async (req, res) => {
-  const { id } = req.params;
-  const { page = 1, limit = 10, sortBy = 'title.asc', title } = req.query;
-  const [sortField, sortOrder] = sortBy.split('.');
-  const skip = (page - 1) * limit;
-  const options = {
-    skip: Math.max(0, skip),
-    take: parseInt(limit),
-    orderBy: [
-      {
-        [sortField]: sortOrder,
-      },
-    ],
-    where: {
-      AND: [
-        {
-          prayerId: parseInt(id),
-        },
-        {
-          title: {
-            contains: title || '',
-          },
-        },
-      ],
-    },
-  };
-  const notes = await prisma.note.findMany(options);
-  res.json({
-    page: parseInt(page),
-    limit: parseInt(limit),
-    sortBy,
-    notes,
-  });
-});
-
 exports.createPrayer = [
   body('summary', 'Summary is required')
     .isString()
@@ -156,18 +121,19 @@ exports.createPrayer = [
     const prayer = await prisma.prayer.create({
       data,
     });
-    tagIds.forEach(async (tagId) => {
-      await prisma.tagsOnPrayers.create({
-        data: {
-          tag: {
-            connect: { id: tagId },
-          },
-          prayer: {
-            connect: { id: prayer.id },
-          },
+    if (tagIds?.length > 0) {
+      const tagsOnPrayersData = tagIds.map((tagId) => ({
+        tag: {
+          connect: { id: tagId },
         },
+        prayer: {
+          connect: { id: prayer.id },
+        },
+      }));
+      await prisma.tagsOnPrayers.createMany({
+        data: tagsOnPrayersData,
       });
-    });
+    }
     res.json({
       prayer,
     });
@@ -230,7 +196,6 @@ exports.updatePrayer = [
     if (!prayerToUpdate) {
       return res.status(404).send({ error: 'Prayer not found' });
     }
-    console.log(prayerToUpdate.tags);
     const {
       summary = prayerToUpdate.summary,
       description = prayerToUpdate.description,
@@ -266,6 +231,7 @@ exports.updatePrayer = [
         id: parseInt(prayerId),
       },
     });
+    // delete relations only
     await prisma.prayer.update({
       data: {
         tags: {
@@ -276,20 +242,56 @@ exports.updatePrayer = [
         id: parseInt(prayerId),
       },
     });
-    tagIds?.forEach(async (tagId) => {
-      await prisma.tagsOnPrayers.create({
-        data: {
-          tag: {
-            connect: { id: tagId },
-          },
-          prayer: {
-            connect: { id: prayer.id },
-          },
+    if (tagIds?.length > 0) {
+      const tagsOnPrayersData = tagIds.map((tagId) => ({
+        tag: {
+          connect: { id: tagId },
         },
+        prayer: {
+          connect: { id: prayerId },
+        },
+      }));
+      await prisma.tagsOnPrayers.createMany({
+        data: tagsOnPrayersData,
       });
-    });
+    }
     res.json({
       prayer,
     });
   }),
 ];
+
+exports.getPrayerAnswers = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  const { page = 1, limit = 10, sortBy = 'content.asc', content } = req.query;
+  const [sortField, sortOrder] = sortBy.split('.');
+  const skip = (page - 1) * limit;
+  const options = {
+    skip: Math.max(0, skip),
+    take: parseInt(limit),
+    orderBy: [
+      {
+        [sortField]: sortOrder,
+      },
+    ],
+    where: {
+      AND: [
+        {
+          prayerId: parseInt(id),
+        },
+        {
+          content: {
+            contains: content || '',
+          },
+        },
+      ],
+    },
+  };
+  const answers = await prisma.answer.findMany(options);
+  res.json({
+    page: parseInt(page),
+    limit: parseInt(limit),
+    sortBy,
+    answers,
+  });
+});
