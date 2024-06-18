@@ -1,10 +1,6 @@
 module.exports = {
   type: 'object',
   properties: {
-    id: {
-      type: 'integer',
-      description: 'ID of the Topic',
-    },
     name: {
       type: 'string',
       description: 'Name of the Topic',

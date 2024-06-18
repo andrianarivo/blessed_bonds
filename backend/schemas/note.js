@@ -1,10 +1,6 @@
 module.exports = {
   type: 'object',
   properties: {
-    id: {
-      type: 'integer',
-      description: 'ID of the Note',
-    },
     title: {
       type: 'string',
       description: 'Title of the Note',

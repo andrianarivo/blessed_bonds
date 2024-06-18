@@ -1,19 +1,17 @@
 module.exports = {
   type: 'object',
   properties: {
-    id: {
-      type: 'integer',
-      description: 'ID of the Status',
-    },
     name: {
       type: 'string',
       description: 'Name of the Status',
     },
-    prayers: {
+    prayerIds: {
       type: 'array',
       items: {
-        $ref: '#/components/schemas/Prayer',
+        type: 'integer',
+        description: 'IDs of the Prayers with the Status',
       },
+      example: [1, 2, 3],
       description: 'Prayers with the Status',
     },
     createdAt: {

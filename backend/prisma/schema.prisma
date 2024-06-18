@@ -43,8 +43,8 @@ model Prayer {
   isPrivate      Boolean         @default(true)
   topic          Topic?          @relation(fields: [topicId], references: [id])
   topicId        Int?
-  status         Status          @relation(fields: [statusId], references: [id])
-  statusId       Int
+  status         Status?         @relation(fields: [statusId], references: [id])
+  statusId       Int?
   answers        Answer[]
   notes          Note[]
   tags           TagsOnPrayers[]
@@ -87,7 +87,7 @@ model Note {
   isPrivate    Boolean
   prayer       Prayer   @relation(fields: [prayerId], references: [id], onDelete: Cascade)
   prayerId     Int
-  noteParent   Note?    @relation("NotesReplies", fields: [noteParentId], references: [id])
+  noteParent   Note?    @relation("NotesReplies", fields: [noteParentId], references: [id], onDelete: Cascade)
   noteParentId Int?
   replies      Note[]   @relation("NotesReplies")
   createdAt    DateTime @default(now())
