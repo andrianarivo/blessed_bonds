@@ -231,7 +231,7 @@ exports.updatePrayer = [
         id: parseInt(prayerId),
       },
     });
-    // delete relations only
+    // delete relations, keep the tags
     await prisma.prayer.update({
       data: {
         tags: {

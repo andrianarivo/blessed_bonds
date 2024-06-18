@@ -92,10 +92,10 @@ exports.createPrayerNote = [
 ];
 
 exports.deletePrayerNote = asyncHandler(async (req, res) => {
-  const { prayerId, noteId } = req.params;
-  const noteToDelete = await prisma.note.findFirst({
+  const { noteId } = req.params;
+  const noteToDelete = await prisma.note.findUnique({
     where: {
-      AND: [{ id: parseInt(noteId) }, { prayerId: parseInt(prayerId) }],
+      id: parseInt(noteId),
     },
   });
   if (!noteToDelete) {
@@ -130,10 +130,10 @@ exports.updatePrayerNote = [
     if (!errors.isEmpty()) {
       return res.status(400).send({ errors: errors.array() });
     }
-    const { prayerId, noteId } = req.params;
-    const noteToUpdate = await prisma.note.findFirst({
+    const { noteId } = req.params;
+    const noteToUpdate = await prisma.note.findUnique({
       where: {
-        AND: [{ id: parseInt(noteId) }, { prayerId: parseInt(prayerId) }],
+        id: parseInt(noteId),
       },
     });
     if (!noteToUpdate) {
@@ -149,7 +149,6 @@ exports.updatePrayerNote = [
       title,
       content,
       isPrivate,
-      prayerId: parseInt(prayerId),
       noteParentId,
     };
     const note = await prisma.note.update({
