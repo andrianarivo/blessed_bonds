@@ -2,7 +2,6 @@ const asyncHandler = require('express-async-handler');
 const { body, validationResult } = require('express-validator');
 const { isArrayOfIds } = require('../validators');
 const { prisma } = require('../db');
-const note = require('../schemas/note');
 
 exports.listPrayerNote = asyncHandler(async (req, res) => {
   const { prayerId } = req.params;
