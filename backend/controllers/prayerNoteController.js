@@ -42,10 +42,10 @@ exports.listPrayerNote = asyncHandler(async (req, res) => {
 });
 
 exports.getPrayerNote = asyncHandler(async (req, res) => {
-  const { prayerId, noteId } = req.params;
-  const note = await prisma.note.findFirst({
+  const { noteId } = req.params;
+  const note = await prisma.note.findUnique({
     where: {
-      AND: [{ id: parseInt(noteId) }, { prayerId: parseInt(prayerId) }],
+      id: parseInt(noteId),
     },
     include: {
       replies: true,
