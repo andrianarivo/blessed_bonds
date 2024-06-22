@@ -56,4 +56,32 @@ const {
  */
 router.get('/', listPrayerAnswer);
 
+/**
+ * @openapi
+ * /prayers/{prayerId}/answers/{answerId}:
+ *   get:
+ *     tags:
+ *       - Answer
+ *     description: Get an Answer specified by Prayer and ID
+ *     parameters:
+ *       - in: path
+ *         name: prayerId
+ *         schema:
+ *           type: integer
+ *         required: true
+ *         description: ID of the Prayer
+ *       - in: path
+ *         name: answerId
+ *         schema:
+ *           type: integer
+ *         required: true
+ *         description: ID of the Answer
+ *     responses:
+ *       200:
+ *         description: Returns an Answer from the specified Prayer
+ *       404:
+ *         description: Answer not found
+ */
+router.get('/:answerId', getPrayerAnswer);
+
 module.exports = router;

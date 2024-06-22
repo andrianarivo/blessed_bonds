@@ -1,4 +1,5 @@
 const asyncHandler = require('express-async-handler');
+const { prisma } = require('../db');
 
 exports.listPrayerAnswer = asyncHandler(async (req, res) => {
   const { prayerId } = req.params;
@@ -34,11 +35,24 @@ exports.listPrayerAnswer = asyncHandler(async (req, res) => {
     page: parseInt(page),
     limit: parseInt(limit),
     sortBy,
-    answers: answers.filter((note) => !note.noteParentId),
+    answers,
   });
 });
 
-exports.getPrayerAnswer = asyncHandler(async (req, res) => {});
+exports.getPrayerAnswer = asyncHandler(async (req, res) => {
+  const { answerId } = req.params;
+  const answer = await prisma.answer.findUnique({
+    where: {
+      id: parseInt(answerId),
+    },
+  });
+  if (!answer) {
+    return res.status(404).send({ error: 'Answer not found' });
+  }
+  res.json({
+    answer,
+  });
+});
 
 exports.createPrayerAnswer = [asyncHandler(async (req, res) => {})];
 
