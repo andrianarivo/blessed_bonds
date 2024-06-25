@@ -56,6 +56,24 @@ exports.getPrayerAnswer = asyncHandler(async (req, res) => {
 
 exports.createPrayerAnswer = [asyncHandler(async (req, res) => {})];
 
-exports.deletePrayerAnswer = asyncHandler(async (req, res) => {});
+exports.deletePrayerAnswer = asyncHandler(async (req, res) => {
+  const { answerId } = req.params;
+  const answerToDelete = await prisma.answer.findUnique({
+    where: {
+      id: parseInt(answerId),
+    },
+  });
+  if (!answerToDelete) {
+    return res.status(404).send({ error: 'Answer not found' });
+  }
+  const answer = await prisma.answer.delete({
+    where: {
+      id: parseInt(answerId),
+    },
+  });
+  res.json({
+    answer,
+  });
+});
 
 exports.updatePrayerAnswer = [asyncHandler(async (req, res) => {})];

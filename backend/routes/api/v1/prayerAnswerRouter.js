@@ -84,4 +84,32 @@ router.get('/', listPrayerAnswer);
  */
 router.get('/:answerId', getPrayerAnswer);
 
+/**
+ * @openapi
+ * /prayers/{prayerId}/answers/{answerId}:
+ *   delete:
+ *     tags:
+ *       - Answer
+ *     description: Delete a Answer from a Prayer specified by ID
+ *     parameters:
+ *       - in: path
+ *         name: prayerId
+ *         schema:
+ *           type: integer
+ *         required: true
+ *         description: ID of the Prayer
+ *       - in: path
+ *         name: answerId
+ *         schema:
+ *           type: integer
+ *         required: true
+ *         description: ID of the Answer
+ *     responses:
+ *       200:
+ *         description: Answer deleted successfully
+ *       404:
+ *         description: Answer not found
+ */
+router.delete('/:answerId', deletePrayerAnswer);
+
 module.exports = router;
