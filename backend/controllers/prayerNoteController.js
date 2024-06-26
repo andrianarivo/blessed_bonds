@@ -144,17 +144,16 @@ exports.updatePrayerNote = [
       isPrivate = noteToUpdate.isPrivate,
       noteParentId = noteToUpdate.noteParentId,
     } = req.body;
-    const data = {
-      title,
-      content,
-      isPrivate,
-      noteParentId,
-    };
     const note = await prisma.note.update({
       where: {
         id: parseInt(noteId),
       },
-      data,
+      data: {
+        title,
+        content,
+        isPrivate,
+        noteParentId,
+      },
     });
     res.json({
       note,

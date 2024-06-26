@@ -1,6 +1,6 @@
 const express = require('express');
 
-const router = express.Router();
+const router = express.Router({ mergeParams: true });
 
 const {
   listPrayerNote,
@@ -9,6 +9,10 @@ const {
   deletePrayerNote,
   updatePrayerNote,
 } = require('../../../controllers/prayerNoteController');
+
+const { prayerExists } = require('../../../controllers/prayerController');
+
+router.all('*', prayerExists);
 
 /**
  * @openapi
@@ -80,7 +84,7 @@ router.get('/', listPrayerNote);
  *       200:
  *         description: Returns a Note from the specified Prayer
  *       404:
- *         description: Note not found
+ *         description: Note or Prayer not found
  */
 router.get('/:noteId', getPrayerNote);
 
@@ -110,6 +114,8 @@ router.get('/:noteId', getPrayerNote);
  *         description: Note created successfully
  *       400:
  *         description: Validation error
+ *       404:
+ *         description: Prayer not found
  */
 router.post('/', createPrayerNote);
 
@@ -137,7 +143,7 @@ router.post('/', createPrayerNote);
  *       200:
  *         description: Note deleted successfully
  *       404:
- *         description: Note not found
+ *         description: Note or Prayer not found
  */
 router.delete('/:noteId', deletePrayerNote);
 
@@ -173,6 +179,8 @@ router.delete('/:noteId', deletePrayerNote);
  *         description: Note updated successfully
  *       400:
  *         description: Validation error
+ *       404:
+ *         description: Prayer not found
  */
 router.patch('/:noteId', updatePrayerNote);
 
