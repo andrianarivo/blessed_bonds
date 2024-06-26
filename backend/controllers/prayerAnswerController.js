@@ -1,4 +1,5 @@
 const asyncHandler = require('express-async-handler');
+const { body, validationResult } = require('express-validator');
 const { prisma } = require('../db');
 
 exports.listPrayerAnswer = asyncHandler(async (req, res) => {
@@ -54,7 +55,33 @@ exports.getPrayerAnswer = asyncHandler(async (req, res) => {
   });
 });
 
-exports.createPrayerAnswer = [asyncHandler(async (req, res) => {})];
+exports.createPrayerAnswer = [
+  body('content', 'Content is required')
+    .isString()
+    .isLength({ min: 3 })
+    .escape(),
+  asyncHandler(async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+    const { prayerId } = req.params;
+    const { content } = req.body;
+    const answer = await prisma.answer.create({
+      data: {
+        content,
+        prayer: {
+          connect: {
+            id: parseInt(prayerId),
+          },
+        },
+      },
+    });
+    res.json({
+      answer,
+    });
+  }),
+];
 
 exports.deletePrayerAnswer = asyncHandler(async (req, res) => {
   const { answerId } = req.params;
@@ -76,4 +103,37 @@ exports.deletePrayerAnswer = asyncHandler(async (req, res) => {
   });
 });
 
-exports.updatePrayerAnswer = [asyncHandler(async (req, res) => {})];
+exports.updatePrayerAnswer = [
+  body('content', 'Content is required')
+    .optional()
+    .isString()
+    .isLength({ min: 3 })
+    .escape(),
+  asyncHandler(async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).send({ errors: errors.array() });
+    }
+    const { answerId } = req.params;
+    const answerToUpdate = await prisma.answer.findUnique({
+      where: {
+        id: parseInt(answerId),
+      },
+    });
+    if (!answerToUpdate) {
+      return res.status(404).send({ error: 'Answer not found' });
+    }
+    const { content = answerToUpdate.content } = req.body;
+    const answer = await prisma.answer.update({
+      data: {
+        content,
+      },
+      where: {
+        id: parseInt(answerId),
+      },
+    });
+    res.json({
+      answer,
+    });
+  }),
+];

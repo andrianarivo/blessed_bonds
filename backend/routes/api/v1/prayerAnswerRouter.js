@@ -1,6 +1,6 @@
 const express = require('express');
 
-const router = express.Router();
+const router = express.Router({ mergeParams: true });
 
 const {
   listPrayerAnswer,
@@ -9,6 +9,10 @@ const {
   deletePrayerAnswer,
   updatePrayerAnswer,
 } = require('../../../controllers/prayerAnswerController');
+
+const { prayerExists } = require('../../../controllers/prayerController');
+
+router.all('*', prayerExists);
 
 /**
  * @openapi
@@ -86,6 +90,35 @@ router.get('/:answerId', getPrayerAnswer);
 
 /**
  * @openapi
+ * /prayers/{prayerId}/answers:
+ *   post:
+ *     tags:
+ *       - Answer
+ *     description: Create a new Answer for a Prayer
+ *     parameters:
+ *       - in: path
+ *         name: prayerId
+ *         schema:
+ *           type: integer
+ *         required: true
+ *         description: ID of the Prayer
+ *     requestBody:
+ *       description: Answer data
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *            $ref: '#/components/schemas/Answer'
+ *     responses:
+ *       200:
+ *         description: Answer created successfully
+ *       400:
+ *         description: Validation error
+ */
+router.post('/', createPrayerAnswer);
+
+/**
+ * @openapi
  * /prayers/{prayerId}/answers/{answerId}:
  *   delete:
  *     tags:
@@ -111,5 +144,40 @@ router.get('/:answerId', getPrayerAnswer);
  *         description: Answer not found
  */
 router.delete('/:answerId', deletePrayerAnswer);
+
+/**
+ * @openapi
+ * /prayers/{prayerId}/answers/{answerId}:
+ *   patch:
+ *     tags:
+ *       - Answer
+ *     description: Update Answer specified by Prayer and ID
+ *     parameters:
+ *       - in: path
+ *         name: prayerId
+ *         schema:
+ *           type: integer
+ *         required: true
+ *         description: ID of the Prayer
+ *       - in: path
+ *         name: answerId
+ *         schema:
+ *           type: integer
+ *         required: true
+ *         description: ID of the Answer
+ *     requestBody:
+ *       description: Answer data
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *            $ref: '#/components/schemas/Answer'
+ *     responses:
+ *       200:
+ *         description: Answer updated successfully
+ *       400:
+ *         description: Validation error
+ */
+router.patch('/:answerId', updatePrayerAnswer);
 
 module.exports = router;
