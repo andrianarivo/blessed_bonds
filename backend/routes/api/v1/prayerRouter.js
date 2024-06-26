@@ -8,7 +8,6 @@ const {
   createPrayer,
   deletePrayer,
   updatePrayer,
-  getPrayerAnswers,
 } = require('../../../controllers/prayerController');
 
 /**
@@ -143,51 +142,5 @@ router.delete('/:id', deletePrayer);
  *         description: Validation error
  */
 router.patch('/:id', updatePrayer);
-
-/**
- * @openapi
- * /prayers/{id}/answers:
- *   get:
- *     tags:
- *       - Prayer
- *     description: Get Answers from a Prayer specified by ID
- *     parameters:
- *       - in: path
- *         name: id
- *         schema:
- *           type: integer
- *         required: true
- *         description: ID of the Prayer
- *       - in: query
- *         name: page
- *         schema:
- *           type: integer
- *           default: 1
- *         description: Page number
- *       - in: query
- *         name: limit
- *         schema:
- *           type: integer
- *           default: 10
- *         description: Number of Answers per page
- *       - in: query
- *         name: sortBy
- *         schema:
- *           type: string
- *           default: "content.asc"
- *         description: Sorting field and order separeted by a dot
- *       - in: query
- *         name: content
- *         schema:
- *           type: string
- *           default: "Messiah"
- *         description: Search by content (keyword)
- *     responses:
- *       200:
- *         description: Returns a list of Answers from the specified Prayer
- *       404:
- *         description: Prayer not found
- */
-router.get('/:id/answers', getPrayerAnswers);
 
 module.exports = router;

@@ -5,9 +5,6 @@ module.exports = {
       type: 'string',
       description: 'Content of the Note',
     },
-    prayer: {
-      $ref: '#/components/schemas/Prayer',
-    },
     createdAt: {
       type: 'string',
       format: 'date-time',
