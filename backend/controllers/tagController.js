@@ -84,6 +84,21 @@ exports.deleteTag = asyncHandler(async (req, res) => {
   if (!tagToDelete) {
     return res.status(404).send({ error: 'Tag not found' });
   }
+  await prisma.tag.update({
+    data: {
+      prayers: {
+        deleteMany: {},
+      },
+    },
+    where: {
+      id: parseInt(id),
+    },
+  });
+  await prisma.tagsOnPrayers.deleteMany({
+    where: {
+      tagId: parseInt(id),
+    },
+  });
   const tag = await prisma.tag.delete({
     where: {
       id: parseInt(id),
