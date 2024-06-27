@@ -1,19 +1,11 @@
 FROM node:20.11.1-alpine3.19
 
-# Set working directory
 WORKDIR /app
-
-# Copy package.json and package-lock.json
 COPY package*.json ./
-
-# Install dependencies
-RUN yarn
-
-# Copy the rest of the application code
+RUN npm install
 COPY . .
-
-# Expose the frontend port (adjust if necessary)
+COPY entrypoint.sh /entrypoint.sh
 EXPOSE 3001
-
-# Command to run the frontend (adjust if necessary)
+RUN chmod +x /entrypoint.sh
+ENTRYPOINT [ "/entrypoint.sh" ]
 CMD ["npm", "run", "dev"]
