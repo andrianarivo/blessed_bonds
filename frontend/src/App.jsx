@@ -1,12 +1,14 @@
 import './App.css';
+import Tag from './components/Tag';
 
 function App() {
   return (
-    <div>
+    <div className="flex flex-col justify-center items-center">
       <h1 className="text-3xl font-bold underline">Hello world?</h1>
-      <button type="button" className="btn">
-        Button
-      </button>
+
+      <div className="flex">
+        <Tag label="Finance" backgroundColor="#ffece1" color="#ff5c00" />
+      </div>
     </div>
   );
 }
