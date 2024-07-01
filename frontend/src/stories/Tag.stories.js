@@ -14,10 +14,18 @@ export default {
   },
 };
 
-export const Default = {
+export const Example1 = {
   args: {
     label: 'Finance',
     backgroundColor: '#ffece1',
     color: '#ff5c00',
+  },
+};
+
+export const Example2 = {
+  args: {
+    label: 'Self-control',
+    backgroundColor: '#e1f6ff',
+    color: '#2c62b5',
   },
 };
