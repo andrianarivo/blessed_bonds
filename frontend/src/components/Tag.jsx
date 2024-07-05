@@ -16,6 +16,11 @@ export default function Tag({ label, backgroundColor, color }) {
 
 Tag.propTypes = {
   label: PropTypes.string.isRequired,
-  backgroundColor: PropTypes.string.isRequired,
-  color: PropTypes.string.isRequired,
+  backgroundColor: PropTypes.string,
+  color: PropTypes.string,
+};
+
+Tag.defaultProps = {
+  backgroundColor: '#ffece1',
+  color: '#ff5c00',
 };
