@@ -1,5 +1,6 @@
 import './App.css';
 import Tag from './components/Tag';
+import Note from './components/Note';
 
 function App() {
   return (
@@ -8,6 +9,13 @@ function App() {
 
       <div className="flex">
         <Tag label="Finance" backgroundColor="#ffece1" color="#ff5c00" />
+      </div>
+
+      <div className="flex">
+        <Note
+          text="It was said that you would, destroy the Sith, not join them."
+          iconUrl="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
+        />
       </div>
     </div>
   );
