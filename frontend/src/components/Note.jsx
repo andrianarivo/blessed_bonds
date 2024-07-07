@@ -1,56 +1,62 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Markdown from 'react-markdown';
+import { createAvatar } from '@dicebear/core';
+import { adventurer } from '@dicebear/collection';
 
-function Note({ title, text, iconUrl, author }) {
-  const getInitials = (name) => {
-    const names = name.split(' ');
-    return names
-      .toSpliced(1, names.length - 2)
-      .reduce((acc, name) => acc + name[0], '');
-  };
+const getAvatar = (name) => {
+  const avatar = createAvatar(adventurer, {
+    seed: name,
+  });
 
-  const getColor = (name) => {
-    const colors = [
-      '#ff5c00',
-      '#ffbb00',
-      '#fde047',
-      '#48bb78',
-      '#2b6cb0',
-      '#f472b6',
-      '#ed64a6',
-    ];
+  return avatar.toString();
+};
 
-    const charCodes = name.split('').map((char) => char.charCodeAt(0));
-    const sum = charCodes.reduce((acc, code) => acc + code, 0);
-    return colors[sum % colors.length];
-  };
+const hashStringToInt = (s) => {
+  let hash = 0;
+  for (let i = 0; i < s.length; i += 1) {
+    // eslint-disable-next-line no-bitwise
+    hash = s.charCodeAt(i) + ((hash << 5) - hash);
+  }
+  return hash;
+};
 
+const intToRGB = (i) => {
+  // eslint-disable-next-line no-bitwise
+  const c = (i & 0x00ffffff).toString(16).toUpperCase();
+  return '00000'.substring(0, 6 - c.length) + c;
+};
+
+const getColor = (name) => {
+  const hash = hashStringToInt(name);
+  const color = intToRGB(hash);
+  return `#${color}`;
+};
+
+function Note({ title, text, iconUrl = undefined, author = 'unknown' }) {
   return (
     <div className="chat chat-start">
       <div className="chat-image avatar">
         <div
           className="w-10 rounded-full"
-          style={
-            !iconUrl
-              ? {
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  backgroundColor: getColor(author),
-                }
-              : undefined
-          }
+          style={{
+            backgroundColor: !iconUrl ? getColor(author) : undefined,
+          }}
         >
-          {iconUrl ? (
-            <img alt={`${author} profile`} src={iconUrl} />
-          ) : (
-            <p className="font-bold text-white">{getInitials(author)}</p>
-          )}
+          <img
+            alt={`${author} profile`}
+            src={
+              iconUrl ||
+              `data:image/svg+xml;utf8,${encodeURIComponent(getAvatar(author))}`
+            }
+          />
         </div>
       </div>
       <div className="chat-bubble bg-gray-200 text-gray-500">
-        <h3 className="text-black font-medium">{title}</h3>
+        <div className="flex justify-between">
+          <h3 className="text-black font-medium">{title}</h3>
+          <span className="material-symbols-outlined">description</span>
+        </div>
         <Markdown className="text-sm">{text}</Markdown>
       </div>
     </div>
@@ -62,11 +68,6 @@ Note.propTypes = {
   text: PropTypes.string.isRequired,
   iconUrl: PropTypes.string,
   author: PropTypes.string,
-};
-
-Note.defaultProps = {
-  iconUrl: undefined,
-  author: 'UN',
 };
 
 export default Note;
