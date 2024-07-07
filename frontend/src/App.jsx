@@ -13,8 +13,9 @@ function App() {
 
       <div className="flex">
         <Note
-          text="It was said that you would, destroy the Sith, not join them."
-          iconUrl="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
+          title="I hear the Gospel in my dreams"
+          text="# Hi, *Pluto*! Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis et dui id leo suscipit imperdiet. "
+          author="David Stanley"
         />
       </div>
     </div>
