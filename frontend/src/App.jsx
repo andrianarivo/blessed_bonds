@@ -1,7 +1,7 @@
 import './App.css';
 import Tag from './components/Tag';
 import Note from './components/Note';
-import Prayer from './components/Prayer';
+import PrayerContainer from './components/PrayerContainer';
 
 const tags = [
   {
@@ -34,19 +34,8 @@ const App = () => (
     </div>
 
     <div className="w-1/2">
-      <Prayer
-        header={
-          <div className="flex flex-wrap gap-2">
-            {tags.map((tag) => (
-              <Tag
-                label={tag.label}
-                backgroundColor={tag.backgroundColor}
-                color={tag.color}
-                key={tag.label}
-              />
-            ))}
-          </div>
-        }
+      <PrayerContainer
+        tags={tags}
         summary="God is provider"
         description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pulvinar urna vel efficitur iaculis. Praesent dapibus arcu et leo malesuada, in suscipit ligula tincidunt. Mauris malesuada lacinia eros. Proin sed maximus leo. Suspendisse at purus ac libero volutpat consequat."
         noteCount={2}

@@ -1,8 +1,8 @@
-import Prayer from '../components/Prayer';
+import PrayerContainer from '../components/PrayerContainer';
 
 export default {
   title: 'Example/Prayer',
-  component: Prayer,
+  component: PrayerContainer,
   parameters: {
     layout: 'centered',
   },
@@ -15,8 +15,22 @@ export default {
     author: { control: 'text' },
     noteCount: { control: 'number' },
     answersCount: { control: 'number' },
+    tags: { control: 'object' },
   },
 };
+
+const tags = [
+  {
+    label: 'Finance',
+    backgroundColor: '#ffece1',
+    color: '#ff5c00',
+  },
+  {
+    label: 'Self-control',
+    backgroundColor: '#e1f6ff',
+    color: '#2c62b4',
+  },
+];
 
 export const Example1 = {
   args: {
@@ -27,5 +41,6 @@ export const Example1 = {
     answersCount: 2,
     author: 'David Stanley',
     createdAt: '2021-09-01T00:00:00.000Z',
+    tags,
   },
 };

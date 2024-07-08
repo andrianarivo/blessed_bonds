@@ -5,7 +5,6 @@ import getAvatar from '../utils/avatar';
 import { getColorFromName } from '../utils/colors';
 
 const Prayer = ({
-  header = null,
   summary,
   description,
   createdAt,
@@ -13,6 +12,8 @@ const Prayer = ({
   noteCount = 0,
   answersCount = 0,
   author = 'anonymous',
+  header = null,
+  children = null,
 }) => (
   <div className="card bg-base-100 w-96 shadow-xl border border-1">
     <div className="w-1 h-16 bg-indigo-600 absolute top-14 -left-[2px] rounded" />
@@ -42,6 +43,7 @@ const Prayer = ({
           </button>
         </div>
         <div className="divider my-0" />
+        {children}
         <div className="flex justify-between items-center w-full">
           <div className="flex items-center gap-2">
             <div className="avatar">
@@ -83,6 +85,7 @@ Prayer.propTypes = {
   answersCount: PropTypes.number,
   author: PropTypes.string,
   iconUrl: PropTypes.string,
+  children: PropTypes.element,
 };
 
 export default Prayer;
