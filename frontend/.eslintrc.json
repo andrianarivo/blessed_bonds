@@ -6,13 +6,23 @@
   },
 
   "extends": ["airbnb", "plugin:react/recommended", "plugin:react-hooks/recommended", "prettier"],
-  "plugins": ["react", "react-hooks", "jsx-a11y", "import"],
+  "plugins": ["react", "react-hooks", "jsx-a11y", "import", "prefer-arrow-functions"],
   "rules": {
     "react/jsx-filename-extension": ["warn", { "extensions": [".js", ".jsx"] }],
     "react/react-in-jsx-scope": "off",
     "import/no-unresolved": "off",
     "no-shadow": "off",
-    "react/require-default-props": "off"
+    "react/require-default-props": "off",
+    "prefer-arrow-functions/prefer-arrow-functions": [
+      "warn",
+      {
+        "allowNamedFunctions": false,
+        "classPropertiesAllowed": true,
+        "disallowPrototype": false,
+        "returnStyle": "implicit",
+        "singleReturnOnly": false
+      }
+    ]
   },
   "overrides": [
     {
