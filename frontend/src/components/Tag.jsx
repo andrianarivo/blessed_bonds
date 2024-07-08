@@ -1,11 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export default function Tag({
-  label,
-  backgroundColor = '#ffece1',
-  color = '#ff5c00',
-}) {
+const Tag = ({ label, backgroundColor = '#ffece1', color = '#ff5c00' }) => {
   const style = {
     backgroundColor,
     color,
@@ -16,10 +12,12 @@ export default function Tag({
       {label}
     </div>
   );
-}
+};
 
 Tag.propTypes = {
   label: PropTypes.string.isRequired,
   backgroundColor: PropTypes.string,
   color: PropTypes.string,
 };
+
+export default Tag;
