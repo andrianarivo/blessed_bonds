@@ -1,63 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Markdown from 'react-markdown';
-import { createAvatar } from '@dicebear/core';
-import { adventurer } from '@dicebear/collection';
 import classNames from 'classnames';
 import moment from 'moment';
-
-const getAvatar = (name) => {
-  const avatar = createAvatar(adventurer, {
-    seed: name,
-  });
-
-  return avatar.toString();
-};
-
-const hashStringToInt = (s) => {
-  let hash = 0;
-  for (let i = 0; i < s.length; i += 1) {
-    // eslint-disable-next-line no-bitwise
-    hash = s.charCodeAt(i) + ((hash << 5) - hash);
-  }
-  return hash;
-};
-
-const intToRGB = (i) => {
-  // eslint-disable-next-line no-bitwise
-  let c = (i & 0x00ffffff).toString(16).toUpperCase();
-  c = '00000'.substring(0, 6 - c.length) + c;
-
-  // Ensure the colors are bright by increasing the RGB values
-  let r = parseInt(c.substring(0, 2), 16);
-  let g = parseInt(c.substring(2, 4), 16);
-  let b = parseInt(c.substring(4, 6), 16);
-
-  // Adjust RGB values to ensure brightness
-  r = Math.min(r + 100, 255);
-  g = Math.min(g + 100, 255);
-  b = Math.min(b + 100, 255);
-
-  // Convert back to hex and return
-  // eslint-disable-next-line no-bitwise
-  return ((1 << 24) + (r << 16) + (g << 8) + b)
-    .toString(16)
-    .slice(1)
-    .toUpperCase();
-};
-
-const getColor = (name) => {
-  const hash = hashStringToInt(name);
-  const color = intToRGB(hash);
-  return `#${color}`;
-};
+import { getColorFromName } from '../utils/colors';
+import getAvatar from '../utils/avatar';
 
 const Note = ({
   title,
   text,
   createdAt,
   iconUrl = undefined,
-  author = 'unknown',
+  author = 'anonymous',
   isOwn = false,
 }) => {
   const chatClass = classNames('chat', {
@@ -70,7 +24,7 @@ const Note = ({
         <div
           className="w-10 rounded-full"
           style={{
-            backgroundColor: !iconUrl ? getColor(author) : undefined,
+            backgroundColor: !iconUrl ? getColorFromName(author) : undefined,
           }}
         >
           <img
