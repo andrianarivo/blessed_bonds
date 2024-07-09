@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import classNames from 'classnames';
+import { createEditor } from 'slate';
+import { Slate, Editable, withReact } from 'slate-react';
 import getAvatar from '../utils/avatar';
 import { getColorFromName } from '../utils/colors';
 
@@ -18,6 +20,14 @@ const Prayer = ({
   renderTags = undefined,
   renderNotes = undefined,
 }) => {
+  const [editor] = useState(() => withReact(createEditor()));
+
+  const initialValue = [
+    {
+      type: 'paragraph',
+      children: [{ text: 'A line of text in a paragraph.' }],
+    },
+  ];
   const cardClass = classNames(
     'card',
     'bg-base-100',
@@ -66,11 +76,16 @@ const Prayer = ({
             </button>
           </div>
           <div className="divider my-0" />
-          <div className="w-full">
-            {renderNotes &&
-              Array.isArray(notes) &&
-              notes.map((note, idx) => renderNotes(note, idx))}
-          </div>
+          {renderNotes && Array.isArray(notes) && (
+            <div className="w-full">
+              <div>{notes.map((note, idx) => renderNotes(note, idx))}</div>
+              <div>
+                <Slate editor={editor} initialValue={initialValue}>
+                  <Editable />
+                </Slate>
+              </div>
+            </div>
+          )}
           <div className="flex justify-between items-center w-full">
             <div className="flex items-center gap-2">
               <div className="avatar">
