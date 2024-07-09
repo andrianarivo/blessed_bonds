@@ -18,6 +18,18 @@ const Note = ({
     'chat-end': isOwn,
     'chat-start': !isOwn,
   });
+  const chatFooterClass = classNames(
+    'chat-footer',
+    'text-gray-400',
+    'flex',
+    'justify-between',
+    'items-center',
+    {
+      'flex-row-reverse': isOwn,
+    },
+    'gap-3'
+  );
+
   return (
     <div className={chatClass}>
       <div className="chat-image avatar">
@@ -45,8 +57,11 @@ const Note = ({
         </div>
         <Markdown className="text-sm max-w-[90%]">{text}</Markdown>
       </div>
-      <div className="chat-footer text-gray-400 w-full flex justify-between items-center underline">
-        <div>{moment(createdAt).from(moment())}</div>
+      <div className={chatFooterClass}>
+        <button className="link" type="button">
+          ~ {moment(createdAt).from(moment())} | {isOwn ? 'You' : author}
+        </button>
+        <div className="rounded w-[3px] h-[3px] bg-gray-500" />
         {isOwn ? (
           <div>
             <button

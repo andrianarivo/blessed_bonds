@@ -1,8 +1,10 @@
-import PrayerContainer from '../components/PrayerContainer';
+import Prayer from '../components/Prayer';
+import Tag from '../components/Tag';
+import Note from '../components/Note';
 
 export default {
   title: 'Example/Prayer',
-  component: PrayerContainer,
+  component: Prayer,
   parameters: {
     layout: 'centered',
   },
@@ -32,6 +34,23 @@ const tags = [
   },
 ];
 
+const notes = [
+  {
+    title: 'I hear the Gospel in my dreams',
+    content:
+      'Hi, *Pluto*! Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis et dui id leo suscipit imperdiet.',
+    isPrivate: false,
+    createdAt: '2021-09-01T00:00:00.000Z',
+  },
+  {
+    title: 'Jesus is the Messiah',
+    content:
+      'Hi, *Pluto*! Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis et dui id leo suscipit imperdiet.',
+    isPrivate: false,
+    createdAt: '2021-09-01T00:00:00.000Z',
+  },
+];
+
 export const Example1 = {
   args: {
     summary: 'God is provider',
@@ -42,5 +61,22 @@ export const Example1 = {
     author: 'David Stanley',
     createdAt: '2021-09-01T00:00:00.000Z',
     tags,
+    notes,
+    renderTags: (tag) => (
+      <Tag
+        label={tag.label}
+        backgroundColor={tag.backgroundColor}
+        color={tag.color}
+        key={tag.label}
+      />
+    ),
+    renderNotes: (note, idx) => (
+      <Note
+        title={note.title}
+        text={note.content}
+        isOwn={idx % 2 === 0}
+        createdAt={note.createdAt}
+      />
+    ),
   },
 };

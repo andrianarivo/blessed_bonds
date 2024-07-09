@@ -1,7 +1,7 @@
 import './App.css';
 import Tag from './components/Tag';
 import Note from './components/Note';
-import PrayerContainer from './components/PrayerContainer';
+import Prayer from './components/Prayer';
 
 const tags = [
   {
@@ -13,6 +13,23 @@ const tags = [
     label: 'Self-control',
     backgroundColor: '#e1f6ff',
     color: '#2c62b4',
+  },
+];
+
+const notes = [
+  {
+    title: 'I hear the Gospel in my dreams',
+    content:
+      'Hi, *Pluto*! Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis et dui id leo suscipit imperdiet.',
+    isPrivate: false,
+    createdAt: '2021-09-01T00:00:00.000Z',
+  },
+  {
+    title: 'Jesus is the Messiah',
+    content:
+      'Hi, *Pluto*! Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis et dui id leo suscipit imperdiet.',
+    isPrivate: false,
+    createdAt: '2021-09-01T00:00:00.000Z',
   },
 ];
 
@@ -33,8 +50,16 @@ const App = () => (
       />
     </div>
 
-    <div className="w-1/2">
-      <PrayerContainer
+    <div className="w-2/3">
+      <Prayer
+        renderTags={(tag) => (
+          <Tag
+            label={tag.label}
+            backgroundColor={tag.backgroundColor}
+            color={tag.color}
+            key={tag.label}
+          />
+        )}
         tags={tags}
         summary="God is provider"
         description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pulvinar urna vel efficitur iaculis. Praesent dapibus arcu et leo malesuada, in suscipit ligula tincidunt. Mauris malesuada lacinia eros. Proin sed maximus leo. Suspendisse at purus ac libero volutpat consequat."
@@ -42,6 +67,15 @@ const App = () => (
         answersCount={2}
         author="David Stanley"
         createdAt="2021-09-01T00:00:00.000Z"
+        notes={notes}
+        renderNotes={(note, idx) => (
+          <Note
+            title={note.title}
+            text={note.content}
+            isOwn={idx % 2 === 0}
+            createdAt={note.createdAt}
+          />
+        )}
       />
     </div>
   </div>
