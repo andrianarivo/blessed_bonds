@@ -40,7 +40,7 @@ const App = () => (
       <Tag label="Finance" backgroundColor="#ffece1" color="#ff5c00" />
     </div>
 
-    <div className="w-1/2">
+    <div className="w-2/3">
       <Note
         title="I hear the Gospel in my dreams"
         text="# Hi, *Pluto*! Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis et dui id leo suscipit imperdiet. "
