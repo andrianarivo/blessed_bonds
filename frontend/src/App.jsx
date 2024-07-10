@@ -2,6 +2,7 @@ import './App.css';
 import Tag from './components/Tag';
 import Note from './components/Note';
 import Prayer from './components/Prayer';
+import Editor from './components/Editor';
 
 const tags = [
   {
@@ -52,12 +53,12 @@ const App = () => (
 
     <div className="w-2/3">
       <Prayer
-        renderTags={(tag) => (
+        renderTags={(tag, idx) => (
           <Tag
+            key={idx}
             label={tag.label}
             backgroundColor={tag.backgroundColor}
             color={tag.color}
-            key={tag.label}
           />
         )}
         tags={tags}
@@ -70,6 +71,7 @@ const App = () => (
         notes={notes}
         renderNotes={(note, idx) => (
           <Note
+            key={idx}
             title={note.title}
             text={note.content}
             isOwn={idx % 2 === 0}
@@ -77,6 +79,10 @@ const App = () => (
           />
         )}
       />
+    </div>
+
+    <div className="w-2/3">
+      <Editor />
     </div>
   </div>
 );
