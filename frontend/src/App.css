@@ -1,0 +1,7 @@
+.markdown {
+  @apply font-sans;
+}
+
+.markdown a {
+  @apply text-blue-500 underline;
+}
