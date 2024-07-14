@@ -1,19 +1,8 @@
 import './App.css';
-import {
-  MDXEditor,
-  headingsPlugin,
-  listsPlugin,
-  toolbarPlugin,
-  markdownShortcutPlugin,
-  linkDialogPlugin,
-  linkPlugin,
-  UndoRedo,
-  BoldItalicUnderlineToggles,
-  CreateLink,
-} from '@mdxeditor/editor';
 import Tag from './components/Tag';
 import Note from './components/Note';
 import Prayer from './components/Prayer';
+import Editor from './components/Editor';
 import '@mdxeditor/editor/style.css';
 
 const tags = [
@@ -93,28 +82,8 @@ const App = () => (
       />
     </div>
 
-    <div className="w-2/3 border border-gray-400">
-      <MDXEditor
-        contentEditableClassName="markdown"
-        markdown="# Hello world"
-        plugins={[
-          headingsPlugin(),
-          listsPlugin(),
-          markdownShortcutPlugin(),
-          linkDialogPlugin(),
-          linkPlugin(),
-          toolbarPlugin({
-            toolbarContents: () => (
-              <>
-                {' '}
-                <UndoRedo />
-                <BoldItalicUnderlineToggles />
-                <CreateLink />
-              </>
-            ),
-          }),
-        ]}
-      />
+    <div className="w-2/3">
+      <Editor />
     </div>
   </div>
 );

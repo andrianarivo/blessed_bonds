@@ -3,5 +3,5 @@
 @tailwind utilities;
 
 .mdxeditor-toolbar {
-  @apply rounded-none
+  @apply rounded-none;
 }
