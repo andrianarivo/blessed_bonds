@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import moment from 'moment';
 import classNames from 'classnames';
 import Avatar from './Avatar';
+import Editor from './Editor';
 
 const Prayer = ({
   summary,
@@ -17,6 +18,8 @@ const Prayer = ({
   renderTags = undefined,
   renderNotes = undefined,
 }) => {
+  const [markdown, setMarkdown] = React.useState('# Title\nWrite a note...');
+
   const cardClass = classNames(
     'card',
     'bg-base-100',
@@ -70,8 +73,20 @@ const Prayer = ({
           {renderNotes && Array.isArray(notes) && notes.length > 0 && (
             <div className="w-full">
               <div>{notes.map((note, idx) => renderNotes(note, idx))}</div>
+              <div className="flex gap-3 my-4">
+                <Avatar
+                  author={author}
+                  iconUrl={iconUrl}
+                  className="self-end"
+                  size="lg"
+                />
+                <div className="flex-1 overflow-scroll">
+                  <Editor content={markdown} onChange={setMarkdown} />
+                </div>
+              </div>
             </div>
           )}
+
           <div className="flex justify-between items-center w-full">
             <div className="flex items-center gap-2">
               <Avatar author={author} iconUrl={iconUrl} />
