@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import Markdown from 'react-markdown';
 import classNames from 'classnames';
 import moment from 'moment';
-import { getColorFromName } from '../utils/colors';
-import getAvatar from '../utils/avatar';
+import Avatar from './Avatar';
 
 const Note = ({
   title,
@@ -32,22 +31,7 @@ const Note = ({
 
   return (
     <div className={chatClass}>
-      <div className="chat-image avatar">
-        <div
-          className="w-10 rounded-full"
-          style={{
-            backgroundColor: !iconUrl ? getColorFromName(author) : undefined,
-          }}
-        >
-          <img
-            alt={`${author} profile`}
-            src={
-              iconUrl ||
-              `data:image/svg+xml;utf8,${encodeURIComponent(getAvatar(author))}`
-            }
-          />
-        </div>
-      </div>
+      <Avatar className="chat-image" iconUrl={iconUrl} author={author} />
       <div className="chat-bubble bg-gray-200 text-gray-500 max-w-max">
         <div className="flex justify-between">
           <h3 className="text-black font-medium">{title}</h3>

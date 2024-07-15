@@ -2,8 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import classNames from 'classnames';
-import getAvatar from '../utils/avatar';
-import { getColorFromName } from '../utils/colors';
+import Avatar from './Avatar';
 
 const Prayer = ({
   summary,
@@ -25,13 +24,13 @@ const Prayer = ({
     'border',
     'border-1',
     {
-      'w-96': renderNotes === undefined,
-      'w-full': renderNotes !== undefined,
+      'w-96': !notes || notes.length <= 0,
+      'w-full': notes && notes.length > 0,
     }
   );
 
   const descriptionClass = classNames('text-gray-400', {
-    'line-clamp-4': renderNotes === undefined,
+    'line-clamp-4': !notes || notes.length <= 0,
   });
 
   return (
@@ -41,6 +40,7 @@ const Prayer = ({
         <div className="flex flex-wrap gap-2">
           {renderTags &&
             Array.isArray(tags) &&
+            tags.length > 0 &&
             tags.map((tag, idx) => renderTags(tag, idx))}
         </div>
         <h2 className="card-title">{summary}</h2>
@@ -67,31 +67,14 @@ const Prayer = ({
             </button>
           </div>
           <div className="divider my-0" />
-          {renderNotes && Array.isArray(notes) && (
+          {renderNotes && Array.isArray(notes) && notes.length > 0 && (
             <div className="w-full">
               <div>{notes.map((note, idx) => renderNotes(note, idx))}</div>
             </div>
           )}
           <div className="flex justify-between items-center w-full">
             <div className="flex items-center gap-2">
-              <div className="avatar">
-                <div
-                  className="w-10 rounded-full"
-                  style={{
-                    backgroundColor: !iconUrl
-                      ? getColorFromName(author)
-                      : undefined,
-                  }}
-                >
-                  <img
-                    alt={`${author} profile`}
-                    src={
-                      iconUrl ||
-                      `data:image/svg+xml;utf8,${encodeURIComponent(getAvatar(author))}`
-                    }
-                  />
-                </div>
-              </div>
+              <Avatar author={author} iconUrl={iconUrl} />
               {author}
             </div>
             <div className="flex items-center gap-2 text-gray-500">
