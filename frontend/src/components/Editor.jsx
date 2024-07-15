@@ -19,7 +19,6 @@ import {
 
 const Editor = () => (
   <MDXEditor
-    className="border border-slate-700 rounded-md overflow-hidden flex flex-col-reverse"
     contentEditableClassName="markdown prose"
     markdown="* Hello world"
     plugins={[
