@@ -8,6 +8,8 @@ import {
   linkDialogPlugin,
   linkPlugin,
   quotePlugin,
+  tablePlugin,
+  thematicBreakPlugin,
   UndoRedo,
   BoldItalicUnderlineToggles,
   StrikeThroughSupSubToggles,
@@ -15,17 +17,21 @@ import {
   CreateLink,
   BlockTypeSelect,
   Separator,
+  InsertTable,
+  InsertThematicBreak,
 } from '@mdxeditor/editor';
+import PropTypes from 'prop-types';
+import '@mdxeditor/editor/style.css';
 
-const Editor = () => (
+const Editor = ({ content, onChange }) => (
   <MDXEditor
     contentEditableClassName="markdown prose"
-    markdown="* Hello world"
+    markdown={content}
+    onChange={onChange}
     plugins={[
       toolbarPlugin({
         toolbarContents: () => (
           <>
-            {' '}
             <UndoRedo />
             <Separator />
             <BoldItalicUnderlineToggles />
@@ -37,20 +43,33 @@ const Editor = () => (
             <BlockTypeSelect />
             <Separator />
             <CreateLink />
+            <InsertTable />
+            <InsertThematicBreak />
+            <Separator />
+            <div className="flex w-full justify-end">
+              <button type="button" className="btn btn-sm text-blue-600">
+                <span className="material-symbols-outlined">send</span>
+              </button>
+            </div>
           </>
         ),
       }),
 
-      headingsPlugin(),
+      headingsPlugin({ allowedHeadingLevels: [1, 2, 3] }),
       listsPlugin(),
       markdownShortcutPlugin(),
       quotePlugin(),
       linkPlugin(),
       linkDialogPlugin(),
+      tablePlugin(),
+      thematicBreakPlugin(),
     ]}
   />
 );
 
-Editor.propTypes = {};
+Editor.propTypes = {
+  content: PropTypes.string.isRequired,
+  onChange: PropTypes.func,
+};
 
 export default Editor;

@@ -2,8 +2,6 @@ import './App.css';
 import Tag from './components/Tag';
 import Note from './components/Note';
 import Prayer from './components/Prayer';
-import Editor from './components/Editor';
-import '@mdxeditor/editor/style.css';
 
 const tags = [
   {
@@ -80,10 +78,6 @@ const App = () => (
           />
         )}
       />
-    </div>
-
-    <div className="w-2/3">
-      <Editor />
     </div>
   </div>
 );
