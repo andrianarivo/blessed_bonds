@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import moment from 'moment';
 import classNames from 'classnames';
 import Avatar from './Avatar';
-import Editor from './Editor';
 
 const Prayer = ({
   summary,
@@ -17,9 +16,10 @@ const Prayer = ({
   author = 'anonymous',
   renderTags = undefined,
   renderNotes = undefined,
+  renderEditor = undefined,
+  onClickSeeAnswers = undefined,
+  onClickSeeNotes = undefined,
 }) => {
-  const [markdown, setMarkdown] = React.useState('# Title\nWrite a note...');
-
   const cardClass = classNames(
     'card',
     'bg-base-100',
@@ -35,6 +35,9 @@ const Prayer = ({
   const descriptionClass = classNames('text-gray-400', {
     'line-clamp-4': !notes || notes.length <= 0,
   });
+
+  const isLargeDisplay =
+    renderNotes && Array.isArray(notes) && notes.length > 0;
 
   return (
     <div className={cardClass}>
@@ -53,6 +56,7 @@ const Prayer = ({
             <button
               className="btn btn-ghost btn-sm font-normal hover:text-black"
               type="button"
+              onClick={onClickSeeNotes}
             >
               <span className="material-symbols-outlined text-base">
                 description
@@ -62,6 +66,7 @@ const Prayer = ({
             <button
               className="btn btn-ghost btn-sm font-normal hover:text-black"
               type="button"
+              onClick={onClickSeeAnswers}
             >
               <span className="material-symbols-outlined text-base">
                 mark_email_read
@@ -70,20 +75,10 @@ const Prayer = ({
             </button>
           </div>
           <div className="divider my-0" />
-          {renderNotes && Array.isArray(notes) && notes.length > 0 && (
+          {isLargeDisplay && (
             <div className="w-full">
               <div>{notes.map((note, idx) => renderNotes(note, idx))}</div>
-              <div className="flex gap-3 my-4">
-                <Avatar
-                  author={author}
-                  iconUrl={iconUrl}
-                  className="self-end"
-                  size="lg"
-                />
-                <div className="flex-1 overflow-scroll">
-                  <Editor content={markdown} onChange={setMarkdown} />
-                </div>
-              </div>
+              <div className="my-4">{renderEditor && renderEditor()}</div>
             </div>
           )}
 
@@ -92,9 +87,24 @@ const Prayer = ({
               <Avatar author={author} iconUrl={iconUrl} />
               {author}
             </div>
-            <div className="flex items-center gap-2 text-gray-500">
-              <span className="material-symbols-outlined">event</span>
-              {moment(createdAt).format('ll')}
+            <div className="flex items-center">
+              {isLargeDisplay && (
+                <>
+                  <button
+                    type="button"
+                    className="link btn-small text-lg text-gray-500 font-normal mr-4"
+                    onClick={onClickSeeAnswers}
+                  >
+                    See answers
+                  </button>
+
+                  <div className="rounded w-[3px] h-[3px] bg-gray-500" />
+                </>
+              )}
+              <div className="flex items-center gap-2 text-gray-500 ml-4">
+                <span className="material-symbols-outlined">event</span>
+                {moment(createdAt).format('ll')}
+              </div>
             </div>
           </div>
         </div>
@@ -128,6 +138,9 @@ Prayer.propTypes = {
   ),
   renderTags: PropTypes.func,
   renderNotes: PropTypes.func,
+  renderEditor: PropTypes.func,
+  onClickSeeAnswers: PropTypes.func,
+  onClickSeeNotes: PropTypes.func,
 };
 
 export default Prayer;
