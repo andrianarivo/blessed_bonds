@@ -3,9 +3,17 @@
 @tailwind utilities;
 
 .mdxeditor-toolbar {
-  @apply rounded-none;
+  @apply rounded-none !important;
 }
 
 .mdxeditor {
   @apply border border-gray-200 rounded-md overflow-hidden flex flex-col-reverse;
+}
+
+.markdown {
+  @apply font-sans;
+}
+
+.markdown a {
+  @apply text-blue-500 underline;
 }
