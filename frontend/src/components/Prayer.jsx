@@ -92,7 +92,7 @@ const Prayer = ({
                 <>
                   <button
                     type="button"
-                    className="link btn-small text-lg text-gray-500 font-normal mr-4"
+                    className="link btn-small text-lg text-gray-700 font-extralight mr-4 underline-offset-4 decoration-1"
                     onClick={onClickSeeAnswers}
                   >
                     See answers

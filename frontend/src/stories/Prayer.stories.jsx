@@ -86,7 +86,7 @@ export const Example1 = {
       <div className="flex gap-3">
         <Avatar author="David Stanley" className="self-end" size="lg" />
         <div className="flex-1 overflow-scroll">
-          <Editor content={'## Note Title\nWrite a note...'} />
+          <Editor content={'### Note Title\nWrite a note...'} />
         </div>
       </div>
     ),

@@ -55,7 +55,7 @@ const Editor = ({ content, onChange }) => (
         ),
       }),
 
-      headingsPlugin({ allowedHeadingLevels: [1, 2, 3] }),
+      headingsPlugin({ allowedHeadingLevels: [3, 4, 5, 6] }),
       listsPlugin(),
       markdownShortcutPlugin(),
       quotePlugin(),

@@ -38,7 +38,7 @@ const notes = [
 
 const App = () => {
   const [markdown, setMarkdown] = React.useState(
-    '## Note Title\nWrite a note...'
+    '### Note Title\nWrite a note...'
   );
   return (
     <div className="flex flex-col justify-center items-center gap-y-4">
