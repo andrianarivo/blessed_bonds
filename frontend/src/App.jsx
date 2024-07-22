@@ -5,6 +5,7 @@ import Note from './components/Note';
 import Prayer from './components/Prayer';
 import Avatar from './components/Avatar';
 import Editor from './components/Editor';
+import Answer from './components/Answer';
 
 const tags = [
   {
@@ -92,6 +93,13 @@ const App = () => {
               </div>
             </div>
           )}
+        />
+      </div>
+
+      <div className="w-2/3">
+        <Answer
+          title="Be patient ⏰"
+          content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis et dui id leo suscipit imperdiet. Nunc congue mauris id felis pellentesque, non vulputate felis pellentesque."
         />
       </div>
     </div>
