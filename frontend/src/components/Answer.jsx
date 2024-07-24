@@ -3,14 +3,12 @@ import PropTypes from 'prop-types';
 
 const Answer = ({ title, content }) => (
   <div
-    tabIndex={0}
+    tabIndex="0"
     role="button"
-    className="collapse collapse-arrow border-base-300 border"
+    className="flex flex-col gap-y-2 shadow-sm p-4 rounded-2xl border-base-300 border bg-white cursor-default"
   >
-    <div className="collapse-title text-md font-medium">{title}</div>
-    <div className="collapse-content">
-      <p className="font-normal text-sm text-gray-500">{content}</p>
-    </div>
+    <div className="text-md font-medium">{title}</div>
+    <p className="font-normal text-sm text-gray-400">{content}</p>
   </div>
 );
 

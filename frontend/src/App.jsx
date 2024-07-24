@@ -9,11 +9,13 @@ import Answer from './components/Answer';
 
 const tags = [
   {
+    id: 1,
     label: 'Finance',
     backgroundColor: '#ffece1',
     color: '#ff5c00',
   },
   {
+    id: 2,
     label: 'Self-control',
     backgroundColor: '#e1f6ff',
     color: '#2c62b4',
@@ -22,6 +24,7 @@ const tags = [
 
 const notes = [
   {
+    id: 1,
     title: 'I hear the Gospel in my dreams',
     content:
       'Hi, *Pluto*! Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis et dui id leo suscipit imperdiet.',
@@ -29,11 +32,27 @@ const notes = [
     createdAt: '2021-09-01T00:00:00.000Z',
   },
   {
+    id: 2,
     title: 'Jesus is the Messiah',
     content:
       'Hi, *Pluto*! Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis et dui id leo suscipit imperdiet.',
     isPrivate: false,
     createdAt: '2021-09-01T00:00:00.000Z',
+  },
+];
+
+const answers = [
+  {
+    id: 1,
+    title: 'Be patient ⏰',
+    content:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis et dui id leo suscipit imperdiet. Nunc congue mauris id felis pellentesque, non vulputate felis pellentesque. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis et dui id leo suscipit imperdiet. Nunc congue mauris id felis pellentesque, non vulputate felis pellentesque. ',
+  },
+  {
+    id: 2,
+    title: 'Gear up ⚙️',
+    content:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis et dui id leo suscipit imperdiet. Nunc congue mauris id felis pellentesque, non vulputate felis pellentesque.',
   },
 ];
 
@@ -85,6 +104,10 @@ const App = () => {
               createdAt={note.createdAt}
             />
           )}
+          answers={answers}
+          renderAnswers={(answer) => (
+            <Answer title={answer.title} content={answer.content} />
+          )}
           renderEditor={() => (
             <div className="flex gap-3">
               <Avatar author="David Stanley" className="self-end" size="lg" />
@@ -96,11 +119,19 @@ const App = () => {
         />
       </div>
 
-      <div className="w-2/3">
-        <Answer
-          title="Be patient ⏰"
-          content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis et dui id leo suscipit imperdiet. Nunc congue mauris id felis pellentesque, non vulputate felis pellentesque."
-        />
+      <div className="w-2/3 flex justify-center">
+        <div className="dropdown dropdown-end">
+          <div tabIndex="0" role="button" className="btn m-1">
+            Click
+          </div>
+
+          <div className="dropdown-content w-96 bg-gray-200 rounded-2xl p-1">
+            <Answer
+              title="Be patient ⏰"
+              content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis et dui id leo suscipit imperdiet. Nunc congue mauris id felis pellentesque, non vulputate felis pellentesque."
+            />
+          </div>
+        </div>
       </div>
     </div>
   );

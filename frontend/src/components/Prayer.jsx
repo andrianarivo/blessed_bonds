@@ -13,11 +13,12 @@ const Prayer = ({
   answersCount = 0,
   tags = [],
   notes = [],
+  answers = [],
   author = 'anonymous',
   renderTags = undefined,
   renderNotes = undefined,
+  renderAnswers = undefined,
   renderEditor = undefined,
-  onClickSeeAnswers = undefined,
   onClickSeeNotes = undefined,
 }) => {
   const cardClass = classNames(
@@ -39,16 +40,45 @@ const Prayer = ({
   const isLargeDisplay =
     renderNotes && Array.isArray(notes) && notes.length > 0;
 
+  const dropdownClass = classNames('dropdown', 'dropdown-end', {
+    'dropdown-top': !isLargeDisplay,
+  });
+
+  const dropdownContentClass = classNames(
+    'dropdown-content',
+    'flex',
+    'flex-col',
+    'gap-y-3',
+    'w-96',
+    'overflow-y-scroll',
+    'scrollbar-w-none',
+    'max-h-96',
+    { 'backdrop-blur': Array.isArray(answers) && answers.length > 0 },
+    { 'bg-gray-400-blur': Array.isArray(answers) && answers.length > 0 },
+    'rounded-2xl',
+    'p-3',
+    'z-50'
+  );
+
+  const renderAnswersList = () => (
+    <ul className={dropdownContentClass}>
+      {renderAnswers &&
+        answers.map((answer, index) => (
+          <li key={answer.id}>{renderAnswers(answer, index)}</li>
+        ))}
+    </ul>
+  );
+
   return (
     <div className={cardClass}>
       <div className="w-1 h-16 bg-indigo-600 absolute top-14 -left-[2px] rounded" />
       <div className="card-body p-5">
-        <div className="flex flex-wrap gap-2">
+        <ul className="flex flex-wrap gap-2">
           {renderTags &&
             Array.isArray(tags) &&
             tags.length > 0 &&
-            tags.map((tag, idx) => renderTags(tag, idx))}
-        </div>
+            tags.map((tag) => <li key={tag.id}>{renderTags(tag)}</li>)}
+        </ul>
         <h2 className="card-title">{summary}</h2>
         <p className={descriptionClass}>{description}</p>
         <div className="card-actions flex-col">
@@ -63,16 +93,19 @@ const Prayer = ({
               </span>
               {`${noteCount} notes`}
             </button>
-            <button
-              className="btn btn-ghost btn-sm font-normal hover:text-black"
-              type="button"
-              onClick={onClickSeeAnswers}
-            >
-              <span className="material-symbols-outlined text-base">
-                mark_email_read
-              </span>
-              {`${answersCount} answers`}
-            </button>
+            <div className={dropdownClass}>
+              <div
+                tabIndex="0"
+                role="button"
+                className="btn btn-ghost btn-sm font-normal hover:text-black"
+              >
+                <span className="material-symbols-outlined text-base">
+                  mark_email_read
+                </span>
+                {`${answersCount} answers`}
+              </div>
+              {renderAnswersList()}
+            </div>
           </div>
           <div className="divider my-0" />
           {isLargeDisplay && (
@@ -90,13 +123,16 @@ const Prayer = ({
             <div className="flex items-center">
               {isLargeDisplay && (
                 <>
-                  <button
-                    type="button"
-                    className="link btn-small text-lg text-gray-700 font-extralight mr-4 underline-offset-4 decoration-1"
-                    onClick={onClickSeeAnswers}
-                  >
-                    See answers
-                  </button>
+                  <div className="dropdown dropdown-top dropdown-end">
+                    <div
+                      tabIndex="0"
+                      role="button"
+                      className="link btn-small text-lg text-gray-700 font-extralight mr-4 underline-offset-4 decoration-1"
+                    >
+                      See answers
+                    </div>
+                    {renderAnswersList()}
+                  </div>
 
                   <div className="rounded w-[3px] h-[3px] bg-gray-500" />
                 </>
@@ -123,6 +159,7 @@ Prayer.propTypes = {
   iconUrl: PropTypes.string,
   tags: PropTypes.arrayOf(
     PropTypes.shape({
+      id: PropTypes.number.isRequired,
       label: PropTypes.string.isRequired,
       backgroundColor: PropTypes.string,
       color: PropTypes.string,
@@ -130,16 +167,25 @@ Prayer.propTypes = {
   ),
   notes: PropTypes.arrayOf(
     PropTypes.shape({
+      id: PropTypes.number.isRequired,
       title: PropTypes.string.isRequired,
       content: PropTypes.string.isRequired,
       createdAt: PropTypes.string.isRequired,
       isPrivate: PropTypes.bool,
     })
   ),
+  answers: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      title: PropTypes.string.isRequired,
+      content: PropTypes.string.isRequired,
+      createdAt: PropTypes.string.isRequired,
+    })
+  ),
   renderTags: PropTypes.func,
   renderNotes: PropTypes.func,
+  renderAnswers: PropTypes.func,
   renderEditor: PropTypes.func,
-  onClickSeeAnswers: PropTypes.func,
   onClickSeeNotes: PropTypes.func,
 };
 
