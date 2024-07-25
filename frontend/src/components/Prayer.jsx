@@ -2,7 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import classNames from 'classnames';
+import { Swiper, SwiperSlide } from 'swiper/react';
 import Avatar from './Avatar';
+import SwiperPrevButton from './swipper/SwiperPrevButton';
+import SwiperNextButton from './swipper/SwiperNextButton';
+
+import 'swiper/css';
 
 const Prayer = ({
   summary,
@@ -46,27 +51,58 @@ const Prayer = ({
 
   const dropdownContentClass = classNames(
     'dropdown-content',
-    'flex',
-    'flex-col',
-    'gap-y-3',
-    'w-96',
-    'overflow-y-scroll',
-    'scrollbar-w-none',
-    'max-h-96',
-    { 'backdrop-blur': Array.isArray(answers) && answers.length > 0 },
-    { 'bg-gray-400-blur': Array.isArray(answers) && answers.length > 0 },
-    'rounded-2xl',
-    'p-3',
-    'z-50'
+    'z-50',
+    'p-2',
+    'bg-gray-400-blur',
+    'backdrop-blur-md',
+    'rounded-xl',
+    {
+      'w-96': Array.isArray(answers) && answers.length > 0,
+    },
+    {
+      'w-48':
+        !Array.isArray(answers) ||
+        (Array.isArray(answers) && answers.length <= 0),
+    }
   );
 
+  const swiperCtaClass = classNames('flex', 'justify-between', 'my-2', {
+    invisible:
+      !Array.isArray(answers) ||
+      (Array.isArray(answers) && answers.length <= 0),
+  });
+
   const renderAnswersList = () => (
-    <ul className={dropdownContentClass}>
-      {renderAnswers &&
-        answers.map((answer, index) => (
-          <li key={answer.id}>{renderAnswers(answer, index)}</li>
-        ))}
-    </ul>
+    <div className={dropdownContentClass}>
+      {Array.isArray(answers) && answers.length > 0 ? (
+        <Swiper slidesPerView={1}>
+          {renderAnswers &&
+            answers.map((answer, index) => (
+              <SwiperSlide key={answer.id}>
+                {renderAnswers(answer, index)}
+              </SwiperSlide>
+            ))}
+          <div className={swiperCtaClass}>
+            <SwiperPrevButton />
+            <div className="flex gap-2">
+              <button type="button" className="btn btn-circle bg-blue-600">
+                <span className="material-symbols-outlined text-2xl text-white">
+                  edit
+                </span>
+              </button>
+              <button type="button" className="btn btn-circle bg-orange-500">
+                <span className="material-symbols-outlined text-2xl text-white">
+                  delete
+                </span>
+              </button>
+            </div>
+            <SwiperNextButton />
+          </div>
+        </Swiper>
+      ) : (
+        <p className="text-center">Nothing to show here...</p>
+      )}
+    </div>
   );
 
   return (

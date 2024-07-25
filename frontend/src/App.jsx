@@ -118,21 +118,6 @@ const App = () => {
           )}
         />
       </div>
-
-      <div className="w-2/3 flex justify-center">
-        <div className="dropdown dropdown-end">
-          <div tabIndex="0" role="button" className="btn m-1">
-            Click
-          </div>
-
-          <div className="dropdown-content w-96 bg-gray-200 rounded-2xl p-1">
-            <Answer
-              title="Be patient ⏰"
-              content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis et dui id leo suscipit imperdiet. Nunc congue mauris id felis pellentesque, non vulputate felis pellentesque."
-            />
-          </div>
-        </div>
-      </div>
     </div>
   );
 };

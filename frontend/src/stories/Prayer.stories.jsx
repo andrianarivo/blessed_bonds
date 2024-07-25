@@ -123,7 +123,7 @@ export const Example2 = {
     description:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pulvinar urna vel efficitur iaculis. Praesent dapibus arcu et leo malesuada, in suscipit ligula tincidunt. Mauris malesuada lacinia eros. Proin sed maximus leo. Suspendisse at purus ac libero volutpat consequat.',
     noteCount: 2,
-    answersCount: 2,
+    answersCount: 0,
     author: 'David Stanley',
     createdAt: '2021-09-01T00:00:00.000Z',
     onClickSeeNotes: fn(),
