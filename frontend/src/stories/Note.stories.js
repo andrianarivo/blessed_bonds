@@ -1,28 +1,31 @@
 import Note from '../components/Note';
 
 export default {
-  title: 'Example/Note',
+  title: 'Components/Note',
   component: Note,
   parameters: {
     layout: 'centered',
   },
   tags: ['autodocs'],
-  argTypes: {
-    title: { control: 'text' },
-    text: { control: 'text' },
-    createdAt: { control: 'date' },
-    iconUrl: { control: 'text' },
-    author: { control: 'text' },
-    isOwn: { control: 'boolean' },
+};
+
+export const Note1 = {
+  args: {
+    title: 'I hear the Gospel in my dreams',
+    content:
+      '# Hi, *Pluto*! Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis et dui id leo suscipit imperdiet. ',
+    isOwn: false,
+    createdAt: '2021-09-01T00:00:00.000Z',
   },
 };
 
-export const Example1 = {
+export const Note2 = {
   args: {
-    title: 'I hear the Gospel in my dreams',
-    text: '# Hi, *Pluto*! Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis et dui id leo suscipit imperdiet. ',
+    title: 'Jesus is the Messiah',
+    content:
+      '# Hi, *Pluto*! Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis et dui id leo suscipit imperdiet. ',
     author: 'David Stanley',
-    isOwn: false,
+    isOwn: true,
     createdAt: '2021-09-01T00:00:00.000Z',
   },
 };
