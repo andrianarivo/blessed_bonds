@@ -1,28 +1,23 @@
 import Tag from '../components/Tag';
 
 export default {
-  title: 'Example/Tag',
+  title: 'Components/Tag',
   component: Tag,
   parameters: {
     layout: 'centered',
   },
   tags: ['autodocs'],
-  argTypes: {
-    backgroundColor: { control: 'color' },
-    color: { control: 'color' },
-    label: { control: 'text' },
-  },
 };
 
-export const Example1 = {
+export const Tag1 = {
   args: {
-    label: 'Finance',
+    label: 'Finance 1',
     backgroundColor: '#ffece1',
     color: '#ff5c00',
   },
 };
 
-export const Example2 = {
+export const Tag2 = {
   args: {
     label: 'Self-control',
     backgroundColor: '#e1f6ff',
