@@ -15,6 +15,7 @@ import { Note1, Note2 } from './Note.stories';
 import { Answer1, Answer2 } from './Answer.stories';
 import { Tag1, Tag2 } from './Tag.stories';
 import MarkdownEditor from '../components/MarkdownEditor';
+import AnswerContainer from '../components/AnswerContainer';
 
 export default {
   title: 'Playground/Prayer',
@@ -44,10 +45,12 @@ export const Expanded = {
         </TagRow>
       }
       answers={
-        <AnswerCarousel>
-          <Answer {...Answer1.args} />
-          <Answer {...Answer2.args} />
-        </AnswerCarousel>
+        <AnswerContainer className="w-96">
+          <AnswerCarousel>
+            <Answer {...Answer1.args} />
+            <Answer {...Answer2.args} />
+          </AnswerCarousel>
+        </AnswerContainer>
       }
       notes={
         <NoteBox>
@@ -77,6 +80,16 @@ export const Expanded = {
 };
 
 export const Collapsed = {
+  render: (args) => (
+    <Prayer
+      answers={
+        <AnswerContainer className="w-48">
+          <p>No answers yet...</p>
+        </AnswerContainer>
+      }
+      {...args}
+    />
+  ),
   args: {
     summary: 'God is provider',
     description:
@@ -86,6 +99,5 @@ export const Collapsed = {
     author: 'David Stanley',
     createdAt: '2021-09-01T00:00:00.000Z',
     onClickSeeNotes: fn(),
-    answers: [],
   },
 };

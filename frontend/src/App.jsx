@@ -1,10 +1,12 @@
 import './App.css';
 import React from 'react';
+import classNames from 'classnames';
 import Tag from './components/Tag';
 import Note from './components/Note';
 import Prayer from './components/Prayer';
 import Answer from './components/Answer';
 import TagRow from './components/TagRow';
+import AnswerContainer from './components/AnswerContainer';
 import AnswerCarousel from './components/AnswerCarousel';
 import NoteBox from './components/NoteBox';
 import MarkdownEditor from './components/MarkdownEditor';
@@ -62,6 +64,12 @@ const App = () => {
   const [markdown, setMarkdown] = React.useState(
     '### Note Title\nWrite a note...'
   );
+
+  const answerContainerClass = classNames(
+    { 'w-96': answers.length > 0 },
+    { 'w-42': answers.length <= 0 }
+  );
+
   return (
     <div className="flex flex-col justify-center items-center gap-y-4">
       <h1 className="text-2xl my-6">Playground phase</h1>
@@ -102,15 +110,21 @@ const App = () => {
             </NoteBox>
           }
           answers={
-            <AnswerCarousel>
-              {answers.map((answer) => (
-                <Answer
-                  key={answer.id}
-                  title={answer.title}
-                  content={answer.content}
-                />
-              ))}
-            </AnswerCarousel>
+            <AnswerContainer className={answerContainerClass}>
+              {answers.length > 0 ? (
+                <AnswerCarousel>
+                  {answers.map((answer) => (
+                    <Answer
+                      key={answer.id}
+                      title={answer.title}
+                      content={answer.content}
+                    />
+                  ))}
+                </AnswerCarousel>
+              ) : (
+                <p>No answers yet</p>
+              )}
+            </AnswerContainer>
           }
           editor={
             <MarkdownEditor

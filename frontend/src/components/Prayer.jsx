@@ -1,4 +1,4 @@
-import React, { Children } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import classNames from 'classnames';
@@ -41,27 +41,6 @@ const Prayer = ({
     'dropdown-top': !isLargeDisplay,
   });
 
-  const dropdownContentClass = classNames(
-    'dropdown-content',
-    'z-50',
-    'p-2',
-    'bg-gray-400-blur',
-    'backdrop-blur-md',
-    'rounded-xl',
-    {
-      'w-96': Children.count(answers) > 0,
-    },
-    {
-      'w-48': Children.count(answers) <= 0,
-    }
-  );
-
-  const renderAnswers = () => (
-    <div className={dropdownContentClass}>
-      {Children.count(answers) > 0 ? answers : <p>Nothing to show here...</p>}
-    </div>
-  );
-
   return (
     <div className={cardClass}>
       <div className="w-1 h-16 bg-indigo-600 absolute top-14 -left-[2px] rounded" />
@@ -92,7 +71,7 @@ const Prayer = ({
                 </span>
                 {`${answersCount} answers`}
               </div>
-              {renderAnswers()}
+              <div className="dropdown-content z-50">{answers}</div>
             </div>
           </div>
           <div className="divider my-0" />
@@ -119,7 +98,7 @@ const Prayer = ({
                     >
                       See answers
                     </div>
-                    {renderAnswers()}
+                    <div className="dropdown-content z-50">{answers}</div>
                   </div>
 
                   <div className="rounded w-[3px] h-[3px] bg-gray-500" />
