@@ -1,3 +1,7 @@
+/* eslint-disable import/no-extraneous-dependencies */
+
+import { fn } from '@storybook/test';
+
 import Answer from '../components/Answer';
 
 export default {
@@ -14,6 +18,8 @@ export const Answer1 = {
     title: 'Be patient ⏰',
     content:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis et dui id leo suscipit imperdiet. Nunc congue mauris id felis pellentesque, non vulputate felis pellentesque.',
+    onEdit: fn(),
+    onRemove: fn(),
   },
 };
 
@@ -22,5 +28,7 @@ export const Answer2 = {
     title: 'Gear up ⚙️',
     content:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis et dui id leo suscipit imperdiet. Nunc congue mauris id felis pellentesque, non vulputate felis pellentesque.',
+    onEdit: fn(),
+    onRemove: fn(),
   },
 };
