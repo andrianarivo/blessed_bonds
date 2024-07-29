@@ -87,6 +87,12 @@ export const Collapsed = {
           <p>No answers yet...</p>
         </AnswerContainer>
       }
+      tags={
+        <TagRow>
+          <Tag {...Tag1.args} />
+          <Tag {...Tag2.args} />
+        </TagRow>
+      }
       {...args}
     />
   ),
@@ -98,6 +104,9 @@ export const Collapsed = {
     answersCount: 0,
     author: 'David Stanley',
     createdAt: '2021-09-01T00:00:00.000Z',
-    onClickSeeNotes: fn(),
+    onSeeNotes: fn(),
+    onShare: fn(),
+    onEdit: fn(),
+    onRemove: fn(),
   },
 };
