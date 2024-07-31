@@ -10,6 +10,8 @@ import AnswerContainer from './components/AnswerContainer';
 import AnswerCarousel from './components/AnswerCarousel';
 import NoteBox from './components/NoteBox';
 import MarkdownEditor from './components/MarkdownEditor';
+import MenuItem from './components/MenuItem';
+import MenuSection from './components/MenuSection';
 
 const tags = [
   {
@@ -74,66 +76,76 @@ const App = () => {
     <div className="flex flex-col justify-center items-center gap-y-4">
       <h1 className="text-2xl my-6">Playground phase</h1>
 
-      <div className="w-2/3">
-        <Prayer
-          summary="God is provider"
-          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pulvinar urna vel efficitur iaculis. Praesent dapibus arcu et leo malesuada, in suscipit ligula tincidunt. Mauris malesuada lacinia eros. Proin sed maximus leo. Suspendisse at purus ac libero volutpat consequat."
-          isLargeDisplay
-          noteCount={2}
-          answersCount={2}
-          author="David Stanley"
-          createdAt="2021-09-01T00:00:00.000Z"
-          tags={
-            <TagRow>
-              {tags.map((tag) => (
-                <Tag
-                  key={tag.id}
-                  label={tag.label}
-                  backgroundColor={tag.backgroundColor}
-                  color={tag.color}
-                />
-              ))}
-            </TagRow>
-          }
-          notes={
-            <NoteBox>
-              {notes.map((note, idx) => (
-                <Note
-                  key={note.id}
-                  title={note.title}
-                  content={note.content}
-                  createdAt={note.createdAt}
-                  author={note.author}
-                  isOwn={idx % 2 === 0}
-                />
-              ))}
-            </NoteBox>
-          }
-          answers={
-            <AnswerContainer className={answerContainerClass}>
-              {answers.length > 0 ? (
-                <AnswerCarousel>
-                  {answers.map((answer) => (
-                    <Answer
-                      key={answer.id}
-                      title={answer.title}
-                      content={answer.content}
-                    />
-                  ))}
-                </AnswerCarousel>
-              ) : (
-                <p>No answers yet</p>
-              )}
-            </AnswerContainer>
-          }
-          editor={
-            <MarkdownEditor
-              author="David Stanley"
-              markdown={markdown}
-              setMarkdown={setMarkdown}
-            />
-          }
-        />
+      <div className="flex">
+        <div className="w-1/4 px-8">
+          <MenuSection>
+            <MenuItem active />
+            <MenuItem icon="sms" title="answers" />
+            <MenuItem icon="fact_check" title="notes" />
+          </MenuSection>
+        </div>
+
+        <div className="w-2/3">
+          <Prayer
+            summary="God is provider"
+            description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pulvinar urna vel efficitur iaculis. Praesent dapibus arcu et leo malesuada, in suscipit ligula tincidunt. Mauris malesuada lacinia eros. Proin sed maximus leo. Suspendisse at purus ac libero volutpat consequat."
+            isLargeDisplay
+            noteCount={2}
+            answersCount={2}
+            author="David Stanley"
+            createdAt="2021-09-01T00:00:00.000Z"
+            tags={
+              <TagRow>
+                {tags.map((tag) => (
+                  <Tag
+                    key={tag.id}
+                    label={tag.label}
+                    backgroundColor={tag.backgroundColor}
+                    color={tag.color}
+                  />
+                ))}
+              </TagRow>
+            }
+            notes={
+              <NoteBox>
+                {notes.map((note, idx) => (
+                  <Note
+                    key={note.id}
+                    title={note.title}
+                    content={note.content}
+                    createdAt={note.createdAt}
+                    author={note.author}
+                    isOwn={idx % 2 === 0}
+                  />
+                ))}
+              </NoteBox>
+            }
+            answers={
+              <AnswerContainer className={answerContainerClass}>
+                {answers.length > 0 ? (
+                  <AnswerCarousel>
+                    {answers.map((answer) => (
+                      <Answer
+                        key={answer.id}
+                        title={answer.title}
+                        content={answer.content}
+                      />
+                    ))}
+                  </AnswerCarousel>
+                ) : (
+                  <p>No answers yet</p>
+                )}
+              </AnswerContainer>
+            }
+            editor={
+              <MarkdownEditor
+                author="David Stanley"
+                markdown={markdown}
+                setMarkdown={setMarkdown}
+              />
+            }
+          />
+        </div>
       </div>
     </div>
   );
