@@ -12,6 +12,7 @@ import NoteBox from './components/NoteBox';
 import MarkdownEditor from './components/MarkdownEditor';
 import MenuItem from './components/MenuItem';
 import MenuSection from './components/MenuSection';
+import FlashMessage from './components/FlashMessage';
 
 const tags = [
   {
@@ -77,12 +78,13 @@ const App = () => {
       <h1 className="text-2xl my-6">Playground phase</h1>
 
       <div className="flex">
-        <div className="w-1/4 px-8">
-          <MenuSection>
-            <MenuItem active />
-            <MenuItem icon="sms" title="answers" />
-            <MenuItem icon="fact_check" title="notes" />
+        <div className="relative w-1/5 px-4">
+          <MenuSection title="my topics" canAddMore>
+            <MenuItem icon="action_key" active />
+            <MenuItem icon="priority" title="answers" />
+            <MenuItem icon="wysiwyg" title="notes" />
           </MenuSection>
+          <FlashMessage classNames="absolute bottom-0 left-0 px-4" />
         </div>
 
         <div className="w-2/3">
