@@ -1,5 +1,5 @@
 import './App.css';
-import React from 'react';
+import React, { useState } from 'react';
 import classNames from 'classnames';
 import Tag from './components/Tag';
 import Note from './components/Note';
@@ -13,6 +13,8 @@ import MarkdownEditor from './components/MarkdownEditor';
 import MenuItem from './components/MenuItem';
 import MenuSection from './components/MenuSection';
 import FlashMessage from './components/FlashMessage';
+import Menu from './components/Menu';
+import logo from './assets/logo.jpg';
 
 const tags = [
   {
@@ -68,86 +70,140 @@ const App = () => {
     '### Note Title\nWrite a note...'
   );
 
+  const [isMenuLarge, setMenuLarge] = useState(true);
+
   const answerContainerClass = classNames(
     { 'w-96': answers.length > 0 },
     { 'w-42': answers.length <= 0 }
   );
 
+  const handleOnClickToogleMenuDisplay = () => {
+    setMenuLarge(!isMenuLarge);
+  };
+
   return (
-    <div className="flex flex-col justify-center items-center gap-y-4">
-      <h1 className="text-2xl my-6">Playground phase</h1>
-
-      <div className="flex">
-        <div className="relative w-1/5 px-4">
-          <MenuSection title="my topics" canAddMore>
-            <MenuItem icon="action_key" active />
-            <MenuItem icon="priority" title="answers" />
-            <MenuItem icon="wysiwyg" title="notes" />
+    <div className="flex justify-center min-h-full">
+      <Menu large={isMenuLarge}>
+        <div className="divide-y-2">
+          <div className="flex justify-between items-center">
+            <div className="flex items-center gap-2 m-4">
+              <img className="w-8 h-8 rounded-full" src={logo} alt="logo" />
+              {isMenuLarge && (
+                <p className="text-purple-800 text-lg font-medium">
+                  Prayer Dom
+                </p>
+              )}
+            </div>
+            {isMenuLarge && (
+              <button
+                onClick={handleOnClickToogleMenuDisplay}
+                type="button"
+                className="btn btn-ghost btn-sm"
+              >
+                <span className="material-symbols-outlined text-gray-400">
+                  keyboard_double_arrow_left
+                </span>
+              </button>
+            )}
+          </div>
+          <MenuSection large={!isMenuLarge}>
+            <MenuItem icon="action_key" large={!isMenuLarge} />
+            <MenuItem icon="priority" title="answers" large={!isMenuLarge} />
+            <MenuItem icon="wysiwyg" title="notes" large={!isMenuLarge} />
           </MenuSection>
-          <FlashMessage classNames="absolute bottom-0 left-0 px-4" />
+          <MenuSection title="my topics" canAddMore large={!isMenuLarge}>
+            <MenuItem
+              title="Career"
+              color="#7ac554"
+              useDot
+              active
+              large={!isMenuLarge}
+            />
+            <MenuItem
+              title="Ministry"
+              color="#f7a501"
+              useDot
+              large={!isMenuLarge}
+            />
+          </MenuSection>
         </div>
+        <div className="absolute bottom-0 left-0 m-4">
+          {isMenuLarge ? (
+            <FlashMessage />
+          ) : (
+            <button
+              onClick={handleOnClickToogleMenuDisplay}
+              type="button"
+              className="btn btn-ghost btn-sm"
+            >
+              <span className="material-symbols-outlined text-gray-400">
+                keyboard_double_arrow_right
+              </span>
+            </button>
+          )}
+        </div>
+      </Menu>
 
-        <div className="w-2/3">
-          <Prayer
-            summary="God is provider"
-            description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pulvinar urna vel efficitur iaculis. Praesent dapibus arcu et leo malesuada, in suscipit ligula tincidunt. Mauris malesuada lacinia eros. Proin sed maximus leo. Suspendisse at purus ac libero volutpat consequat."
-            isLargeDisplay
-            noteCount={2}
-            answersCount={2}
-            author="David Stanley"
-            createdAt="2021-09-01T00:00:00.000Z"
-            tags={
-              <TagRow>
-                {tags.map((tag) => (
-                  <Tag
-                    key={tag.id}
-                    label={tag.label}
-                    backgroundColor={tag.backgroundColor}
-                    color={tag.color}
-                  />
-                ))}
-              </TagRow>
-            }
-            notes={
-              <NoteBox>
-                {notes.map((note, idx) => (
-                  <Note
-                    key={note.id}
-                    title={note.title}
-                    content={note.content}
-                    createdAt={note.createdAt}
-                    author={note.author}
-                    isOwn={idx % 2 === 0}
-                  />
-                ))}
-              </NoteBox>
-            }
-            answers={
-              <AnswerContainer className={answerContainerClass}>
-                {answers.length > 0 ? (
-                  <AnswerCarousel>
-                    {answers.map((answer) => (
-                      <Answer
-                        key={answer.id}
-                        title={answer.title}
-                        content={answer.content}
-                      />
-                    ))}
-                  </AnswerCarousel>
-                ) : (
-                  <p>No answers yet</p>
-                )}
-              </AnswerContainer>
-            }
-            editor={
-              <MarkdownEditor
-                author="David Stanley"
-                markdown={markdown}
-                setMarkdown={setMarkdown}
-              />
-            }
-          />
-        </div>
+      <div className="ml-menulg p-4">
+        <Prayer
+          summary="God is provider"
+          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pulvinar urna vel efficitur iaculis. Praesent dapibus arcu et leo malesuada, in suscipit ligula tincidunt. Mauris malesuada lacinia eros. Proin sed maximus leo. Suspendisse at purus ac libero volutpat consequat."
+          isLargeDisplay
+          noteCount={2}
+          answersCount={2}
+          author="David Stanley"
+          createdAt="2021-09-01T00:00:00.000Z"
+          tags={
+            <TagRow>
+              {tags.map((tag) => (
+                <Tag
+                  key={tag.id}
+                  label={tag.label}
+                  backgroundColor={tag.backgroundColor}
+                  color={tag.color}
+                />
+              ))}
+            </TagRow>
+          }
+          notes={
+            <NoteBox>
+              {notes.map((note, idx) => (
+                <Note
+                  key={note.id}
+                  title={note.title}
+                  content={note.content}
+                  createdAt={note.createdAt}
+                  author={note.author}
+                  isOwn={idx % 2 === 0}
+                />
+              ))}
+            </NoteBox>
+          }
+          answers={
+            <AnswerContainer className={answerContainerClass}>
+              {answers.length > 0 ? (
+                <AnswerCarousel>
+                  {answers.map((answer) => (
+                    <Answer
+                      key={answer.id}
+                      title={answer.title}
+                      content={answer.content}
+                    />
+                  ))}
+                </AnswerCarousel>
+              ) : (
+                <p>No answers yet</p>
+              )}
+            </AnswerContainer>
+          }
+          editor={
+            <MarkdownEditor
+              author="David Stanley"
+              markdown={markdown}
+              setMarkdown={setMarkdown}
+            />
+          }
+        />
       </div>
     </div>
   );

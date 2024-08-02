@@ -2,7 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-const MenuItem = ({ icon = 'browse', title = 'home', active = false }) => {
+const MenuItem = ({
+  icon = undefined,
+  title = 'home',
+  color = undefined,
+  active = false,
+  useDot = false,
+  large = false,
+}) => {
   const buttonClass = classNames(
     'flex',
     'gap-2',
@@ -11,7 +18,6 @@ const MenuItem = ({ icon = 'browse', title = 'home', active = false }) => {
     'font-medium',
     'capitalize',
     'w-full',
-    'justify-start',
     {
       'text-gray-500': !active,
     },
@@ -20,12 +26,28 @@ const MenuItem = ({ icon = 'browse', title = 'home', active = false }) => {
     },
     {
       'text-gray-900': active,
+    },
+    {
+      'justify-start': !large,
+    },
+    {
+      'justify-center': large,
     }
   );
   return (
     <button type="button" className={buttonClass}>
-      <span className="material-symbols-outlined">{icon}</span>
-      {title}
+      {icon && (
+        <span className="material-symbols-outlined" style={{ color }}>
+          {icon}
+        </span>
+      )}
+      {useDot && (
+        <div
+          className="rounded-full w-2 h-2"
+          style={{ backgroundColor: color }}
+        />
+      )}
+      {!large && title}
     </button>
   );
 };
@@ -33,7 +55,10 @@ const MenuItem = ({ icon = 'browse', title = 'home', active = false }) => {
 MenuItem.propTypes = {
   icon: PropTypes.string,
   title: PropTypes.string,
+  color: PropTypes.string,
   active: PropTypes.bool,
+  useDot: PropTypes.bool,
+  large: PropTypes.bool,
 };
 
 export default MenuItem;
