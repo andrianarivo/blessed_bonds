@@ -12,6 +12,7 @@ const MenuItem = ({
 }) => {
   const buttonClass = classNames(
     'flex',
+    'flex-nowrap',
     'gap-2',
     'btn',
     'btn-ghost',

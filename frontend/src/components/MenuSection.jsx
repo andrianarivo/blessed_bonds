@@ -27,7 +27,7 @@ const MenuSection = ({
     <div className="w-full">
       {((title && !large) || canAddMore) && (
         <div className={containerClass}>
-          {!large && title}
+          {!large && <p className="line-clamp-1">{title}</p>}
           {canAddMore && (
             <button
               type="button"

@@ -13,7 +13,7 @@ import MarkdownEditor from './components/MarkdownEditor';
 import MenuItem from './components/MenuItem';
 import MenuSection from './components/MenuSection';
 import FlashMessage from './components/FlashMessage';
-import Menu from './components/Menu';
+import Sidebar from './components/Sidebar';
 import logo from './assets/logo.jpg';
 
 const tags = [
@@ -77,19 +77,25 @@ const App = () => {
     { 'w-42': answers.length <= 0 }
   );
 
+  const containerClass = classNames(
+    'p-4',
+    { 'ml-menulg': isMenuLarge },
+    { 'ml-menusm': !isMenuLarge }
+  );
+
   const handleOnClickToogleMenuDisplay = () => {
     setMenuLarge(!isMenuLarge);
   };
 
   return (
     <div className="flex justify-center min-h-full">
-      <Menu large={isMenuLarge}>
+      <Sidebar large={isMenuLarge}>
         <div className="divide-y-2">
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-2 m-4">
               <img className="w-8 h-8 rounded-full" src={logo} alt="logo" />
               {isMenuLarge && (
-                <p className="text-purple-800 text-lg font-medium">
+                <p className="text-purple-800 text-lg font-medium line-clamp-1">
                   Prayer Dom
                 </p>
               )}
@@ -142,9 +148,9 @@ const App = () => {
             </button>
           )}
         </div>
-      </Menu>
+      </Sidebar>
 
-      <div className="ml-menulg p-4">
+      <div className={containerClass}>
         <Prayer
           summary="God is provider"
           description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pulvinar urna vel efficitur iaculis. Praesent dapibus arcu et leo malesuada, in suscipit ligula tincidunt. Mauris malesuada lacinia eros. Proin sed maximus leo. Suspendisse at purus ac libero volutpat consequat."
