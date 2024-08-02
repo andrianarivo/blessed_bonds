@@ -10,7 +10,7 @@ const Sidebar = ({ children, large = true }) => (
     transition={{
       type: 'spring',
     }}
-    className="top-0 bottom-0 left-0 p-2 w-menulg overflow-y-auto border-r-2 border-gray-200 fixed z-50 bg-white"
+    className="top-0 bottom-0 left-0 p-2 w-menulg overflow-y-auto border-r-2 border-gray-200 fixed z-40 bg-white"
   >
     {Children.map(children, (child) => child)}
   </motion.div>

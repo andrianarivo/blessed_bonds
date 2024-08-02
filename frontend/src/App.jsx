@@ -89,6 +89,9 @@ const App = () => {
 
   return (
     <div className="flex justify-center min-h-full">
+      {isMenuLarge && (
+        <FlashMessage classNames="absolute z-50 w-52 bottom-0 left-0 ml-5 mb-4" />
+      )}
       <Sidebar large={isMenuLarge}>
         <div className="divide-y-2">
           <div className="flex justify-between items-center">
@@ -96,7 +99,7 @@ const App = () => {
               <img className="w-8 h-8 rounded-full" src={logo} alt="logo" />
               {isMenuLarge && (
                 <p className="text-purple-800 text-lg font-medium line-clamp-1">
-                  Prayer Dom
+                  Prayerdom
                 </p>
               )}
             </div>
@@ -134,9 +137,7 @@ const App = () => {
           </MenuSection>
         </div>
         <div className="absolute bottom-0 left-0 m-4">
-          {isMenuLarge ? (
-            <FlashMessage />
-          ) : (
+          {!isMenuLarge && (
             <button
               onClick={handleOnClickToogleMenuDisplay}
               type="button"
