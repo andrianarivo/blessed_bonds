@@ -29,8 +29,8 @@ services:
     ports:
       - "5432:5432"
     environment:
-      POSTGRES_DB: prayer_dom_db
-      POSTGRES_USER: prayer_dom
+      POSTGRES_DB: prayerdom_db
+      POSTGRES_USER: prayerdom
       POSTGRES_PASSWORD: root
     volumes:
       - pgdata:/var/lib/postgresql/data
