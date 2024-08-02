@@ -5,6 +5,7 @@ import classNames from 'classnames';
 import Avatar from './Avatar';
 
 import 'swiper/css';
+import ShareEditDelete from './ShareEditDelete';
 
 const Prayer = ({
   summary,
@@ -68,38 +69,13 @@ const Prayer = ({
         <summary type="button" className={moreActionClass}>
           <span className="material-symbols-outlined">more_horiz</span>
         </summary>
-        <ul className="dropdown-content list-none min-w-max bg-white border border-gray-200 rounded-xl shadow-sm divide-y">
-          <li>
-            <button
-              type="button"
-              className="btn btn-ghost grid grid-cols-2 w-full hover:bg-gray-200 hover:rounded-br-none hover:rounded-bl-none"
-              onClick={onShare}
-            >
-              <p className="text-start">Share</p>
-              <span className="material-symbols-outlined text-end">share</span>
-            </button>
-          </li>
-          <li>
-            <button
-              type="button"
-              className="btn btn-ghost grid grid-cols-2 text-blue-600 w-full hover:bg-blue-600 hover:text-white hover:rounded-none"
-              onClick={onEdit}
-            >
-              <p className="text-start">Edit</p>
-              <span className="material-symbols-outlined text-end">edit</span>
-            </button>
-          </li>
-          <li>
-            <button
-              type="button"
-              className="btn btn-ghost grid grid-cols-2 text-orange-500 w-full hover:bg-orange-500 hover:text-white hover:rounded-tr-none hover:rounded-tl-none"
-              onClick={onRemove}
-            >
-              <p className="text-start">Remove</p>
-              <span className="material-symbols-outlined text-end">delete</span>
-            </button>
-          </li>
-        </ul>
+        <div className="dropdown-content">
+          <ShareEditDelete
+            onShare={onShare}
+            onEdit={onEdit}
+            onRemove={onRemove}
+          />
+        </div>
       </details>
       <div className="card-body p-5">
         {tags}
