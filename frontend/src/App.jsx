@@ -14,7 +14,8 @@ import MenuItem from './components/MenuItem';
 import MenuSection from './components/MenuSection';
 import FlashMessage from './components/FlashMessage';
 import Sidebar from './components/Sidebar';
-import logo from './assets/logo.jpg';
+import LeftRightButton from './components/LeftRightButton';
+import Logo from './components/Logo';
 
 const tags = [
   {
@@ -95,58 +96,41 @@ const App = () => {
       <Sidebar large={isMenuLarge}>
         <div className="divide-y-2">
           <div className="flex justify-between items-center">
-            <div className="flex items-center gap-2 m-4">
-              <img className="w-8 h-8 rounded-full" src={logo} alt="logo" />
-              {isMenuLarge && (
-                <p className="text-purple-800 text-lg font-medium line-clamp-1">
-                  Prayerdom
-                </p>
-              )}
-            </div>
+            <Logo large={isMenuLarge} />
             {isMenuLarge && (
-              <button
-                onClick={handleOnClickToogleMenuDisplay}
-                type="button"
-                className="btn btn-ghost btn-sm"
-              >
-                <span className="material-symbols-outlined text-gray-400">
-                  keyboard_double_arrow_left
-                </span>
-              </button>
+              <LeftRightButton
+                left={isMenuLarge}
+                onToggle={handleOnClickToogleMenuDisplay}
+              />
             )}
           </div>
-          <MenuSection large={!isMenuLarge}>
-            <MenuItem icon="action_key" large={!isMenuLarge} />
-            <MenuItem icon="priority" title="answers" large={!isMenuLarge} />
-            <MenuItem icon="wysiwyg" title="notes" large={!isMenuLarge} />
+          <MenuSection large={isMenuLarge}>
+            <MenuItem icon="action_key" large={isMenuLarge} />
+            <MenuItem icon="priority" title="answers" large={isMenuLarge} />
+            <MenuItem icon="wysiwyg" title="notes" large={isMenuLarge} />
           </MenuSection>
-          <MenuSection title="my topics" canAddMore large={!isMenuLarge}>
+          <MenuSection title="my topics" canAddMore large={isMenuLarge}>
             <MenuItem
               title="Career"
               color="#7ac554"
               useDot
               active
-              large={!isMenuLarge}
+              large={isMenuLarge}
             />
             <MenuItem
               title="Ministry"
               color="#f7a501"
               useDot
-              large={!isMenuLarge}
+              large={isMenuLarge}
             />
           </MenuSection>
         </div>
         <div className="absolute bottom-0 left-0 m-4">
           {!isMenuLarge && (
-            <button
-              onClick={handleOnClickToogleMenuDisplay}
-              type="button"
-              className="btn btn-ghost btn-sm"
-            >
-              <span className="material-symbols-outlined text-gray-400">
-                keyboard_double_arrow_right
-              </span>
-            </button>
+            <LeftRightButton
+              left={isMenuLarge}
+              onToggle={handleOnClickToogleMenuDisplay}
+            />
           )}
         </div>
       </Sidebar>
