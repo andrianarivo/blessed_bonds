@@ -1,6 +1,3 @@
-/* eslint-disable react/jsx-props-no-spreading */
-/* eslint-disable import/no-extraneous-dependencies */
-
 import { fn } from '@storybook/test';
 
 import Prayer from '../components/Prayer';

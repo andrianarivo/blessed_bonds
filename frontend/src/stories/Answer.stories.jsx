@@ -1,5 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
-
 import { fn } from '@storybook/test';
 
 import Answer from '../components/Answer';
