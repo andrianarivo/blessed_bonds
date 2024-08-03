@@ -23,7 +23,9 @@
         "returnStyle": "implicit",
         "singleReturnOnly": false
       }
-    ]
+    ],
+    "react/jsx-props-no-spreading": ["error", { "custom": "ignore"}],
+    "import/no-extraneous-dependencies": ["error", {"devDependencies": ["**/*.test.js", "**/*.spec.js", "**/*.stories.js", "**/*.stories.jsx"]}]
   },
   "overrides": [
     {
