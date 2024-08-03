@@ -6,32 +6,36 @@ const MenuSection = ({
   children,
   title,
   canAddMore = false,
-  large = false,
+  large = true,
+  onAddMore = undefined,
 }) => {
-  const containerClass = classNames(
+  const titleContainerClass = classNames(
     'flex',
+    'justify-start',
     'items-center',
     'uppercase',
     'p-4',
     'text-gray-500',
     'text-xs',
     'font-bold',
+    'gap-x-4',
     {
-      'justify-between': !large,
+      'justify-between': large,
     },
     {
-      'justify-center': large,
+      'justify-center': !large,
     }
   );
   return (
-    <div className="w-full">
-      {((title && !large) || canAddMore) && (
-        <div className={containerClass}>
-          {!large && <p className="line-clamp-1">{title}</p>}
+    <div>
+      {((title && large) || canAddMore) && (
+        <div className={titleContainerClass}>
+          {large && <p className="line-clamp-1">{title}</p>}
           {canAddMore && (
             <button
               type="button"
               className="flex items-center border border-gray-500 rounded-md px-[2px] active:bg-gray-200"
+              onClick={onAddMore}
             >
               <span className="material-symbols-outlined text-xs text-gray-500">
                 add
@@ -50,6 +54,7 @@ MenuSection.propTypes = {
   title: PropTypes.string,
   canAddMore: PropTypes.bool,
   large: PropTypes.bool,
+  onAddMore: PropTypes.func,
 };
 
 export default MenuSection;

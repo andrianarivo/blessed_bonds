@@ -6,9 +6,10 @@ const MenuItem = ({
   icon = undefined,
   title = 'home',
   color = undefined,
+  large = true,
   active = false,
   useDot = false,
-  large = false,
+  onClick = undefined,
 }) => {
   const buttonClass = classNames(
     'flex',
@@ -29,14 +30,14 @@ const MenuItem = ({
       'text-gray-900': active,
     },
     {
-      'justify-start': !large,
+      'justify-start': large,
     },
     {
-      'justify-center': large,
+      'justify-center': !large,
     }
   );
   return (
-    <button type="button" className={buttonClass}>
+    <button type="button" className={buttonClass} onClick={onClick}>
       {icon && (
         <span className="material-symbols-outlined" style={{ color }}>
           {icon}
@@ -48,7 +49,7 @@ const MenuItem = ({
           style={{ backgroundColor: color }}
         />
       )}
-      {!large && title}
+      {large && title}
     </button>
   );
 };
@@ -60,6 +61,7 @@ MenuItem.propTypes = {
   active: PropTypes.bool,
   useDot: PropTypes.bool,
   large: PropTypes.bool,
+  onClick: PropTypes.func,
 };
 
 export default MenuItem;

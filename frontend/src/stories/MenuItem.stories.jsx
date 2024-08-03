@@ -1,4 +1,4 @@
-/* eslint-disable import/no-extraneous-dependencies */
+import { fn } from '@storybook/test';
 
 import MenuItem from '../components/MenuItem';
 import materialIcons from './assets/material-icons-list.json';
@@ -22,6 +22,7 @@ export const Home = {
   args: {
     icon: 'browse',
     title: 'home',
+    onClick: fn(),
   },
 };
 
@@ -29,6 +30,7 @@ export const Answers = {
   args: {
     icon: 'priority',
     title: 'answers',
+    onClick: fn(),
   },
 };
 
@@ -36,5 +38,26 @@ export const Notes = {
   args: {
     icon: 'wysiwyg',
     title: 'notes',
+
+    onClick: fn(),
+  },
+};
+
+export const Career = {
+  args: {
+    useDot: true,
+    color: '#7ac554',
+    title: 'career',
+
+    onClick: fn(),
+  },
+};
+
+export const Ministry = {
+  args: {
+    useDot: true,
+    color: '#f7a501',
+    title: 'ministry',
+    onClick: fn(),
   },
 };
