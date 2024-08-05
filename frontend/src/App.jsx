@@ -1,5 +1,5 @@
 import './App.css';
-import React, { useState } from 'react';
+import React from 'react';
 import classNames from 'classnames';
 import Tag from './components/Tag';
 import Note from './components/Note';
@@ -14,7 +14,6 @@ import MenuItem from './components/MenuItem';
 import MenuSection from './components/MenuSection';
 import FlashMessage from './components/FlashMessage';
 import Sidebar from './components/Sidebar';
-import LeftRightButton from './components/LeftRightButton';
 import Logo from './components/Logo';
 
 const tags = [
@@ -71,130 +70,111 @@ const App = () => {
     '### Note Title\nWrite a note...'
   );
 
-  const [isMenuLarge, setMenuLarge] = useState(true);
-
   const answerContainerClass = classNames(
     { 'w-96': answers.length > 0 },
     { 'w-42': answers.length <= 0 }
   );
 
-  const containerClass = classNames(
-    'p-4',
-    { 'ml-menulg': isMenuLarge },
-    { 'ml-menusm': !isMenuLarge }
-  );
-
-  const handleOnClickToogleMenuDisplay = () => {
-    setMenuLarge(!isMenuLarge);
-  };
-
   return (
-    <div className="flex justify-center min-h-full">
-      {isMenuLarge && (
-        <FlashMessage classNames="absolute z-50 w-52 bottom-0 left-0 ml-5 mb-4" />
-      )}
-      <Sidebar large={isMenuLarge}>
-        <div className="divide-y-2">
-          <div className="flex justify-between items-center">
-            <Logo large={isMenuLarge} />
-            {isMenuLarge && (
-              <LeftRightButton
-                left={isMenuLarge}
-                onToggle={handleOnClickToogleMenuDisplay}
-              />
-            )}
-          </div>
-          <MenuSection large={isMenuLarge}>
-            <MenuItem icon="action_key" large={isMenuLarge} />
-            <MenuItem icon="priority" title="answers" large={isMenuLarge} />
-            <MenuItem icon="wysiwyg" title="notes" large={isMenuLarge} />
-          </MenuSection>
-          <MenuSection title="my topics" canAddMore large={isMenuLarge}>
-            <MenuItem
-              title="Career"
-              color="#7ac554"
-              useDot
-              active
-              large={isMenuLarge}
-            />
-            <MenuItem
-              title="Ministry"
-              color="#f7a501"
-              useDot
-              large={isMenuLarge}
-            />
-          </MenuSection>
-        </div>
-        <div className="absolute bottom-0 left-0 m-4">
-          {!isMenuLarge && (
-            <LeftRightButton
-              left={isMenuLarge}
-              onToggle={handleOnClickToogleMenuDisplay}
-            />
-          )}
-        </div>
-      </Sidebar>
+    <div className="drawer">
+      <input id="app-drawer" type="checkbox" className="drawer-toggle" />
 
-      <div className={containerClass}>
-        <Prayer
-          summary="God is provider"
-          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pulvinar urna vel efficitur iaculis. Praesent dapibus arcu et leo malesuada, in suscipit ligula tincidunt. Mauris malesuada lacinia eros. Proin sed maximus leo. Suspendisse at purus ac libero volutpat consequat."
-          isLargeDisplay
-          noteCount={2}
-          answersCount={2}
-          author="David Stanley"
-          createdAt="2021-09-01T00:00:00.000Z"
-          tags={
-            <TagRow>
-              {tags.map((tag) => (
-                <Tag
-                  key={tag.id}
-                  label={tag.label}
-                  backgroundColor={tag.backgroundColor}
-                  color={tag.color}
-                />
-              ))}
-            </TagRow>
-          }
-          notes={
-            <NoteBox>
-              {notes.map((note, idx) => (
-                <Note
-                  key={note.id}
-                  title={note.title}
-                  content={note.content}
-                  createdAt={note.createdAt}
-                  author={note.author}
-                  isOwn={idx % 2 === 0}
-                />
-              ))}
-            </NoteBox>
-          }
-          answers={
-            <AnswerContainer className={answerContainerClass}>
-              {answers.length > 0 ? (
-                <AnswerCarousel>
-                  {answers.map((answer) => (
-                    <Answer
-                      key={answer.id}
-                      title={answer.title}
-                      content={answer.content}
-                    />
-                  ))}
-                </AnswerCarousel>
-              ) : (
-                <p>No answers yet</p>
-              )}
-            </AnswerContainer>
-          }
-          editor={
-            <MarkdownEditor
-              author="David Stanley"
-              markdown={markdown}
-              setMarkdown={setMarkdown}
-            />
-          }
-        />
+      <div className="drawer-content w-full min-h-full flex flex-col justify-center items-center gap-4 p-4">
+        <label htmlFor="app-drawer" className="btn btn-primary drawer-button">
+          Open drawer
+          <input hidden type="checkbox" />
+        </label>
+
+        <div className="w-2/3">
+          <Prayer
+            summary="God is provider"
+            description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pulvinar urna vel efficitur iaculis. Praesent dapibus arcu et leo malesuada, in suscipit ligula tincidunt. Mauris malesuada lacinia eros. Proin sed maximus leo. Suspendisse at purus ac libero volutpat consequat."
+            isLargeDisplay
+            noteCount={2}
+            answersCount={2}
+            author="David Stanley"
+            createdAt="2021-09-01T00:00:00.000Z"
+            tags={
+              <TagRow>
+                {tags.map((tag) => (
+                  <Tag
+                    key={tag.id}
+                    label={tag.label}
+                    backgroundColor={tag.backgroundColor}
+                    color={tag.color}
+                  />
+                ))}
+              </TagRow>
+            }
+            notes={
+              <NoteBox>
+                {notes.map((note, idx) => (
+                  <Note
+                    key={note.id}
+                    title={note.title}
+                    content={note.content}
+                    createdAt={note.createdAt}
+                    author={note.author}
+                    isOwn={idx % 2 === 0}
+                  />
+                ))}
+              </NoteBox>
+            }
+            answers={
+              <AnswerContainer className={answerContainerClass}>
+                {answers.length > 0 ? (
+                  <AnswerCarousel>
+                    {answers.map((answer) => (
+                      <Answer
+                        key={answer.id}
+                        title={answer.title}
+                        content={answer.content}
+                      />
+                    ))}
+                  </AnswerCarousel>
+                ) : (
+                  <p>No answers yet</p>
+                )}
+              </AnswerContainer>
+            }
+            editor={
+              <MarkdownEditor
+                author="David Stanley"
+                markdown={markdown}
+                setMarkdown={setMarkdown}
+              />
+            }
+          />
+        </div>
+      </div>
+
+      <div className="drawer-side z-50">
+        <label
+          htmlFor="app-drawer"
+          aria-label="close sidebar"
+          className="drawer-overlay"
+        >
+          <input hidden type="checkbox" />
+        </label>
+        <Sidebar classNames="flex flex-col justify-between">
+          <div className="divide-y-2">
+            <div className="flex justify-between items-center">
+              <Logo />
+            </div>
+            <MenuSection>
+              <MenuItem icon="action_key" />
+              <MenuItem icon="priority" title="answers" />
+              <MenuItem icon="wysiwyg" title="notes" />
+            </MenuSection>
+            <MenuSection title="my topics" canAddMore>
+              <MenuItem title="Career" color="#7ac554" useDot active />
+              <MenuItem title="Ministry" color="#f7a501" useDot />
+            </MenuSection>
+          </div>
+          <div className="flex justify-center items-center">
+            <FlashMessage />
+          </div>
+        </Sidebar>
       </div>
     </div>
   );

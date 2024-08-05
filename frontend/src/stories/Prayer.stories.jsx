@@ -17,7 +17,7 @@ import AnswerContainer from '../components/AnswerContainer';
 export default {
   title: 'Playground/Prayer',
   component: Prayer,
-  subcomponents: { Tag },
+  subcomponents: { Tag, Note, Answer },
   parameters: {
     layout: 'centered',
   },
