@@ -25,8 +25,9 @@
       }
     ],
     "react/jsx-props-no-spreading": ["error", { "custom": "ignore"}],
-    "import/no-extraneous-dependencies": ["error", {"devDependencies": ["**/*.test.js", "**/*.spec.js", "**/*.stories.js", "**/*.stories.jsx"]}]
-  },
+    "import/no-extraneous-dependencies": ["error", {"devDependencies": ["**/*.test.js", "**/*.spec.js", "**/*.stories.js", "**/*.stories.jsx"]}],
+    "react/jsx-pascal-case": ["error", { "allowNamespace": true }]
+    },
   "overrides": [
     {
       "files": ["src/**/*Slice.js"],
