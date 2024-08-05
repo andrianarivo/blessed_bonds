@@ -20,9 +20,10 @@ export default {
 
 export const Home = {
   args: {
-    icon: 'browse',
+    icon: 'ac_unit',
     title: 'home',
     onClick: fn(),
+    large: true,
   },
 };
 
@@ -31,6 +32,7 @@ export const Answers = {
     icon: 'priority',
     title: 'answers',
     onClick: fn(),
+    large: true,
   },
 };
 
@@ -38,8 +40,8 @@ export const Notes = {
   args: {
     icon: 'wysiwyg',
     title: 'notes',
-
     onClick: fn(),
+    large: true,
   },
 };
 
@@ -48,8 +50,9 @@ export const Career = {
     useDot: true,
     color: '#7ac554',
     title: 'career',
-
     onClick: fn(),
+    large: true,
+    active: true,
   },
 };
 
@@ -59,5 +62,6 @@ export const Ministry = {
     color: '#f7a501',
     title: 'ministry',
     onClick: fn(),
+    large: true,
   },
 };

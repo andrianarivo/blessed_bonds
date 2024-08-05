@@ -6,7 +6,6 @@ const MenuItem = ({
   icon = undefined,
   title = 'home',
   color = undefined,
-  large = true,
   active = false,
   useDot = false,
   onClick = undefined,
@@ -20,6 +19,7 @@ const MenuItem = ({
     'font-medium',
     'capitalize',
     'w-full',
+    'justify-start',
     {
       'text-gray-500': !active,
     },
@@ -28,12 +28,6 @@ const MenuItem = ({
     },
     {
       'text-gray-900': active,
-    },
-    {
-      'justify-start': large,
-    },
-    {
-      'justify-center': !large,
     }
   );
   return (
@@ -49,7 +43,7 @@ const MenuItem = ({
           style={{ backgroundColor: color }}
         />
       )}
-      {large && title}
+      {title}
     </button>
   );
 };
@@ -60,7 +54,6 @@ MenuItem.propTypes = {
   color: PropTypes.string,
   active: PropTypes.bool,
   useDot: PropTypes.bool,
-  large: PropTypes.bool,
   onClick: PropTypes.func,
 };
 
