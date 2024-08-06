@@ -15,6 +15,7 @@ import MenuSection from './components/MenuSection';
 import FlashMessage from './components/FlashMessage';
 import Sidebar from './components/Sidebar';
 import Logo from './components/Logo';
+import Navbar from './components/Navbar';
 
 const tags = [
   {
@@ -79,11 +80,17 @@ const App = () => {
     <div className="drawer">
       <input id="app-drawer" type="checkbox" className="drawer-toggle" />
 
-      <div className="drawer-content w-full min-h-full flex flex-col justify-center items-center gap-4 p-4">
-        <label htmlFor="app-drawer" className="btn btn-primary drawer-button">
-          Open drawer
-          <input hidden type="checkbox" />
-        </label>
+      <div className="drawer-content w-full min-h-full flex flex-col justify-center items-center gap-4">
+        <Navbar
+          hamburger={
+            <label htmlFor="app-drawer" className="btn btn-ghost drawer-button">
+              <span className="material-symbols-outlined text-gray-400">
+                menu
+              </span>
+              <input hidden type="checkbox" />
+            </label>
+          }
+        />
 
         <div className="w-2/3">
           <Prayer
