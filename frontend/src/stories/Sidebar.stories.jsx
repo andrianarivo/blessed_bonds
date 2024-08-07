@@ -17,7 +17,7 @@ export default {
   },
 };
 
-const Sider = {
+const Template = {
   render: (args) => (
     <Sidebar {...args}>
       <div className="divide-y">
@@ -32,11 +32,7 @@ const Sider = {
 };
 
 export const Default = {
-  render: (args) => (
-    <div className="h-screen">
-      <Sider.render {...args} />
-    </div>
-  ),
+  ...Template,
 };
 
 export const Drawer = {
@@ -57,7 +53,7 @@ export const Drawer = {
         >
           <input hidden type="checkbox" />
         </label>
-        <Sider.render {...args} />
+        <Template.render {...args} />
       </div>
     </div>
   ),
