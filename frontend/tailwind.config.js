@@ -12,8 +12,7 @@ export default {
     },
     extend: {
       spacing: {
-        menulg: '250px',
-        menusm: '80px',
+        sidebar: '250px',
       },
       transitionProperty: {
         width: 'width',
