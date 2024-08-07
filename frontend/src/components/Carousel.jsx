@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import SwiperPrevButton from './swipper/SwiperPrevButton';
 import SwiperNextButton from './swipper/SwiperNextButton';
 
-const AnswerCarousel = ({ children }) => {
+const Carousel = ({ children }) => {
   const swiperCtaClass = classNames('flex', 'justify-between', 'my-2', {
     invisible: Children.count(children) <= 0,
   });
@@ -23,8 +23,8 @@ const AnswerCarousel = ({ children }) => {
   );
 };
 
-AnswerCarousel.propTypes = {
+Carousel.propTypes = {
   children: PropTypes.arrayOf(PropTypes.element).isRequired,
 };
 
-export default AnswerCarousel;
+export default Carousel;

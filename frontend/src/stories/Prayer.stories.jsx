@@ -5,14 +5,14 @@ import Tag from '../components/Tag';
 import Note from '../components/Note';
 import Answer from '../components/Answer';
 import TagRow from '../components/TagRow';
-import AnswerCarousel from '../components/AnswerCarousel';
+import Carousel from '../components/Carousel';
 import NoteBox from '../components/NoteBox';
+import MarkdownEditor from '../components/MarkdownEditor';
+import BlurBackground from '../components/BlurBackground';
 
 import { Note1, Note2 } from './Note.stories';
 import { Answer1, Answer2 } from './Answer.stories';
 import { Tag1, Tag2 } from './Tag.stories';
-import MarkdownEditor from '../components/MarkdownEditor';
-import AnswerContainer from '../components/AnswerContainer';
 
 export default {
   title: 'Playground/Prayer',
@@ -27,8 +27,11 @@ export default {
     notes: { table: { disable: true } },
     answers: { table: { disable: true } },
     tags: { table: { disable: true } },
-    onClickSeeNotes: { table: { disable: true } },
     editor: { table: { disable: true } },
+    onClickSeeNotes: { table: { disable: true } },
+    onClickEdit: { table: { disable: true } },
+    onClickRemove: { table: { disable: true } },
+    onClickShare: { table: { disable: true } },
   },
 };
 
@@ -42,12 +45,12 @@ export const Expanded = {
         </TagRow>
       }
       answers={
-        <AnswerContainer className="w-96">
-          <AnswerCarousel>
+        <BlurBackground className="w-96">
+          <Carousel>
             <Answer {...Answer1.args} />
             <Answer {...Answer2.args} />
-          </AnswerCarousel>
-        </AnswerContainer>
+          </Carousel>
+        </BlurBackground>
       }
       notes={
         <NoteBox>
@@ -80,9 +83,9 @@ export const Collapsed = {
   render: (args) => (
     <Prayer
       answers={
-        <AnswerContainer className="w-48">
+        <BlurBackground className="w-48">
           <p>No answers yet...</p>
-        </AnswerContainer>
+        </BlurBackground>
       }
       tags={
         <TagRow>
@@ -101,9 +104,9 @@ export const Collapsed = {
     answersCount: 0,
     author: 'David Stanley',
     createdAt: '2021-09-01T00:00:00.000Z',
-    onSeeNotes: fn(),
-    onShare: fn(),
-    onEdit: fn(),
-    onRemove: fn(),
+    onClickSeeNotes: fn(),
+    onClickShare: fn(),
+    onClickEdit: fn(),
+    onClickRemove: fn(),
   },
 };

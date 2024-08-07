@@ -6,8 +6,8 @@ import Note from './components/Note';
 import Prayer from './components/Prayer';
 import Answer from './components/Answer';
 import TagRow from './components/TagRow';
-import AnswerContainer from './components/AnswerContainer';
-import AnswerCarousel from './components/AnswerCarousel';
+import BlurBackground from './components/BlurBackground';
+import Carousel from './components/Carousel';
 import NoteBox from './components/NoteBox';
 import MarkdownEditor from './components/MarkdownEditor';
 import MenuItem from './components/MenuItem';
@@ -128,9 +128,9 @@ const App = () => {
               </NoteBox>
             }
             answers={
-              <AnswerContainer className={answerContainerClass}>
+              <BlurBackground className={answerContainerClass}>
                 {answers.length > 0 ? (
-                  <AnswerCarousel>
+                  <Carousel>
                     {answers.map((answer) => (
                       <Answer
                         key={answer.id}
@@ -138,11 +138,11 @@ const App = () => {
                         content={answer.content}
                       />
                     ))}
-                  </AnswerCarousel>
+                  </Carousel>
                 ) : (
                   <p>No answers yet</p>
                 )}
-              </AnswerContainer>
+              </BlurBackground>
             }
             editor={
               <MarkdownEditor
@@ -163,7 +163,7 @@ const App = () => {
         >
           <input hidden type="checkbox" />
         </label>
-        <Sidebar classNames="flex flex-col justify-between">
+        <Sidebar className="flex flex-col justify-between">
           <div className="divide-y-2">
             <div className="flex justify-between items-center">
               <Logo />

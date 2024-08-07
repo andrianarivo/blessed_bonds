@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cl from 'classnames';
 
-const FlashMessage = ({ classNames }) => {
-  const wrapperClass = cl(classNames);
+const FlashMessage = ({ className }) => {
+  const wrapperClass = cl(className);
   return (
     <div className={wrapperClass}>
       <div className="relative flex flex-col justify-center items-center bg-gray-100 rounded-xl p-4 gap-4">
@@ -26,7 +26,7 @@ const FlashMessage = ({ classNames }) => {
 };
 
 FlashMessage.propTypes = {
-  classNames: PropTypes.string,
+  className: PropTypes.string,
 };
 
 export default FlashMessage;

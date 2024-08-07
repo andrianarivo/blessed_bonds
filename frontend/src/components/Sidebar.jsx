@@ -2,20 +2,20 @@ import React, { Children } from 'react';
 import PropTypes from 'prop-types';
 import cl from 'classnames';
 
-const Sidebar = ({ children, classNames = '' }) => {
+const Sidebar = ({ children, className = '' }) => {
   const containerClass = cl(
     'top-0',
     'bottom-0',
     'left-0',
     'p-2',
-    'w-menulg',
+    'w-sidebar',
     'overflow-y-auto',
     'border-r',
     'border-gray-200',
     'fixed',
     'z-40',
     'bg-white',
-    classNames
+    className
   );
   return (
     <div className={containerClass}>
@@ -26,7 +26,7 @@ const Sidebar = ({ children, classNames = '' }) => {
 
 Sidebar.propTypes = {
   children: PropTypes.arrayOf(PropTypes.element).isRequired,
-  classNames: PropTypes.string,
+  className: PropTypes.string,
 };
 
 export default Sidebar;

@@ -2,7 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 
-const AnswerContainer = ({ className = '', children }) => {
+const BlurBackground = ({ className = '', children }) => {
   const wrapperClass = classNames(
     'p-2',
     'bg-gray-400-blur',
@@ -14,9 +14,9 @@ const AnswerContainer = ({ className = '', children }) => {
   return <div className={wrapperClass}>{children}</div>;
 };
 
-AnswerContainer.propTypes = {
+BlurBackground.propTypes = {
   children: PropTypes.node.isRequired,
   className: PropTypes.string,
 };
 
-export default AnswerContainer;
+export default BlurBackground;

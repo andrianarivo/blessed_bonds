@@ -20,10 +20,10 @@ const Prayer = ({
   notes = null,
   answers = null,
   editor = null,
-  onSeeNotes = undefined,
-  onShare = undefined,
-  onEdit = undefined,
-  onRemove = undefined,
+  onClickSeeNotes = undefined,
+  onClickShare = undefined,
+  onClickEdit = undefined,
+  onClickRemove = undefined,
 }) => {
   const cardClass = classNames(
     'card',
@@ -71,9 +71,9 @@ const Prayer = ({
         </summary>
         <div className="dropdown-content">
           <ShareEditDelete
-            onShare={onShare}
-            onEdit={onEdit}
-            onRemove={onRemove}
+            onClickShare={onClickShare}
+            onClickEdit={onClickEdit}
+            onClickRemove={onClickRemove}
           />
         </div>
       </details>
@@ -86,7 +86,7 @@ const Prayer = ({
             <button
               className="btn btn-ghost btn-sm font-normal hover:text-black"
               type="button"
-              onClick={onSeeNotes}
+              onClick={onClickSeeNotes}
             >
               <span className="material-symbols-outlined text-base">
                 description
@@ -164,11 +164,11 @@ Prayer.propTypes = {
   tags: PropTypes.element,
   notes: PropTypes.element,
   answers: PropTypes.element,
-  editor: PropTypes.func,
-  onSeeNotes: PropTypes.func,
-  onShare: PropTypes.func,
-  onEdit: PropTypes.func,
-  onRemove: PropTypes.func,
+  editor: PropTypes.element,
+  onClickSeeNotes: PropTypes.func,
+  onClickShare: PropTypes.func,
+  onClickEdit: PropTypes.func,
+  onClickRemove: PropTypes.func,
 };
 
 export default Prayer;

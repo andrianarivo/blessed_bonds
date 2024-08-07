@@ -1,6 +1,7 @@
 import { fn } from '@storybook/test';
 
 import MenuItem from '../components/MenuItem';
+import MenuSection from '../components/MenuSection';
 import materialIcons from './assets/material-icons-list.json';
 
 export default {
@@ -63,5 +64,27 @@ export const Ministry = {
     title: 'ministry',
     onClick: fn(),
     large: true,
+  },
+};
+
+export const Section1 = {
+  render: (args) => (
+    <MenuSection {...args}>
+      <MenuItem {...Home.args} />
+      <MenuItem {...Answers.args} />
+      <MenuItem {...Notes.args} />
+    </MenuSection>
+  ),
+};
+
+export const Section2 = {
+  render: (args) => (
+    <MenuSection canAddMore title="My topics" {...args}>
+      <MenuItem {...Career.args} />
+      <MenuItem {...Ministry.args} />
+    </MenuSection>
+  ),
+  args: {
+    onAddMore: fn(),
   },
 };

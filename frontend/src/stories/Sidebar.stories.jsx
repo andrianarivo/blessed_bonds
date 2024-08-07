@@ -2,7 +2,7 @@ import Sidebar from '../components/Sidebar';
 import MenuItem from '../components/MenuItem';
 import Logo from '../components/Logo';
 
-import { Section1, Section2 } from './MenuSection.stories';
+import { Section1, Section2 } from './MenuItem.stories';
 
 export default {
   title: 'Playground/Sidebar',
