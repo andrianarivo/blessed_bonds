@@ -1,7 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Navbar = ({ hamburger = undefined }) => (
+const Navbar = ({
+  hamburger = undefined,
+  onClickProfile = undefined,
+  onClickSettings = undefined,
+  onClickLogout = undefined,
+}) => (
   <div className="navbar bg-white shadow-b-md border-b">
     <div className="flex justify-between w-full">
       <div className="flex gap-2">
@@ -38,18 +43,38 @@ const Navbar = ({ hamburger = undefined }) => (
               />
             </div>
           </div>
-          <ul className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+          <ul className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow text-gray-500">
             <li>
-              <div className="justify-between">
+              <button
+                type="button"
+                className="btn btn-ghost justify-between"
+                onClick={onClickProfile}
+              >
                 Profile
-                <span className="badge">New</span>
-              </div>
+                <span className="material-symbols-outlined">face</span>
+              </button>
             </li>
             <li>
-              <div>Settings</div>
+              <button
+                type="button"
+                className="btn btn-ghost justify-between"
+                onClick={onClickSettings}
+              >
+                Settings
+                <span className="material-symbols-outlined">settings</span>
+              </button>
             </li>
             <li>
-              <div>Logout</div>
+              <button
+                type="button"
+                className="btn btn-ghost justify-between text-red-400"
+                onClick={onClickLogout}
+              >
+                Logout
+                <span className="material-symbols-outlined">
+                  power_settings_new
+                </span>
+              </button>
             </li>
           </ul>
         </div>
@@ -60,6 +85,9 @@ const Navbar = ({ hamburger = undefined }) => (
 
 Navbar.propTypes = {
   hamburger: PropTypes.element,
+  onClickProfile: PropTypes.func,
+  onClickSettings: PropTypes.func,
+  onClickLogout: PropTypes.func,
 };
 
 export default Navbar;
