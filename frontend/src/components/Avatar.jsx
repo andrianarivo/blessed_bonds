@@ -4,14 +4,14 @@ import classNames from 'classnames';
 import { getColorFromName } from '../utils/colors';
 import getAvatar from '../utils/avatar';
 
-const Avatar = ({ className, iconUrl, author, size }) => {
+const Avatar = ({ className, iconUrl, author, size, tabIndex, role }) => {
   const avatarClass = classNames(className, 'avatar');
   const innerClass = classNames('rounded-full', {
     'w-10': size === undefined || size === 'sm',
     'w-16': size === 'lg',
   });
   return (
-    <div className={avatarClass}>
+    <div className={avatarClass} tabIndex={tabIndex} role={role}>
       <div
         className={innerClass}
         style={{
@@ -34,6 +34,8 @@ Avatar.propTypes = {
   className: PropTypes.string,
   iconUrl: PropTypes.string,
   size: PropTypes.string,
+  tabIndex: PropTypes.string,
+  role: PropTypes.string,
 };
 
 export default Avatar;
