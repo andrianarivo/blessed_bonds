@@ -90,6 +90,8 @@ const App = () => {
               <input hidden type="checkbox" />
             </label>
           }
+          username="David Stanley"
+          location="MG, Antananarivo"
         />
 
         <div className="w-2/3">
