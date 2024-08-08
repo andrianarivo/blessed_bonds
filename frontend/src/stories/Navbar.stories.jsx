@@ -29,6 +29,10 @@ const Template = {
       {...args}
     />
   ),
+  args: {
+    username: 'David Stanley',
+    location: 'MG, Antananarivo',
+  },
 };
 
 export const Default = {
@@ -36,12 +40,12 @@ export const Default = {
 };
 
 export const Drawer = {
-  render: () => (
+  render: (args) => (
     <div className="drawer">
       <input id="app-drawer" type="checkbox" className="drawer-toggle" />
 
       <div className="drawer-content w-full min-h-full flex flex-col justify-center items-center gap-4">
-        <Template.render />
+        <Template.render {...args} {...Template.args} />
       </div>
 
       <div className="drawer-side z-50">
