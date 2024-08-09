@@ -6,12 +6,17 @@ import getAvatar from '../utils/avatar';
 
 const Avatar = ({ className, iconUrl, author, size, tabIndex, role }) => {
   const avatarClass = classNames(className, 'avatar');
-  const innerClass = classNames('rounded-full', {
+  const innerClass = classNames('rounded-full', 'tooltip', {
     'w-10': size === undefined || size === 'sm',
     'w-16': size === 'lg',
   });
   return (
-    <div className={avatarClass} tabIndex={tabIndex} role={role}>
+    <div
+      className={avatarClass}
+      tabIndex={tabIndex}
+      role={role}
+      data-tip={author}
+    >
       <div
         className={innerClass}
         style={{
