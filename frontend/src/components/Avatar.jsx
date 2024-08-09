@@ -5,8 +5,8 @@ import { getColorFromName } from '../utils/colors';
 import getAvatar from '../utils/avatar';
 
 const Avatar = ({ className, iconUrl, author, size, tabIndex, role }) => {
-  const avatarClass = classNames(className, 'avatar');
-  const innerClass = classNames('rounded-full', 'tooltip', {
+  const avatarClass = classNames(className, 'avatar', 'tooltip');
+  const innerClass = classNames('rounded-full', {
     'w-10': size === undefined || size === 'sm',
     'w-16': size === 'lg',
   });
