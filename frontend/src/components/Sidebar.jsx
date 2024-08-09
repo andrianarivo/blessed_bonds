@@ -1,6 +1,7 @@
 import React, { Children } from 'react';
 import PropTypes from 'prop-types';
 import cl from 'classnames';
+import './Sidebar.css';
 
 const Sidebar = ({ children, className = '' }) => {
   const containerClass = cl(
