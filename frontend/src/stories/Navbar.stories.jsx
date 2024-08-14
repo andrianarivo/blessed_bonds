@@ -44,7 +44,7 @@ export const Drawer = {
     <div className="drawer">
       <input id="app-drawer" type="checkbox" className="drawer-toggle" />
 
-      <div className="drawer-content w-full min-h-full flex flex-col justify-center items-center gap-4">
+      <div className="drawer-content">
         <Template.render {...args} {...Template.args} />
       </div>
 

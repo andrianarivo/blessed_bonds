@@ -4,6 +4,8 @@ import Logo from '../components/Logo';
 
 import { Section1, Section2 } from './MenuItem.stories';
 
+import './Sidebar.stories.css';
+
 export default {
   title: 'Playground/Sidebar',
   component: Sidebar,
@@ -39,13 +41,13 @@ export const Drawer = {
   render: (args) => (
     <div className="drawer">
       <input id="app-drawer" type="checkbox" className="drawer-toggle" />
-      <div className="drawer-content w-full h-screen flex justify-center items-center p-4">
+      <div className="drawer-content">
         <label htmlFor="app-drawer" className="btn btn-primary drawer-button">
           Open drawer
           <input hidden type="checkbox" />
         </label>
       </div>
-      <div className="drawer-side">
+      <div className="drawer-side z-50">
         <label
           htmlFor="app-drawer"
           aria-label="close sidebar"
