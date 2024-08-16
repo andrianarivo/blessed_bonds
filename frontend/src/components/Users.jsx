@@ -16,7 +16,7 @@ const Users = ({ children }) => {
         type="button"
         className="btn btn-ghost btn-sm font-medium text-indigo-600"
       >
-        <span className="material-symbols-outlined bg-indigo-100 text-xs rounded w-[15px] h-[15px]">
+        <span className="material-symbols-rounded bg-indigo-100 text-xs rounded w-[15px] h-[15px]">
           add
         </span>
         Invite

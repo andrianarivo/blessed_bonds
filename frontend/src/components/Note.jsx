@@ -35,7 +35,7 @@ const Note = ({
       <div className="chat-bubble bg-gray-200 text-gray-500 max-w-max">
         <div className="flex justify-between">
           <h3 className="text-black font-medium">{title}</h3>
-          <span className="material-symbols-outlined text-base">
+          <span className="material-symbols-rounded text-base">
             description
           </span>
         </div>
@@ -52,14 +52,14 @@ const Note = ({
               className="btn btn-ghost btn-sm font-normal text-sm capitalize hover:text-black hover:bg-gray-200 hover:rounded-tr-none hover:rounded-tl-none"
               type="button"
             >
-              <span className="material-symbols-outlined text-lg">edit</span>
+              <span className="material-symbols-rounded text-lg">edit</span>
               edit
             </button>
             <button
               className="btn btn-ghost btn-sm font-normal text-sm capitalize hover:text-black hover:bg-gray-200 hover:rounded-tr-none hover:rounded-tl-none"
               type="button"
             >
-              <span className="material-symbols-outlined text-lg">delete</span>
+              <span className="material-symbols-rounded text-lg">delete</span>
               remove
             </button>
           </div>
@@ -69,7 +69,7 @@ const Note = ({
               className="btn btn-ghost btn-sm font-normal text-sm capitalize hover:text-black hover:bg-gray-200 hover:rounded-tr-none hover:rounded-tl-none"
               type="button"
             >
-              <span className="material-symbols-outlined text-lg">
+              <span className="material-symbols-rounded text-lg">
                 quickreply
               </span>
               private reply
@@ -78,7 +78,7 @@ const Note = ({
               className="btn btn-ghost btn-sm font-normal text-sm capitalize hover:text-black hover:bg-gray-200 hover:rounded-tr-none hover:rounded-tl-none"
               type="button"
             >
-              <span className="material-symbols-outlined text-lg">reply</span>
+              <span className="material-symbols-rounded text-lg">reply</span>
               reply
             </button>
           </div>

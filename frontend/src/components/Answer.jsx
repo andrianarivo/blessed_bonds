@@ -11,7 +11,7 @@ const Answer = ({ title, content, onClickEdit, onClickRemove }) => (
         className="btn btn-circle bg-blue-600"
         onClick={onClickEdit}
       >
-        <span className="material-symbols-outlined text-2xl text-white">
+        <span className="material-symbols-rounded text-2xl text-white">
           edit
         </span>
       </button>
@@ -20,7 +20,7 @@ const Answer = ({ title, content, onClickEdit, onClickRemove }) => (
         className="btn btn-circle bg-orange-500"
         onClick={onClickRemove}
       >
-        <span className="material-symbols-outlined text-2xl text-white">
+        <span className="material-symbols-rounded text-2xl text-white">
           delete
         </span>
       </button>

@@ -11,9 +11,7 @@ const SwiperNextButton = () => {
         swiper.slideNext();
       }}
     >
-      <span className="material-symbols-outlined text-xl">
-        arrow_forward_ios
-      </span>
+      <span className="material-symbols-rounded text-3xl">chevron_right</span>
     </button>
   );
 };

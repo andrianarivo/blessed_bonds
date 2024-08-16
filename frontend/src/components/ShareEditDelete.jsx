@@ -14,7 +14,7 @@ const ShareEditDelete = ({
         onClick={onClickShare}
       >
         <p className="text-start">Share</p>
-        <span className="material-symbols-outlined text-end">share</span>
+        <span className="material-symbols-rounded text-end">share</span>
       </button>
     </li>
     <li>
@@ -24,7 +24,7 @@ const ShareEditDelete = ({
         onClick={onClickEdit}
       >
         <p className="text-start">Edit</p>
-        <span className="material-symbols-outlined text-end">edit</span>
+        <span className="material-symbols-rounded text-end">edit</span>
       </button>
     </li>
     <li>
@@ -34,7 +34,7 @@ const ShareEditDelete = ({
         onClick={onClickRemove}
       >
         <p className="text-start">Remove</p>
-        <span className="material-symbols-outlined text-end">delete</span>
+        <span className="material-symbols-rounded text-end">delete</span>
       </button>
     </li>
   </ul>

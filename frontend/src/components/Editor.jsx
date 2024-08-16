@@ -48,7 +48,7 @@ const Editor = ({ content, onChange }) => (
             <Separator />
             <div className="flex w-full justify-end">
               <button type="button" className="btn btn-sm text-blue-600">
-                <span className="material-symbols-outlined">send</span>
+                <span className="material-symbols-rounded">send</span>
               </button>
             </div>
           </>

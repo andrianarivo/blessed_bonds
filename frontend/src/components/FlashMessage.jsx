@@ -8,7 +8,7 @@ const FlashMessage = ({ className }) => {
     <div className={wrapperClass}>
       <div className="relative flex flex-col justify-center items-center bg-gray-100 rounded-xl p-4 gap-4">
         <div className="absolute -top-8 p-4 bg-gray-100 rounded-full">
-          <span className="material-symbols-outlined text-yellow-500">
+          <span className="material-symbols-rounded symbols-filled text-yellow-400">
             lightbulb
           </span>
         </div>

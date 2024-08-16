@@ -11,9 +11,7 @@ const SwiperPrevButton = () => {
         swiper.slidePrev();
       }}
     >
-      <span className="material-symbols-outlined text-xl ml-1">
-        arrow_back_ios
-      </span>
+      <span className="material-symbols-rounded text-3xl">chevron_left</span>
     </button>
   );
 };

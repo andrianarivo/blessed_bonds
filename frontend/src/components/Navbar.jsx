@@ -16,9 +16,7 @@ const Navbar = ({
       {sidebarToggle}
       <div className="form-control w-96">
         <div className="input bg-gray-100 text-gray-900 flex items-center gap-2">
-          <span className="material-symbols-outlined text-gray-400">
-            search
-          </span>
+          <span className="material-symbols-rounded text-gray-400">search</span>
           <input
             name="search"
             type="text"
@@ -42,7 +40,7 @@ const Navbar = ({
             author={username}
             iconUrl={iconUrl}
           />
-          <span className="material-symbols-outlined text-gray-400">
+          <span className="material-symbols-rounded text-gray-400">
             keyboard_arrow_down
           </span>
         </button>
@@ -54,7 +52,7 @@ const Navbar = ({
               onClick={onClickProfile}
             >
               Profile
-              <span className="material-symbols-outlined">face</span>
+              <span className="material-symbols-rounded">face</span>
             </button>
           </li>
           <li>
@@ -64,7 +62,7 @@ const Navbar = ({
               onClick={onClickSettings}
             >
               Settings
-              <span className="material-symbols-outlined">settings</span>
+              <span className="material-symbols-rounded">settings</span>
             </button>
           </li>
           <li>
@@ -74,7 +72,7 @@ const Navbar = ({
               onClick={onClickLogout}
             >
               Logout
-              <span className="material-symbols-outlined">
+              <span className="material-symbols-rounded">
                 power_settings_new
               </span>
             </button>

@@ -17,7 +17,7 @@ const MenuSection = ({
             className="flex items-center justify-center border border-gray-500 w-[15px] h-[15px] rounded active:bg-gray-200"
             onClick={onAddMore}
           >
-            <span className="material-symbols-outlined text-xs text-gray-500">
+            <span className="material-symbols-rounded text-xs text-gray-500">
               add
             </span>
           </button>

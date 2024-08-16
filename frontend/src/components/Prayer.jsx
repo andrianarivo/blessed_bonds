@@ -67,7 +67,7 @@ const Prayer = ({
       <div className={decorationClass} />
       <details className="dropdown dropdown-end absolute top-4 right-2">
         <summary type="button" className={moreActionClass}>
-          <span className="material-symbols-outlined">more_horiz</span>
+          <span className="material-symbols-rounded">more_horiz</span>
         </summary>
         <div className="dropdown-content">
           <ShareEditDelete
@@ -88,7 +88,7 @@ const Prayer = ({
               type="button"
               onClick={onClickSeeNotes}
             >
-              <span className="material-symbols-outlined text-base">
+              <span className="material-symbols-rounded text-base">
                 description
               </span>
               {`${notesCount} notes`}
@@ -99,7 +99,7 @@ const Prayer = ({
                 role="button"
                 className="btn btn-ghost btn-sm font-normal hover:text-black"
               >
-                <span className="material-symbols-outlined text-base">
+                <span className="material-symbols-rounded text-base">
                   mark_email_read
                 </span>
                 {`${answersCount} answers`}
@@ -141,7 +141,7 @@ const Prayer = ({
                 </>
               )}
               <div className="flex items-center gap-2 text-gray-500 ml-4">
-                <span className="material-symbols-outlined">event</span>
+                <span className="material-symbols-rounded">event</span>
                 {moment(createdAt).format('ll')}
               </div>
             </div>

@@ -33,7 +33,7 @@ const MenuItem = ({
   return (
     <button type="button" className={buttonClass} onClick={onClick}>
       {icon && (
-        <span className="material-symbols-outlined" style={{ color }}>
+        <span className="material-symbols-rounded" style={{ color }}>
           {icon}
         </span>
       )}
