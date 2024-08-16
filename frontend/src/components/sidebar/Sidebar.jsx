@@ -8,7 +8,7 @@ const Sidebar = ({ children, className = '' }) => {
     'top-0',
     'bottom-0',
     'left-0',
-    'p-2',
+    'px-2',
     'w-sidebar',
     'overflow-y-auto',
     'border-r',
