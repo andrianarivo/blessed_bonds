@@ -3,28 +3,31 @@ import React from 'react';
 import MenuItem from './components/MenuItem';
 import MenuSection from './components/MenuSection';
 import FlashMessage from './components/FlashMessage';
-import Sidebar from './components/Sidebar';
+import Sidebar from './components/sidebar/Sidebar';
 import Logo from './components/Logo';
 import Navbar from './components/Navbar';
 import Users from './components/Users';
 import Avatar from './components/Avatar';
 
 const App = () => (
-  <div className="drawer">
+  <div className="drawer lg:drawer-open">
     <input id="app-drawer" type="checkbox" className="drawer-toggle" />
 
-    <div className="drawer-content">
+    <div className="drawer-content lg:ml-sidebar">
       <Navbar
-        hamburger={
-          <label htmlFor="app-drawer" className="btn btn-ghost drawer-button">
+        username="David Stanley"
+        location="MG, Antananarivo"
+        sidebarToggle={
+          <label
+            htmlFor="app-drawer"
+            className="btn btn-ghost drawer-button lg:hidden"
+          >
             <span className="material-symbols-outlined text-gray-400">
               menu
             </span>
             <input hidden type="checkbox" />
           </label>
         }
-        username="David Stanley"
-        location="MG, Antananarivo"
       />
 
       <div className="w-full">
@@ -46,12 +49,10 @@ const App = () => (
         <input hidden type="checkbox" />
       </label>
       <Sidebar className="flex flex-col justify-between">
-        <div className="divide-y-2">
-          <div className="flex justify-between items-center">
-            <Logo />
-          </div>
+        <div className="divide-y">
+          <Logo />
           <MenuSection>
-            <MenuItem icon="action_key" />
+            <MenuItem icon="business_center" />
             <MenuItem icon="priority" title="answers" />
             <MenuItem icon="wysiwyg" title="notes" />
           </MenuSection>
@@ -60,7 +61,7 @@ const App = () => (
             <MenuItem title="Ministry" color="#f7a501" useDot />
           </MenuSection>
         </div>
-        <div className="flex justify-center items-center">
+        <div className="flex justify-center items-center mb-2">
           <FlashMessage />
         </div>
       </Sidebar>
