@@ -57,7 +57,7 @@ export const WithDrawer = {
   args: {
     sidebarToggle: (
       <label htmlFor="app-drawer" className="btn btn-ghost drawer-button">
-        <span className="material-symbols-outlined text-gray-400">menu</span>
+        <span className="material-symbols-rounded text-gray-400">menu</span>
         <input hidden type="checkbox" />
       </label>
     ),
