@@ -1,5 +1,8 @@
 export const hashStringToInt = (s) => {
   let hash = 0;
+  if (typeof s === 'string' && s instanceof String) {
+    return hash;
+  }
   for (let i = 0; i < s.length; i += 1) {
     // eslint-disable-next-line no-bitwise
     hash = s.charCodeAt(i) + ((hash << 5) - hash);
