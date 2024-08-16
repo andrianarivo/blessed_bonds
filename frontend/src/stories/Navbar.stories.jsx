@@ -10,7 +10,7 @@ export default {
   },
   tags: ['autodocs'],
   argTypes: {
-    hamburger: { table: { disable: true } },
+    sidebarToggle: { table: { disable: true } },
     onClickProfile: { table: { disable: true } },
     onClickSettings: { table: { disable: true } },
     onClickLogout: { table: { disable: true } },
@@ -18,28 +18,22 @@ export default {
 };
 
 const Template = {
-  render: (args) => (
-    <Navbar
-      hamburger={
-        <label htmlFor="app-drawer" className="btn btn-ghost drawer-button">
-          <span className="material-symbols-outlined text-gray-400">menu</span>
-          <input hidden type="checkbox" />
-        </label>
-      }
-      {...args}
-    />
-  ),
+  render: (args) => <Navbar {...args} />,
   args: {
     username: 'David Stanley',
     location: 'MG, Antananarivo',
+    id: 'app-drawer',
   },
 };
 
 export const Default = {
   ...Template,
+  args: {
+    ...Template.args,
+  },
 };
 
-export const Drawer = {
+export const WithDrawer = {
   render: (args) => (
     <div className="drawer">
       <input id="app-drawer" type="checkbox" className="drawer-toggle" />
@@ -60,4 +54,12 @@ export const Drawer = {
       </div>
     </div>
   ),
+  args: {
+    sidebarToggle: (
+      <label htmlFor="app-drawer" className="btn btn-ghost drawer-button">
+        <span className="material-symbols-outlined text-gray-400">menu</span>
+        <input hidden type="checkbox" />
+      </label>
+    ),
+  },
 };

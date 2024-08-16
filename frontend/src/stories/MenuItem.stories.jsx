@@ -21,7 +21,7 @@ export default {
 
 export const Home = {
   args: {
-    icon: 'ac_unit',
+    icon: 'business_center',
     title: 'home',
     onClick: fn(),
     large: true,

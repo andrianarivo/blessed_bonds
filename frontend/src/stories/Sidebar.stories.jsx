@@ -1,10 +1,8 @@
-import Sidebar from '../components/Sidebar';
+import Sidebar from '../components/sidebar/Sidebar';
 import MenuItem from '../components/MenuItem';
 import Logo from '../components/Logo';
 
 import { Section1, Section2 } from './MenuItem.stories';
-
-import './Sidebar.stories.css';
 
 export default {
   title: 'Playground/Sidebar',
@@ -23,9 +21,7 @@ const Template = {
   render: (args) => (
     <Sidebar {...args}>
       <div className="divide-y">
-        <div className="flex justify-between items-center">
-          <Logo />
-        </div>
+        <Logo />
         <Section1.render />
         <Section2.render />
       </div>

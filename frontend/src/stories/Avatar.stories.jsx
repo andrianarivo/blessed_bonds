@@ -8,11 +8,15 @@ export default {
     layout: 'centered',
   },
   tags: ['autodocs'],
+  argTypes: {
+    role: { table: { disable: true } },
+    tabIndex: { table: { disable: true } },
+  },
 };
 
 export const User1 = {
   args: {
-    author: 'David Stanley',
+    author: 'Nirintsoa',
   },
 };
 
