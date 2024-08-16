@@ -21,3 +21,11 @@
 .bg-gray-400-blur {
   background-color: rgba(229, 231, 235, 0.6);
 }
+
+.btn-ghost.btn-active {
+  @apply text-white bg-indigo-600;
+}
+
+.symbols-filled {
+  font-variation-settings: 'FILL' 1;
+}
