@@ -13,7 +13,7 @@ const App = () => (
   <div className="drawer lg:drawer-open">
     <input id="app-drawer" type="checkbox" className="drawer-toggle" />
 
-    <div className="drawer-content lg:ml-sidebar">
+    <div className="drawer-content flex flex-col lg:ml-sidebar">
       <Navbar
         username="David Stanley"
         location="MG, Antananarivo"
@@ -116,6 +116,7 @@ const App = () => (
           </div>
         </div>
       </div>
+      <div className="flex bg-blue-200 flex-1 w-full" />
     </div>
 
     <div className="drawer-side z-50">
