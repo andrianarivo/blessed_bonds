@@ -8,9 +8,10 @@ import Logo from './components/Logo';
 import Navbar from './components/Navbar';
 import Users from './components/Users';
 import Avatar from './components/Avatar';
+import Status from './components/Status';
 
 const App = () => (
-  <div className="drawer lg:drawer-open">
+  <div className="drawer lg:drawer-open h-full">
     <input id="app-drawer" type="checkbox" className="drawer-toggle" />
 
     <div className="drawer-content flex flex-col lg:ml-sidebar">
@@ -116,7 +117,11 @@ const App = () => (
           </div>
         </div>
       </div>
-      <div className="flex bg-blue-200 flex-1 w-full" />
+      <div className="flex flex-1 justify-evenly w-full overflow-x-auto gap-4">
+        <Status />
+        <Status />
+        <Status />
+      </div>
     </div>
 
     <div className="drawer-side z-50">
