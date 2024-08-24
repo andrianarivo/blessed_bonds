@@ -9,6 +9,40 @@ import Navbar from './components/Navbar';
 import Users from './components/Users';
 import Avatar from './components/Avatar';
 import Status from './components/Status';
+import Prayer from './components/Prayer';
+
+const prayers = [
+  {
+    id: 1,
+    summary: 'God is provider',
+    description:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pulvinar urna vel efficitur iaculis. Praesent dapibus arcu et leo malesuada, in suscipit ligula tincidunt. Mauris malesuada lacinia eros. Proin sed maximus leo. Suspendisse at purus ac libero volutpat consequat.',
+    noteCount: 2,
+    answersCount: 0,
+    author: 'David Stanley',
+    createdAt: '2021-09-01T00:00:00.000Z',
+  },
+  {
+    id: 2,
+    summary: 'God is provider',
+    description:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pulvinar urna vel efficitur iaculis. Praesent dapibus arcu et leo malesuada, in suscipit ligula tincidunt. Mauris malesuada lacinia eros. Proin sed maximus leo. Suspendisse at purus ac libero volutpat consequat.',
+    noteCount: 2,
+    answersCount: 0,
+    author: 'David Stanley',
+    createdAt: '2021-09-01T00:00:00.000Z',
+  },
+  {
+    id: 3,
+    summary: 'God is provider',
+    description:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pulvinar urna vel efficitur iaculis. Praesent dapibus arcu et leo malesuada, in suscipit ligula tincidunt. Mauris malesuada lacinia eros. Proin sed maximus leo. Suspendisse at purus ac libero volutpat consequat.',
+    noteCount: 2,
+    answersCount: 0,
+    author: 'David Stanley',
+    createdAt: '2021-09-01T00:00:00.000Z',
+  },
+];
 
 const App = () => (
   <div className="drawer lg:drawer-open h-full">
@@ -118,9 +152,31 @@ const App = () => (
         </div>
       </div>
       <div className="flex flex-1 justify-evenly w-full overflow-x-auto gap-4">
-        <Status />
-        <Status />
-        <Status />
+        <Status title="Vision" badge={1} color="#5030e5">
+          {prayers.map(
+            ({
+              summary,
+              description,
+              noteCount,
+              answersCount,
+              author,
+              createdAt,
+              id,
+            }) => (
+              <Prayer
+                key={id}
+                summary={summary}
+                description={description}
+                createdAt={createdAt}
+                author={author}
+                noteCount={noteCount}
+                answersCount={answersCount}
+              />
+            )
+          )}
+        </Status>
+        <Status title="Engaging" badge={1} color="#ffa503" />
+        <Status title="Harvest" badge={1} color="#8ac489" />
       </div>
     </div>
 
