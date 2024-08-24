@@ -13,6 +13,8 @@ export default {
     extend: {
       spacing: {
         sidebar: '250px',
+        prayer: '23rem',
+        status: '25rem',
       },
       transitionProperty: {
         width: 'width',
