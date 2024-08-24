@@ -28,12 +28,15 @@ const Prayer = ({
   const cardClass = classNames(
     'card',
     'bg-base-100',
-    'shadow-xl',
     'border',
     'border-1',
     {
-      'w-96': !notes || notes.length <= 0,
+      'w-prayer': !notes || notes.length <= 0,
       'w-full': notes && notes.length > 0,
+    },
+    {
+      'shadow-xl': isLargeDisplay,
+      shadow: !isLargeDisplay,
     }
   );
 
@@ -69,7 +72,7 @@ const Prayer = ({
         <summary type="button" className={moreActionClass}>
           <span className="material-symbols-rounded">more_horiz</span>
         </summary>
-        <div className="dropdown-content">
+        <div className="dropdown-content z-50">
           <ShareEditDelete
             onClickShare={onClickShare}
             onClickEdit={onClickEdit}
