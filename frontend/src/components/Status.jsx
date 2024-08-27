@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Status = ({ title, badge = 0, color = '#5030e5', children }) => (
-  <div className="w-status rounded-tl-2xl rounded-tr-2xl bg-gray-100 pt-4 flex flex-col shrink-0">
+  <div className="w-status h-full rounded-tl-2xl rounded-tr-2xl bg-gray-100 pt-4 flex flex-col shrink-0">
     <div className="flex items-center gap-2 mx-4">
       <div
         className="w-2 h-2 rounded-full"
@@ -14,7 +14,7 @@ const Status = ({ title, badge = 0, color = '#5030e5', children }) => (
       )}
     </div>
     <div className="h-[2px] my-4 mx-4" style={{ backgroundColor: color }} />
-    <div className="flex-1 overflow-auto flex flex-col gap-2 items-center pb-4">
+    <div className="flex-1 flex flex-col gap-2 items-center pb-4">
       {children}
     </div>
   </div>
