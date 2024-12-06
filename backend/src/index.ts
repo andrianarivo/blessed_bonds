@@ -7,10 +7,8 @@ import { ApolloServerPluginDrainHttpServer } from "@apollo/server/plugin/drainHt
 import { User } from "@prisma/client";
 import cors from "cors";
 import express from "express";
-import session from "express-session";
 import http from "http";
-import passport from "passport";
-import { configureGoogleAuth } from "./auth/google_auth";
+import { configureAuth } from "./auth/middleware";
 import { verifyToken } from "./auth/verify_token";
 import { prisma } from "./db";
 import { Context } from "./types/context";
@@ -19,18 +17,7 @@ async function startApolloServer() {
   const app = express();
   const httpServer = http.createServer(app);
 
-  app.use(
-    session({
-      secret: config.SESSION_SECRET,
-      resave: false,
-      saveUninitialized: false,
-    })
-  );
-
-  app.use(passport.initialize());
-  app.use(passport.session());
-
-  configureGoogleAuth(app);
+  configureAuth(app);
 
   const server = new ApolloServer<Context>({
     typeDefs,
