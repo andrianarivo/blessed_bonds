@@ -1,8 +1,8 @@
 import { graphql } from "@/gql";
 import { useQuery } from "@apollo/client";
 import { useEffect } from "react";
-import { Avatar, AvatarFallback, AvatarImage } from "./components/ui/avatar";
-import { Button } from "./components/ui/button";
+import { Avatar, AvatarFallback, AvatarImage } from "../../components/ui/avatar";
+import { Button } from "../../components/ui/button";
 
 const ME_QUERY = graphql(`
   query Me {
@@ -17,7 +17,7 @@ const ME_QUERY = graphql(`
   }
 `);
 
-function App() {
+function Home() {
   useEffect(() => {
     const token = new URLSearchParams(window.location.search).get("token");
     if (token) {
@@ -59,4 +59,4 @@ function App() {
   );
 }
 
-export default App;
+export default Home;
