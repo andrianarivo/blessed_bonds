@@ -1,0 +1,17 @@
+type User {
+  id: Int!
+  email: String!
+  name: String!
+  avatarUri: String
+  provider: String!
+  providerId: String!
+}
+
+type Query {
+  hello: String
+  me: User
+}
+
+type Mutation {
+  dummy: String
+}

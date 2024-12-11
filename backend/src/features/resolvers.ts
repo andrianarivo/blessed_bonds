@@ -1,16 +1,16 @@
-import { Resolvers } from '@/__generated__/graphql';
-import * as helloWorldMutations from '@/features/hello-world/mutations';
-import * as helloWorldQueries from '@/features/hello-world/queries';
+import { Resolvers } from "@/__generated__/graphql";
+import * as helloWorldMutations from "@/features/me/mutations";
+import * as me from "@/features/me/queries";
 
 const Query = {
-  ...helloWorldQueries
-}
+  ...me,
+};
 
 const Mutation = {
-  ...helloWorldMutations
-}
+  ...helloWorldMutations,
+};
 
 export const resolvers: Resolvers = {
   Query,
-  Mutation
-}
+  Mutation,
+};

@@ -15,7 +15,7 @@ passport.use(
       callbackURL: `http://${config.HOSTNAME}:${config.PORT}/auth/facebook/callback`,
       profileFields: ["id", "displayName", "email", "photos"],
     },
-    async (accessToken, refreshToken, profile, done) => {
+    async (_, __, profile, done) => {
       try {
         const user = await prisma.user.upsert({
           where: {
