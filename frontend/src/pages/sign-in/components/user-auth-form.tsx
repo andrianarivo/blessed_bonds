@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { IconBrandFacebook, IconBrandGoogle } from "@tabler/icons-react";
 import { HTMLAttributes, useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 import { z } from "zod";
 
 interface UserAuthFormProps extends Omit<HTMLAttributes<HTMLDivElement>, "onSubmit"> {
@@ -109,6 +110,13 @@ export function UserAuthForm({ onSubmit: onSubmitProps, errorMsg, ...props }: Us
 
           <Button className="w-full">Sign in</Button>
 
+          <div className="text-sm text-center">
+            Don't have an account?{" "}
+            <Link to="/sign-up" className="font-medium text-primary hover:underline">
+              Sign up
+            </Link>
+          </div>
+
           <div className="relative">
             <div className="absolute inset-0 flex items-center">
               <span className="w-full border-t" />
@@ -118,14 +126,22 @@ export function UserAuthForm({ onSubmit: onSubmitProps, errorMsg, ...props }: Us
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
-            <Button variant="outline" onClick={() => (window.location.href = "/api/auth/google")}>
+          <div className="flex flex-col gap-4">
+            <Button
+              onClick={() =>
+                (window.location.href = `${import.meta.env.VITE_API_SERVER_URI}/auth/google?origin=${window.location.origin}`)
+              }
+            >
               <IconBrandGoogle className="mr-2 h-4 w-4" />
-              Google
+              Sign in with Google
             </Button>
-            <Button variant="outline" onClick={() => (window.location.href = "/api/auth/facebook")}>
+            <Button
+              onClick={() =>
+                (window.location.href = `${import.meta.env.VITE_API_SERVER_URI}/auth/facebook?origin=${window.location.origin}`)
+              }
+            >
               <IconBrandFacebook className="mr-2 h-4 w-4" />
-              Facebook
+              Sign in with Facebook
             </Button>
           </div>
         </form>
