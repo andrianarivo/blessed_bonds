@@ -27,16 +27,39 @@ export type Scalars = {
   Boolean: { input: boolean; output: boolean };
   Int: { input: number; output: number };
   Float: { input: number; output: number };
+  Upload: { input: any; output: any };
+};
+
+export type AuthPayload = {
+  __typename?: "AuthPayload";
+  token?: Maybe<Scalars["String"]["output"]>;
+  user?: Maybe<User>;
 };
 
 export type Mutation = {
   __typename?: "Mutation";
-  dummy?: Maybe<Scalars["String"]["output"]>;
+  signIn?: Maybe<AuthPayload>;
+  signUp?: Maybe<AuthPayload>;
+  uploadProfilePicture?: Maybe<User>;
+};
+
+export type MutationSignInArgs = {
+  email: Scalars["String"]["input"];
+  password: Scalars["String"]["input"];
+};
+
+export type MutationSignUpArgs = {
+  email: Scalars["String"]["input"];
+  name: Scalars["String"]["input"];
+  password: Scalars["String"]["input"];
+};
+
+export type MutationUploadProfilePictureArgs = {
+  file: Scalars["Upload"]["input"];
 };
 
 export type Query = {
   __typename?: "Query";
-  hello?: Maybe<Scalars["String"]["output"]>;
   me?: Maybe<User>;
 };
 
@@ -65,6 +88,59 @@ export type MeQuery = {
   } | null;
 };
 
+export type UserFieldsFragment = {
+  __typename?: "User";
+  id: number;
+  email: string;
+  name: string;
+  avatarUri?: string | null;
+  provider: string;
+  providerId: string;
+} & { " $fragmentName"?: "UserFieldsFragment" };
+
+export type SignUpMutationVariables = Exact<{
+  email: Scalars["String"]["input"];
+  password: Scalars["String"]["input"];
+  name: Scalars["String"]["input"];
+}>;
+
+export type SignUpMutation = {
+  __typename?: "Mutation";
+  signUp?: {
+    __typename?: "AuthPayload";
+    token?: string | null;
+    user?:
+      | ({ __typename?: "User" } & {
+          " $fragmentRefs"?: { UserFieldsFragment: UserFieldsFragment };
+        })
+      | null;
+  } | null;
+};
+
+export const UserFieldsFragmentDoc = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "UserFields" },
+      typeCondition: {
+        kind: "NamedType",
+        name: { kind: "Name", value: "User" },
+      },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          { kind: "Field", name: { kind: "Name", value: "id" } },
+          { kind: "Field", name: { kind: "Name", value: "email" } },
+          { kind: "Field", name: { kind: "Name", value: "name" } },
+          { kind: "Field", name: { kind: "Name", value: "avatarUri" } },
+          { kind: "Field", name: { kind: "Name", value: "provider" } },
+          { kind: "Field", name: { kind: "Name", value: "providerId" } },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<UserFieldsFragment, unknown>;
 export const MeDocument = {
   kind: "Document",
   definitions: [
@@ -95,3 +171,127 @@ export const MeDocument = {
     },
   ],
 } as unknown as DocumentNode<MeQuery, MeQueryVariables>;
+export const SignUpDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "mutation",
+      name: { kind: "Name", value: "SignUp" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: {
+            kind: "Variable",
+            name: { kind: "Name", value: "email" },
+          },
+          type: {
+            kind: "NonNullType",
+            type: {
+              kind: "NamedType",
+              name: { kind: "Name", value: "String" },
+            },
+          },
+        },
+        {
+          kind: "VariableDefinition",
+          variable: {
+            kind: "Variable",
+            name: { kind: "Name", value: "password" },
+          },
+          type: {
+            kind: "NonNullType",
+            type: {
+              kind: "NamedType",
+              name: { kind: "Name", value: "String" },
+            },
+          },
+        },
+        {
+          kind: "VariableDefinition",
+          variable: { kind: "Variable", name: { kind: "Name", value: "name" } },
+          type: {
+            kind: "NonNullType",
+            type: {
+              kind: "NamedType",
+              name: { kind: "Name", value: "String" },
+            },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "signUp" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "email" },
+                value: {
+                  kind: "Variable",
+                  name: { kind: "Name", value: "email" },
+                },
+              },
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "password" },
+                value: {
+                  kind: "Variable",
+                  name: { kind: "Name", value: "password" },
+                },
+              },
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "name" },
+                value: {
+                  kind: "Variable",
+                  name: { kind: "Name", value: "name" },
+                },
+              },
+            ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                { kind: "Field", name: { kind: "Name", value: "token" } },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "user" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      {
+                        kind: "FragmentSpread",
+                        name: { kind: "Name", value: "UserFields" },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "UserFields" },
+      typeCondition: {
+        kind: "NamedType",
+        name: { kind: "Name", value: "User" },
+      },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          { kind: "Field", name: { kind: "Name", value: "id" } },
+          { kind: "Field", name: { kind: "Name", value: "email" } },
+          { kind: "Field", name: { kind: "Name", value: "name" } },
+          { kind: "Field", name: { kind: "Name", value: "avatarUri" } },
+          { kind: "Field", name: { kind: "Name", value: "provider" } },
+          { kind: "Field", name: { kind: "Name", value: "providerId" } },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<SignUpMutation, SignUpMutationVariables>;

@@ -8,10 +8,22 @@ import { ProtectedRoute } from "./components/protected-route";
 const router = createBrowserRouter([
   // Auth routes
   {
-    path: "/sign-in",
-    lazy: async () => ({
-      Component: (await import("@/pages/sign-in/sign-in-container")).default,
-    }),
+    path: "/",
+    errorElement: <GeneralError />,
+    children: [
+      {
+        path: "sign-in",
+        lazy: async () => ({
+          Component: (await import("@/pages/sign-in/sign-in-container")).default,
+        }),
+      },
+      {
+        path: "sign-up",
+        lazy: async () => ({
+          Component: (await import("@/pages/sign-up/sign-up-container")).default,
+        }),
+      },
+    ],
   },
 
   // Main routes
