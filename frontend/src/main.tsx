@@ -1,15 +1,18 @@
 import { ApolloProvider } from "@apollo/client";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { client } from "./apollo-client.ts";
-import "./index.css";
 import { RouterProvider } from "react-router-dom";
+import { client } from "./apollo-client.ts";
+import { ErrorBoundary } from "./components/error-boundary.tsx";
+import "./index.css";
 import router from "./router.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <ApolloProvider client={client}>
-      <RouterProvider router={router} />
-    </ApolloProvider>
+    <ErrorBoundary>
+      <ApolloProvider client={client}>
+        <RouterProvider router={router} />
+      </ApolloProvider>
+    </ErrorBoundary>
   </StrictMode>
 );
